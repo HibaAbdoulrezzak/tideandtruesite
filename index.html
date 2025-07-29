@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Daphne Toronto (Recreation)</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="logo">
+					<a href="#">tide and true</a>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#about">About Us</a></li>
+						<li><a href="services.html">Services</a></li>
+						<li><a href="#private-dining">Private Dining</a></li>
+						<li><a href="#contact">Contact</a></li>
+						<li><a href="#reservations">Reservations</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<section id="carousel-section">
+			<div class="carousel-container">
+				<div class="carousel-slides">
+					<div
+						class="carousel-slide active"
+						style="
+							background-image: url('images/mandm/IMG_8676.JPG');
+						"
+					>
+						<div class="hero-content">
+							<h1>Experience Exquisite Events</h1>
+							<p>
+								Thoughtfully planned, effortlessly executed—Tide
+								& True Occasions brings your vision to life.
+							</p>
+							<a href="#reservations" class="btn">Contact Us</a>
+						</div>
+					</div>
+					<div
+						class="carousel-slide"
+						style="
+							background-image: url('images/mandm/IMG_8664.JPG');
+						"
+					>
+						<div class="hero-content">
+							<h1>Savor Every Moment</h1>
+							<p>Exceptional Flavors, Unforgettable Ambiance</p>
+							<a href="#menu" class="btn">View Our Menu</a>
+						</div>
+					</div>
+					<div
+						class="carousel-slide"
+						style="
+							background-image: url('images/mandm/IMG_8681.JPG');
+						"
+					>
+						<div class="hero-content">
+							<h1>Your Next Event Awaits</h1>
+							<p>Host Private Functions with Us</p>
+							<a href="#private-dining" class="btn"
+								>Private Dining</a
+							>
+						</div>
+					</div>
+				</div>
+
+				<button class="carousel-prev">&#10094;</button>
+				<button class="carousel-next">&#10095;</button>
+
+				<div class="carousel-dots">
+					<span class="dot active"></span>
+					<span class="dot"></span>
+					<span class="dot"></span>
+				</div>
+			</div>
+		</section>
+
+		<section id="image-card-carousel">
+			<div class="container">
+				<h2>
+					bring your <br />
+					visions to life
+				</h2>
+				<div class="carousel-container">
+					<div class="carousel-slides">
+						<div class="carousel-slide grid-item active">
+							<img
+								src="images/sarah-chris/IMG_3127.PNG"
+								alt="Wedding rings and shoes"
+							/>
+						</div>
+						<div class="carousel-slide grid-item">
+							<img
+								src="images/sarah-chris/IMG_3130.PNG"
+								alt="Wedding reception table setting"
+							/>
+						</div>
+						<div class="carousel-slide grid-item">
+							<img
+								src="images/sarah-chris/IMG_3129.PNG"
+								alt="Bride and groom with vintage car"
+							/>
+						</div>
+						<div class="carousel-slide grid-item">
+							<img
+								src="images/sarah-chris/IMG_3131.PNG"
+								alt="Round table setting at wedding reception"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="about" class="text-section">
+			<div class="container">
+				<h2>Our Story</h2>
+				<p>
+					We’re Danielle and Maryam—two creative minds who joined
+					forces after discovering our shared passion for planning,
+					organizing, and making moments unforgettable. With over 20
+					years of combined experience in events, hospitality, and
+					coordination, we bring calm energy, sharp logistics, and a
+					love for the little details that make celebrations feel
+					personal. Tide & True Occasions is rooted in reliability,
+					creativity, and a deep love for bringing visions to
+					life—whether it’s a wedding, shower, or milestone event.
+				</p>
+
+				<a href="#reservations" class="btn btn-secondary">Contact Us</a>
+			</div>
+		</section>
+		<section id="menu-section" class="menu-dark-bg">
+			<div class="container">
+				<h2 class="menu-title">MENU</h2>
+
+				<div class="menu-categories">
+					<button class="menu-btn">LUNCH</button>
+					<button class="menu-btn">BRUNCH</button>
+					<button class="menu-btn">DINNER</button>
+					<button class="menu-btn">DESSERT</button>
+					<button class="menu-btn active">HAPPY HOUR</button>
+					<button class="menu-btn">COCKTAILS</button>
+				</div>
+
+				<div class="menu-wine">
+					<button class="menu-btn full-width">WINE</button>
+				</div>
+
+				<div class="menu-view-full">
+					<a href="#full-menu" class="btn btn-secondary-dark"
+						>VIEW MENU</a
+					>
+				</div>
+			</div>
+		</section>
+		<section id="contact-section">
+			<div class="container contact-grid">
+				<div class="contact-image">
+					<img
+						src="images/sarah-chris/IMG_3127.PNG"
+						alt="Wedding planning imagery"
+					/>
+				</div>
+				<div class="contact-form-container">
+					<h2 class="contact-title">Contact Us</h2>
+					<p class="contact-intro">
+						Let's plan your unforgettable event. Fill out the form
+						below and we'll be in touch!
+					</p>
+
+					<form action="#" method="POST" class="contact-form">
+						<div class="form-group">
+							<label for="name">Name</label>
+							<input type="text" id="name" name="name" required />
+						</div>
+
+						<div class="form-group">
+							<label for="contact-info">Email or Phone</label>
+							<input
+								type="text"
+								id="contact-info"
+								name="contact_info"
+								placeholder="your@email.com or (123) 456-7890"
+								required
+							/>
+						</div>
+
+						<div class="form-group">
+							<label for="message">Your Message</label>
+							<textarea
+								id="message"
+								name="message"
+								rows="8"
+								placeholder="Tell us about your event, desired date, number of guests, and any special requests..."
+							></textarea>
+						</div>
+
+						<button type="submit" class="btn contact-submit-btn">
+							SEND MESSAGE
+						</button>
+					</form>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div class="container">
+				<p>&copy; 2025 Daphne Toronto Recreation</p>
+				<div class="social-links">
+					<a href="#">Facebook</a>
+					<a href="#">Instagram</a>
+				</div>
+			</div>
+		</footer>
+
+		<script src="script.js"></script>
+	</body>
+</html>

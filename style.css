@@ -1,0 +1,779 @@
+/* General Body and Container Styles */
+body {
+	font-family: Arial, sans-serif; /* Start with a clean sans-serif; we'll add custom fonts */
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: #f8f8f8;
+	color: #333;
+	line-height: 1.6;
+}
+
+/* Use a universal box-sizing */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* Header Styles */
+header {
+	background-color: #ffffff;
+	padding: 20px 0;
+	border-bottom: 1px solid #eee;
+	/* Removed display: flex from header itself to use on inner container */
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Apply flexbox to the container inside the header for proper alignment */
+header .container {
+	display: flex;
+	justify-content: space-between; /* Pushes logo to left, nav to right */
+	align-items: center; /* Vertically aligns logo and nav */
+	width: 100%;
+}
+
+.logo a {
+	/* For Daphne's logo, it's a very specific serif font. */
+	/* For now, let's use a generic serif that looks somewhat similar or a strong sans-serif */
+	font-family: "Georgia", serif; /* A system serif font */
+	/* To get closer to Daphne, you'd import a Google Font like 'Playfair Display' or 'Lora' */
+	font-size: 1em;
+	font-weight: bold;
+	color: #222;
+	text-decoration: none;
+	letter-spacing: 2px; /* Adds space between letters */
+	text-transform: uppercase; /* Makes it all caps like Daphne */
+}
+
+/* Navigation Styles */
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex; /* Arrange nav items in a row */
+}
+
+nav ul li {
+	margin-left: 35px; /* Increase space between nav items */
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: #555;
+	font-weight: normal; /* Daphne's nav links are not bold */
+	padding: 5px 0;
+	transition: color 0.3s ease, border-bottom 0.3s ease;
+	font-size: 1.05em; /* Slightly adjust font size */
+	text-transform: uppercase; /* Make nav links uppercase */
+}
+
+nav ul li a:hover {
+	color: #a08040;
+	border-bottom: 2px solid #a08040;
+}
+
+/* Carousel Section Styles */
+#carousel-section {
+	height: 80vh; /* Set height for the entire carousel container */
+	width: 100%;
+	overflow: hidden; /* Hide overflowing slides */
+	position: relative; /* For positioning arrows/dots */
+}
+
+.carousel-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.carousel-slides {
+	display: flex; /* Arrange slides in a row */
+	height: 100%;
+	transition: transform 0.5s ease-in-out; /* Smooth transition for sliding */
+}
+
+.carousel-slide {
+	min-width: 100%; /* Each slide takes full width of the container */
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: white;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	/* For now, background-color is set inline in HTML. You can move it here or use images later. */
+}
+
+/* Optional: Overlay for readability, if you add background images later */
+.carousel-slide::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.35); /* Subtle dark overlay */
+	z-index: 1;
+}
+
+/* Ensure these are specific to .carousel-slide to prevent conflicts if you have other hero-content elsewhere */
+.carousel-slide .hero-content {
+	position: relative;
+	z-index: 2;
+	max-width: 800px;
+	padding: 20px;
+}
+
+.carousel-slide .hero-content h1 {
+	font-family: "Playfair Display", serif;
+	font-size: 4.5em;
+	margin-bottom: 15px;
+	line-height: 1.1;
+	text-shadow: none;
+}
+
+.carousel-slide .hero-content p {
+	font-size: 1.5em;
+	margin-bottom: 40px;
+	text-shadow: none;
+}
+
+.carousel-slide .btn {
+	background-color: #a08040;
+	color: white;
+	padding: 15px 35px;
+	text-decoration: none;
+	border-radius: 5px;
+	font-size: 1.2em;
+	font-weight: bold;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	display: inline-block;
+	letter-spacing: 1px;
+}
+
+.carousel-slide .btn:hover {
+	background-color: #8a6c30;
+	transform: translateY(-2px);
+}
+
+/* Carousel Navigation Arrows */
+.carousel-prev,
+.carousel-next {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	color: white;
+	font-weight: bold;
+	font-size: 20px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	border: none;
+	transform: translateY(-50%); /* Vertically center */
+	z-index: 3; /* Ensure arrows are above slides and overlay */
+}
+
+.carousel-next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Carousel Dots */
+.carousel-dots {
+	position: absolute;
+	bottom: 20px;
+	width: 100%;
+	text-align: center;
+	z-index: 3;
+}
+
+.dot {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 0 5px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+
+.dot.active,
+.dot:hover {
+	background-color: #a08040; /* Active/hover dot color */
+}
+
+/* Text Section Styles */
+.text-section {
+	padding: 5px 0; /* Consistent padding top/bottom */
+	background-color: #ffffff; /* White background */
+	text-align: center; /* Center the text content */
+}
+
+.text-section h2 {
+	font-family: "Playfair Display", serif; /* Elegant font for headings */
+	font-size: 3em;
+	margin-bottom: 0px;
+	color: #333;
+}
+
+.text-section p {
+	font-size: 1.1em;
+	max-width: 800px; /* Limit paragraph width for readability */
+	margin: 0 auto 25px auto; /* Center paragraphs and add bottom margin */
+	color: #666; /* Slightly lighter text color */
+}
+
+/* Secondary Button Style (for buttons like in the text section) */
+.btn-secondary {
+	background-color: transparent; /* Transparent background */
+	color: #a08040; /* Golden text */
+	border: 2px solid #a08040; /* Golden border */
+	padding: 12px 30px; /* Slightly less padding than primary button */
+	/* padding-bottom: 4px; */ /* You can remove or comment this line if it's not needed */
+	font-size: 1.1em;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	margin-bottom: 50px; /* ADD THIS LINE - Adjust value as needed (e.g., 30px, 40px, 60px) */
+	display: inline-block; /* Ensure margin applies correctly */
+}
+
+.btn-secondary:hover {
+	background-color: #a08040; /* Golden background on hover */
+	color: white; /* White text on hover */
+	transform: none; /* No lift effect on secondary button */
+}
+/* Image Card Carousel Section Styles (Eating Well Is The Best Reward) */
+#image-card-carousel {
+	padding: 9px 0;
+	background-color: #f0ede6;
+	text-align: center;
+	overflow: hidden; /* Important to hide slides outside the view */
+	position: relative;
+}
+
+#image-card-carousel h2 {
+	font-family: "Playfair Display", serif;
+	font-size: 3.8em;
+	font-weight: 700;
+	color: #333;
+	margin-bottom: 50px;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+#image-card-carousel .carousel-container {
+	max-width: 1000px; /* Still constrain the overall width */
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden; /* This hides the overflowing parts of the slides */
+	/* Remove border-radius and box-shadow if you want individual card styling */
+	border-radius: 5px; /* Optional: Apply a border-radius to the whole visible carousel area */
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for the carousel block */
+}
+
+#image-card-carousel .carousel-slides {
+	display: flex;
+	transition: transform 0.5s ease-in-out;
+	padding-bottom: 50px; /* Space for dots */
+	/* Add some padding here if you want space between carousel edge and first/last card */
+	padding-left: 20px; /* Example: adds space on the left side of the first card */
+	padding-right: 20px; /* Example: adds space on the right side of the last card */
+}
+
+#image-card-carousel .carousel-slide.grid-item {
+	/* Adjust these values to control card size and how many are visible */
+	min-width: 31%; /* Make each card slightly less than 1/3 to create gaps and potential overflow */
+	margin-right: 2%; /* Add margin between cards */
+	flex: 0 0 auto;
+	height: 350px; /* Keep consistent height */
+	overflow: hidden;
+	border-radius: 5px; /* Apply rounded corners to individual cards */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth on each card */
+	background-color: #ffffff; /* White background for the card itself */
+	display: flex; /* Ensures image is centered */
+	justify-content: center;
+	align-items: center;
+}
+
+#image-card-carousel .carousel-slide.grid-item:last-child {
+	margin-right: 0; /* No margin on the last item to avoid extra space */
+}
+
+#image-card-carousel .grid-item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.3s ease;
+}
+
+#image-card-carousel .grid-item img:hover {
+	transform: scale(1.05);
+}
+
+/* Rest of the carousel nav/dots styles should remain the same for this section */
+.card-carousel-nav {
+	position: absolute;
+	transform: translateY(-20%);
+	z-index: 5;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: white;
+	padding: 10px 15px;
+	font-size: 18px;
+	border-radius: 3px;
+}
+
+.card-carousel-nav.carousel-prev {
+	left: 10px;
+}
+
+.card-carousel-nav.carousel-next {
+	right: 10px;
+}
+
+.card-carousel-dots {
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: fit-content;
+	background-color: rgba(255, 255, 255, 0.7);
+	padding: 2px 10px;
+	border-radius: 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	z-index: 5;
+}
+
+.card-carousel-dots .dot {
+	height: 12px;
+	width: 12px;
+	background-color: #999;
+}
+
+.card-carousel-dots .dot.active,
+.card-carousel-dots .dot:hover {
+	background-color: #a08040;
+}
+/* --- Menu Section Styles --- */
+#menu-section {
+	padding: 12px 5px; /* Generous padding top/bottom */
+	text-align: center;
+}
+
+.menu-dark-bg {
+	background-color: #2e4a3b; /* Dark green background as per image */
+	color: #fff;
+}
+
+.menu-title {
+	font-family: "Playfair Display", serif;
+	font-size: 4em; /* Adjust size as needed */
+	font-weight: 700;
+	color: #f0ede6; /* Light grey/off-white for text */
+	margin-bottom: 60px; /* Space below title */
+	display: flex; /* Allow decorative lines to sit next to text */
+	align-items: center;
+	justify-content: center;
+	gap: 20px; /* Space between line and text */
+}
+
+.decorative-line {
+	width: 80px; /* Length of the line */
+	height: 2px; /* Thickness of the line */
+	background-color: #f0ede6; /* Light grey/off-white color */
+	position: relative;
+}
+
+/* Styles for the wavy line effect */
+.decorative-line::before,
+.decorative-line::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #f0ede6;
+}
+
+.decorative-line::before {
+	top: -5px; /* Adjust vertical position */
+	transform: rotate(20deg); /* Angle for one part of the wave */
+}
+
+.decorative-line::after {
+	top: 5px; /* Adjust vertical position */
+	transform: rotate(-20deg); /* Angle for the other part of the wave */
+}
+
+/* Menu Categories Buttons */
+.menu-categories {
+	display: flex;
+	flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+	justify-content: center;
+	gap: 15px; /* Space between buttons */
+	margin-bottom: 25px; /* Space below this row */
+	max-width: 900px; /* Constrain width of button rows */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.menu-btn {
+	background-color: transparent;
+	color: #f0ede6; /* Light text color */
+	border: 1px solid #f0ede6; /* Light border */
+	padding: 12px 25px;
+	font-family: "Lora", serif;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease,
+		border-color 0.3s ease;
+	border-radius: 5px; /* Slight rounded corners */
+}
+
+.menu-btn:hover {
+	background-color: rgba(240, 237, 230, 0.1); /* Subtle background on hover */
+	border-color: #a08040; /* Golden border on hover */
+	color: #a08040; /* Golden text on hover */
+}
+
+.menu-btn.active {
+	background-color: #f0ede6; /* Active button background */
+	color: #2e4a3b; /* Dark text on active button */
+	border-color: #f0ede6;
+}
+
+.menu-btn.active:hover {
+	background-color: #a08040; /* Golden hover for active button */
+	color: #fff;
+	border-color: #a08040;
+}
+
+/* Wine Button */
+.menu-wine {
+	margin-bottom: 50px; /* Space below wine button */
+	max-width: 900px; /* Keep consistent with categories */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.menu-wine .menu-btn.full-width {
+	width: 100%; /* Make wine button span full width of its container */
+	padding: 15px 25px; /* Slightly larger padding */
+	font-size: 1.2em;
+}
+
+/* View Menu Button */
+.menu-view-full {
+	margin-top: 20px; /* Space above view menu button */
+}
+
+.btn-secondary-dark {
+	/* New style for a button on dark background */
+	background-color: transparent;
+	color: #f0ede6; /* Light color for text */
+	border: 2px solid #f0ede6; /* Light border */
+	padding: 15px 40px;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s ease, color 0.3s ease,
+		border-color 0.3s ease;
+	display: inline-block;
+}
+
+.btn-secondary-dark:hover {
+	background-color: #a08040; /* Golden background on hover */
+	color: white; /* White text on hover */
+	border-color: #a08040;
+}
+
+/* Responsive adjustments for menu section */
+@media (max-width: 768px) {
+	.menu-title {
+		font-size: 3em;
+		gap: 10px;
+		margin-bottom: 40px;
+	}
+
+	.decorative-line {
+		width: 40px; /* Shorter lines on smaller screens */
+	}
+
+	.menu-categories {
+		gap: 10px;
+	}
+
+	.menu-btn {
+		font-size: 1em;
+		padding: 10px 20px;
+	}
+
+	.menu-wine .menu-btn.full-width {
+		font-size: 1.1em;
+		padding: 12px 20px;
+	}
+
+	.btn-secondary-dark {
+		padding: 12px 30px;
+		font-size: 1.1em;
+	}
+}
+
+@media (max-width: 480px) {
+	.menu-title {
+		font-size: 2.5em;
+	}
+}
+/* --- CONTACT US Section Styles (Matching Original "CONTACT US" Sizing/Spacing) --- */
+#contact-section {
+	/* Ensures the section spans the full browser width */
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	overflow-x: hidden; /* Prevents horizontal scrollbar */
+
+	/* Overall vertical padding - ADJUSTED for "CONTACT US" height */
+	padding: 40px 0; /* More padding than "Stay in Touch", less than previous "Contact Us" */
+	background-color: #f0ede6; /* A light, warm off-white/cream for "CONTACT US" */
+}
+
+.contact-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr; /* Two columns for desktop */
+	gap: 0px; /* No gap needed between image and form */
+	align-items: stretch; /* Crucial: makes both image and form stretch to common height */
+
+	/* Constrain the content width and center it */
+	max-width: 1100px; /* Slightly wider than before to match "CONTACT US" */
+	margin: 0 auto; /* Centers the grid content horizontally */
+	padding: 0;
+
+	/* Define a minimum height for the entire grid - ADJUSTED for "CONTACT US" height */
+	min-height: 480px; /* This will make the section roughly the height of the original "CONTACT US" */
+}
+
+.contact-image {
+	overflow: hidden;
+	/* No border-radius or box-shadow for the image container */
+}
+
+.contact-image img {
+	width: 100%; /* Image fills container's width */
+	height: 100%; /* Image fills container's height */
+	object-fit: cover; /* Crops image to fit without distortion */
+	display: block;
+}
+
+.contact-form-container {
+	text-align: center;
+	background-color: transparent; /* Background color set on #contact-section itself */
+	padding: 30px; /* More padding inside for "CONTACT US" feel */
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* Vertically center content */
+	align-items: center; /* Horizontally center content */
+}
+
+.contact-form-container .contact-title {
+	font-family: "Playfair Display", serif;
+	font-size: 3em; /* Larger title size to match "CONTACT US" */
+	font-weight: 700;
+	color: #333; /* Darker color from "CONTACT US" */
+	margin-bottom: 10px; /* Spacing below title */
+	line-height: 1.2;
+	text-transform: uppercase;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.contact-form-container .decorative-line::before,
+.contact-form-container .decorative-line::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #333;
+}
+
+.contact-form-container .decorative-line::before {
+	top: -3px; /* Adjust vertical position for wave */
+	transform: rotate(10deg); /* Angle for one part of the wave */
+}
+
+.contact-form-container .decorative-line::after {
+	top: 3px; /* Adjust vertical position for wave */
+	transform: rotate(-10deg); /* Angle for the other part of the wave */
+}
+
+.contact-intro {
+	font-family: Arial, sans-serif; /* Simpler font for intro text */
+	font-size: 1em; /* Standard readable size */
+	color: #666; /* Slightly darker grey */
+	margin-bottom: 30px; /* More space below intro */
+	max-width: 400px; /* Wider text area */
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Form Styles - Adapted for "CONTACT US" */
+.contact-form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px; /* More space between form groups for "CONTACT US" */
+	max-width: 380px; /* Wider form fields to match "CONTACT US" */
+	width: 100%;
+	margin: 0 auto;
+	text-align: left; /* Input text is left-aligned in "CONTACT US" */
+}
+
+.form-group {
+	margin-bottom: 0;
+}
+
+.form-group label {
+	display: block; /* Labels are visible in "CONTACT US" */
+	font-size: 0.9em;
+	color: #555;
+	margin-bottom: 5px; /* Small space between label and input */
+	text-align: left;
+}
+
+.form-group input[type="email"],
+.form-group input[type="text"],
+.form-group textarea {
+	/* Added textarea */
+	width: 100%;
+	padding: 12px 15px; /* Generous padding */
+	border: 1px solid #ccc; /* Lighter gray border from "CONTACT US" */
+	border-radius: 5px; /* Slightly rounded corners for "CONTACT US" */
+	font-size: 1em;
+	font-family: inherit;
+	text-align: left; /* Input text is left-aligned */
+	background-color: #fff; /* White background for inputs in "CONTACT US" */
+	color: #333;
+}
+/* Placeholder text color */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+	color: #999;
+	opacity: 1;
+}
+
+.form-group textarea {
+	min-height: 120px; /* Taller textarea for message */
+	resize: vertical; /* Allow vertical resizing */
+}
+
+/* Adjust the button style for "SEND MESSAGE" (Golden button from original "CONTACT US") */
+.contact-submit-btn {
+	background-color: #a08040; /* Golden background */
+	color: white;
+	padding: 15px 35px; /* Larger padding for button */
+	border: none;
+	border-radius: 5px; /* Rounded corners */
+	font-size: 1.2em; /* Larger font size */
+	font-weight: bold;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+	margin-top: 20px; /* Space above button */
+	width: 100%;
+	max-width: 380px; /* Match form max-width */
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.contact-submit-btn:hover {
+	background-color: #8a6c30; /* Darker golden on hover */
+	transform: translateY(-2px);
+}
+
+/* Responsive adjustments for Contact Section */
+@media (max-width: 992px) {
+	.contact-grid {
+		grid-template-columns: 1fr;
+		gap: 20px; /* More gap when stacked */
+		padding: 0 15px;
+		min-height: auto;
+	}
+
+	.contact-image {
+		max-height: 280px; /* Adjusted max-height for mobile image */
+	}
+
+	.contact-form-container {
+		padding: 25px;
+	}
+
+	.contact-form-container .contact-title {
+		font-size: 2.5em; /* Adjusted for smaller mobile height */
+		margin-bottom: 10px;
+		gap: 10px;
+	}
+
+	.contact-intro {
+		font-size: 0.9em;
+		margin-bottom: 20px;
+		max-width: 100%;
+	}
+
+	.contact-form {
+		gap: 12px;
+		max-width: 100%;
+	}
+
+	.form-group input[type="email"],
+	.form-group input[type="text"],
+	.form-group textarea {
+		padding: 10px 12px;
+		font-size: 0.95em;
+	}
+
+	.contact-submit-btn {
+		padding: 12px 25px;
+		font-size: 1.1em;
+		margin-top: 15px;
+		width: 100%;
+		max-width: 300px; /* Match original mobile button max-width if needed */
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/* Responsive adjustments for footer */
+@media (max-width: 768px) {
+	footer .container {
+		flex-direction: column; /* Stack items vertically */
+		gap: 10px; /* Space between stacked items */
+		text-align: center;
+	}
+
+	.social-links {
+		margin-top: 10px; /* Add a small space above social links when stacked */
+	}
+}
