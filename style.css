@@ -1,3 +1,6 @@
+@import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400);
+
 /* General Body and Container Styles */
 body {
 	font-family: Arial, sans-serif; /* Start with a clean sans-serif; we'll add custom fonts */
@@ -27,7 +30,6 @@ header {
 	background-color: #ffffff;
 	padding: 20px 0;
 	border-bottom: 1px solid #eee;
-	/* Removed display: flex from header itself to use on inner container */
 	position: sticky;
 	top: 0;
 	z-index: 1000;
@@ -37,22 +39,18 @@ header {
 /* Apply flexbox to the container inside the header for proper alignment */
 header .container {
 	display: flex;
-	justify-content: space-between; /* Pushes logo to left, nav to right */
-	align-items: center; /* Vertically aligns logo and nav */
+	justify-content: space-between;
+	align-items: center;
 	width: 100%;
+	max-width: 100%; /* Make sure it stretches full width */
+	padding: 0 20px; /* Optional: add horizontal padding if needed */
+	margin: 0 auto;
 }
 
-.logo a {
-	/* For Daphne's logo, it's a very specific serif font. */
-	/* For now, let's use a generic serif that looks somewhat similar or a strong sans-serif */
-	font-family: "Georgia", serif; /* A system serif font */
-	/* To get closer to Daphne, you'd import a Google Font like 'Playfair Display' or 'Lora' */
-	font-size: 1em;
-	font-weight: bold;
-	color: #222;
-	text-decoration: none;
-	letter-spacing: 2px; /* Adds space between letters */
-	text-transform: uppercase; /* Makes it all caps like Daphne */
+.logo img {
+	height: 80px; /* Adjust as needed */
+	width: auto;
+	display: block;
 }
 
 /* Navigation Styles */
@@ -84,10 +82,10 @@ nav ul li a:hover {
 
 /* Carousel Section Styles */
 #carousel-section {
-	height: 80vh; /* Set height for the entire carousel container */
 	width: 100%;
-	overflow: hidden; /* Hide overflowing slides */
-	position: relative; /* For positioning arrows/dots */
+	height: 100vh; /* or try 80vh if it’s too tall */
+	position: relative;
+	overflow: hidden;
 }
 
 .carousel-container {
@@ -113,6 +111,8 @@ nav ul li a:hover {
 	background-size: cover;
 	background-position: center;
 	position: relative;
+	background-repeat: no-repeat; /* add this */
+
 	/* For now, background-color is set inline in HTML. You can move it here or use images later. */
 }
 
@@ -168,7 +168,7 @@ nav ul li a:hover {
 	transform: translateY(-2px);
 }
 
-/* Carousel Navigation Arrows */
+/* Carousel Navigation Arrows 
 .carousel-prev,
 .carousel-next {
 	cursor: pointer;
@@ -182,11 +182,11 @@ nav ul li a:hover {
 	transition: 0.6s ease;
 	border-radius: 0 3px 3px 0;
 	user-select: none;
-	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background 
 	border: none;
-	transform: translateY(-50%); /* Vertically center */
-	z-index: 3; /* Ensure arrows are above slides and overlay */
-}
+	transform: translateY(-50%); /* Vertically center 
+	z-index: 3; /* Ensure arrows are above slides and overlay 
+} */
 
 .carousel-next {
 	right: 0;
@@ -198,26 +198,6 @@ nav ul li a:hover {
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Carousel Dots */
-.carousel-dots {
-	position: absolute;
-	bottom: 20px;
-	width: 100%;
-	text-align: center;
-	z-index: 3;
-}
-
-.dot {
-	cursor: pointer;
-	height: 15px;
-	width: 15px;
-	margin: 0 5px;
-	background-color: #bbb;
-	border-radius: 50%;
-	display: inline-block;
-	transition: background-color 0.6s ease;
-}
-
 .dot.active,
 .dot:hover {
 	background-color: #a08040; /* Active/hover dot color */
@@ -225,7 +205,7 @@ nav ul li a:hover {
 
 /* Text Section Styles */
 .text-section {
-	padding: 5px 0; /* Consistent padding top/bottom */
+	/* padding: 5px 0; Consistent padding top/bottom */
 	background-color: #ffffff; /* White background */
 	text-align: center; /* Center the text content */
 }
@@ -233,7 +213,6 @@ nav ul li a:hover {
 .text-section h2 {
 	font-family: "Playfair Display", serif; /* Elegant font for headings */
 	font-size: 3em;
-	margin-bottom: 0px;
 	color: #333;
 }
 
@@ -250,10 +229,9 @@ nav ul li a:hover {
 	color: #a08040; /* Golden text */
 	border: 2px solid #a08040; /* Golden border */
 	padding: 12px 30px; /* Slightly less padding than primary button */
-	/* padding-bottom: 4px; */ /* You can remove or comment this line if it's not needed */
 	font-size: 1.1em;
 	transition: background-color 0.3s ease, color 0.3s ease;
-	margin-bottom: 50px; /* ADD THIS LINE - Adjust value as needed (e.g., 30px, 40px, 60px) */
+	margin-bottom: 50px; /* Adjust value as needed (e.g., 30px, 40px, 60px) */
 	display: inline-block; /* Ensure margin applies correctly */
 }
 
@@ -262,7 +240,8 @@ nav ul li a:hover {
 	color: white; /* White text on hover */
 	transform: none; /* No lift effect on secondary button */
 }
-/* Image Card Carousel Section Styles (Eating Well Is The Best Reward) */
+
+/* Image Card Carousel Section Styles */
 #image-card-carousel {
 	padding: 9px 0;
 	background-color: #f0ede6;
@@ -286,7 +265,6 @@ nav ul li a:hover {
 	margin: 0 auto;
 	position: relative;
 	overflow: hidden; /* This hides the overflowing parts of the slides */
-	/* Remove border-radius and box-shadow if you want individual card styling */
 	border-radius: 5px; /* Optional: Apply a border-radius to the whole visible carousel area */
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for the carousel block */
 }
@@ -295,13 +273,11 @@ nav ul li a:hover {
 	display: flex;
 	transition: transform 0.5s ease-in-out;
 	padding-bottom: 50px; /* Space for dots */
-	/* Add some padding here if you want space between carousel edge and first/last card */
 	padding-left: 20px; /* Example: adds space on the left side of the first card */
 	padding-right: 20px; /* Example: adds space on the right side of the last card */
 }
 
 #image-card-carousel .carousel-slide.grid-item {
-	/* Adjust these values to control card size and how many are visible */
 	min-width: 31%; /* Make each card slightly less than 1/3 to create gaps and potential overflow */
 	margin-right: 2%; /* Add margin between cards */
 	flex: 0 0 auto;
@@ -375,9 +351,10 @@ nav ul li a:hover {
 .card-carousel-dots .dot:hover {
 	background-color: #a08040;
 }
+
 /* --- Menu Section Styles --- */
 #menu-section {
-	padding: 12px 5px; /* Generous padding top/bottom */
+	padding: 20px 5px; /* Generous padding top/bottom */
 	text-align: center;
 }
 
@@ -389,40 +366,13 @@ nav ul li a:hover {
 .menu-title {
 	font-family: "Playfair Display", serif;
 	font-size: 4em; /* Adjust size as needed */
-	font-weight: 700;
+	font-weight: 1000;
 	color: #f0ede6; /* Light grey/off-white for text */
-	margin-bottom: 60px; /* Space below title */
+	margin-bottom: 30px; /* Space below title */
 	display: flex; /* Allow decorative lines to sit next to text */
-	align-items: center;
+	align-items: top;
 	justify-content: center;
-	gap: 20px; /* Space between line and text */
-}
-
-.decorative-line {
-	width: 80px; /* Length of the line */
-	height: 2px; /* Thickness of the line */
-	background-color: #f0ede6; /* Light grey/off-white color */
-	position: relative;
-}
-
-/* Styles for the wavy line effect */
-.decorative-line::before,
-.decorative-line::after {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background-color: #f0ede6;
-}
-
-.decorative-line::before {
-	top: -5px; /* Adjust vertical position */
-	transform: rotate(20deg); /* Angle for one part of the wave */
-}
-
-.decorative-line::after {
-	top: 5px; /* Adjust vertical position */
-	transform: rotate(-20deg); /* Angle for the other part of the wave */
+	gap: 50px; /* Space between line and text */
 }
 
 /* Menu Categories Buttons */
@@ -469,21 +419,21 @@ nav ul li a:hover {
 	border-color: #a08040;
 }
 
-/* Wine Button */
+/* Wine Button (now "Weddings" button) */
 .menu-wine {
-	margin-bottom: 50px; /* Space below wine button */
+	margin-bottom: 50px; /* Space below button */
 	max-width: 900px; /* Keep consistent with categories */
 	margin-left: auto;
 	margin-right: auto;
 }
 
 .menu-wine .menu-btn.full-width {
-	width: 100%; /* Make wine button span full width of its container */
+	width: 100%; /* Make button span full width of its container */
 	padding: 15px 25px; /* Slightly larger padding */
 	font-size: 1.2em;
 }
 
-/* View Menu Button */
+/* View Menu Button (now "View Services" button) */
 .menu-view-full {
 	margin-top: 20px; /* Space above view menu button */
 }
@@ -509,16 +459,241 @@ nav ul li a:hover {
 	border-color: #a08040;
 }
 
+/* --- Contact Form Section Styles --- */
+#contact-form-section {
+	display: flex;
+	width: 100%;
+	min-height: 450px; /* Adjust as needed for your desired height */
+	max-height: 550px; /* Prevent it from getting too tall */
+	overflow: hidden; /* Hide anything that overflows due to height constraints */
+}
+
+.contact-image-area {
+	flex: 1; /* Takes up equal space initially */
+	/* *** IMPORTANT: Update this URL to your desired image path *** */
+	background-image: url("images/heropics/kiss.png"); /* Example path for the food/wine image */
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.contact-form-area {
+	flex: 1; /* Takes up equal space initially */
+	background-color: #e0dcd5; /* Light beige background */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	text-align: center;
+}
+
+.contact-form-area .contact-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	gap: 15px; /* Space between lines and text */
+}
+
+.contact-form-area .contact-header h2 {
+	font-family: "Playfair Display", serif;
+	font-size: 2.8em; /* Adjust font size */
+	color: #4a4a4a; /* Darker text color */
+	margin: 0;
+	line-height: 1; /* Tighter line height */
+	font-weight: 400; /* As seen in the image, not too bold */
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.decorative-line-contact {
+	width: 40px; /* Length of the decorative line */
+	height: 1px; /* Thickness of the main line */
+	background-color: #6a6a6a; /* Darker line color */
+	position: relative;
+}
+
+/* Wavy effect for decorative lines */
+.decorative-line-contact::before,
+.decorative-line-contact::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px; /* Thickness of the wavy lines */
+	background-color: #6a6a6a;
+}
+
+.decorative-line-contact::before {
+	top: -4px; /* Adjust vertical position for the top wave */
+	transform: rotate(20deg); /* Angle for the top wave */
+	left: 0;
+}
+
+.decorative-line-contact::after {
+	top: 4px; /* Adjust vertical position for the bottom wave */
+	transform: rotate(-20deg); /* Angle for the bottom wave */
+	left: 0;
+}
+
+.contact-form-area p {
+	font-family: "Lora", serif; /* Elegant font for paragraph */
+	font-size: 1.1em;
+	color: #6a6a6a;
+	margin-bottom: 30px;
+	max-width: 300px; /* Limit width of text */
+	line-height: 1.5;
+}
+
+.contact-form-area form {
+	display: flex;
+	flex-direction: column;
+	width: 80%; /* Adjust width of the form elements (increased from 70%) */
+	max-width: 400px; /* Max width for input and button (increased from 350px) */
+	align-items: center;
+}
+
+/* Styles for text input (NAME) - new */
+.contact-form-area input[type="text"] {
+	width: 100%;
+	padding: 15px 15px;
+	margin-bottom: 15px; /* Space between fields */
+	border: 1px solid #b7b0a7;
+	background-color: transparent;
+	font-family: "Lora", serif;
+	font-size: 1em;
+	color: #4a4a4a;
+	outline: none;
+	box-shadow: none;
+	text-transform: uppercase;
+}
+
+.contact-form-area input[type="text"]::placeholder {
+	color: #8c8c8c;
+	opacity: 1;
+	text-transform: uppercase;
+}
+
+.contact-form-area input[type="text"]:focus {
+	border-color: #a08040;
+}
+
+/* Styles for email input */
+.contact-form-area input[type="email"] {
+	width: 100%;
+	padding: 15px 15px;
+	margin-bottom: 15px;
+	border: 1px solid #b7b0a7; /* Border color from image */
+	background-color: transparent; /* Transparent background */
+	font-family: "Lora", serif;
+	font-size: 1em;
+	color: #4a4a4a; /* Input text color */
+	outline: none; /* Remove outline on focus */
+	box-shadow: none; /* No default box-shadow */
+	text-transform: uppercase; /* Match the "E-MAIL" placeholder style */
+}
+
+.contact-form-area input[type="email"]::placeholder {
+	color: #8c8c8c; /* Placeholder color */
+	opacity: 1; /* Ensure placeholder is visible */
+	text-transform: uppercase;
+}
+
+.contact-form-area input[type="email"]:focus {
+	border-color: #a08040; /* Golden border on focus */
+}
+
+/* Styles for textarea (MESSAGE) - new */
+.contact-form-area textarea {
+	width: 100%;
+	padding: 15px 15px;
+	margin-bottom: 15px; /* Space between fields and button */
+	border: 1px solid #b7b0a7;
+	background-color: transparent;
+	font-family: "Lora", serif;
+	font-size: 1em;
+	color: #4a4a4a;
+	outline: none;
+	box-shadow: none;
+	resize: vertical; /* Allow vertical resizing, but not horizontal */
+	text-transform: uppercase; /* Match input style, though often not needed for textarea content */
+}
+
+.contact-form-area textarea::placeholder {
+	color: #8c8c8c;
+	opacity: 1;
+	text-transform: uppercase;
+}
+
+.contact-form-area textarea:focus {
+	border-color: #a08040;
+}
+
+/* Styles for submit button */
+.contact-form-area button[type="submit"] {
+	width: 100%;
+	padding: 15px 20px;
+	background-color: #3b4d45; /* Dark green subscribe button */
+	color: #ffffff;
+	border: none;
+	font-family: "Lora", serif;
+	font-size: 1em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	letter-spacing: 1px;
+}
+
+.contact-form-area button[type="submit"]:hover {
+	background-color: #2e3d37; /* Slightly darker green on hover */
+}
+
+/* Responsive adjustments for the contact form */
+@media (max-width: 768px) {
+	#contact-form-section {
+		flex-direction: column; /* Stack image and form vertically on smaller screens */
+		min-height: unset; /* Remove fixed height for stacked layout */
+		max-height: unset;
+	}
+
+	.contact-image-area {
+		height: 300px; /* Give the image area a specific height when stacked */
+		width: 100%; /* Ensure it takes full width */
+	}
+
+	.contact-form-area {
+		padding: 40px 20px; /* Add more padding when stacked */
+	}
+
+	.contact-form-area .contact-header h2 {
+		font-size: 2.2em; /* Adjust font size for smaller screens */
+	}
+
+	.decorative-line-contact {
+		width: 30px; /* Shorter lines on smaller screens */
+	}
+
+	.contact-form-area p {
+		font-size: 1em;
+		margin-bottom: 10px;
+	}
+
+	.contact-form-area form {
+		width: 90%; /* Make form elements wider on smaller screens (adjusted from 85%) */
+	}
+}
+
+@media (max-width: 480px) {
+	.contact-form-area .contact-header h2 {
+		font-size: 1.8em;
+	}
+}
+
 /* Responsive adjustments for menu section */
 @media (max-width: 768px) {
 	.menu-title {
 		font-size: 3em;
 		gap: 10px;
-		margin-bottom: 40px;
-	}
-
-	.decorative-line {
-		width: 40px; /* Shorter lines on smaller screens */
+		margin-bottom: 10px;
 	}
 
 	.menu-categories {
@@ -527,7 +702,7 @@ nav ul li a:hover {
 
 	.menu-btn {
 		font-size: 1em;
-		padding: 10px 20px;
+		padding: 10px 20px; /* Adjusted padding to prevent the 'green line' issue */
 	}
 
 	.menu-wine .menu-btn.full-width {
@@ -544,224 +719,6 @@ nav ul li a:hover {
 @media (max-width: 480px) {
 	.menu-title {
 		font-size: 2.5em;
-	}
-}
-/* --- CONTACT US Section Styles (Matching Original "CONTACT US" Sizing/Spacing) --- */
-#contact-section {
-	/* Ensures the section spans the full browser width */
-	width: 100vw;
-	margin-left: calc(50% - 50vw);
-	margin-right: calc(50% - 50vw);
-	overflow-x: hidden; /* Prevents horizontal scrollbar */
-
-	/* Overall vertical padding - ADJUSTED for "CONTACT US" height */
-	padding: 40px 0; /* More padding than "Stay in Touch", less than previous "Contact Us" */
-	background-color: #f0ede6; /* A light, warm off-white/cream for "CONTACT US" */
-}
-
-.contact-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr; /* Two columns for desktop */
-	gap: 0px; /* No gap needed between image and form */
-	align-items: stretch; /* Crucial: makes both image and form stretch to common height */
-
-	/* Constrain the content width and center it */
-	max-width: 1100px; /* Slightly wider than before to match "CONTACT US" */
-	margin: 0 auto; /* Centers the grid content horizontally */
-	padding: 0;
-
-	/* Define a minimum height for the entire grid - ADJUSTED for "CONTACT US" height */
-	min-height: 480px; /* This will make the section roughly the height of the original "CONTACT US" */
-}
-
-.contact-image {
-	overflow: hidden;
-	/* No border-radius or box-shadow for the image container */
-}
-
-.contact-image img {
-	width: 100%; /* Image fills container's width */
-	height: 100%; /* Image fills container's height */
-	object-fit: cover; /* Crops image to fit without distortion */
-	display: block;
-}
-
-.contact-form-container {
-	text-align: center;
-	background-color: transparent; /* Background color set on #contact-section itself */
-	padding: 30px; /* More padding inside for "CONTACT US" feel */
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center; /* Vertically center content */
-	align-items: center; /* Horizontally center content */
-}
-
-.contact-form-container .contact-title {
-	font-family: "Playfair Display", serif;
-	font-size: 3em; /* Larger title size to match "CONTACT US" */
-	font-weight: 700;
-	color: #333; /* Darker color from "CONTACT US" */
-	margin-bottom: 10px; /* Spacing below title */
-	line-height: 1.2;
-	text-transform: uppercase;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.contact-form-container .decorative-line::before,
-.contact-form-container .decorative-line::after {
-	content: "";
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background-color: #333;
-}
-
-.contact-form-container .decorative-line::before {
-	top: -3px; /* Adjust vertical position for wave */
-	transform: rotate(10deg); /* Angle for one part of the wave */
-}
-
-.contact-form-container .decorative-line::after {
-	top: 3px; /* Adjust vertical position for wave */
-	transform: rotate(-10deg); /* Angle for the other part of the wave */
-}
-
-.contact-intro {
-	font-family: Arial, sans-serif; /* Simpler font for intro text */
-	font-size: 1em; /* Standard readable size */
-	color: #666; /* Slightly darker grey */
-	margin-bottom: 30px; /* More space below intro */
-	max-width: 400px; /* Wider text area */
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/* Form Styles - Adapted for "CONTACT US" */
-.contact-form {
-	display: flex;
-	flex-direction: column;
-	gap: 15px; /* More space between form groups for "CONTACT US" */
-	max-width: 380px; /* Wider form fields to match "CONTACT US" */
-	width: 100%;
-	margin: 0 auto;
-	text-align: left; /* Input text is left-aligned in "CONTACT US" */
-}
-
-.form-group {
-	margin-bottom: 0;
-}
-
-.form-group label {
-	display: block; /* Labels are visible in "CONTACT US" */
-	font-size: 0.9em;
-	color: #555;
-	margin-bottom: 5px; /* Small space between label and input */
-	text-align: left;
-}
-
-.form-group input[type="email"],
-.form-group input[type="text"],
-.form-group textarea {
-	/* Added textarea */
-	width: 100%;
-	padding: 12px 15px; /* Generous padding */
-	border: 1px solid #ccc; /* Lighter gray border from "CONTACT US" */
-	border-radius: 5px; /* Slightly rounded corners for "CONTACT US" */
-	font-size: 1em;
-	font-family: inherit;
-	text-align: left; /* Input text is left-aligned */
-	background-color: #fff; /* White background for inputs in "CONTACT US" */
-	color: #333;
-}
-/* Placeholder text color */
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-	color: #999;
-	opacity: 1;
-}
-
-.form-group textarea {
-	min-height: 120px; /* Taller textarea for message */
-	resize: vertical; /* Allow vertical resizing */
-}
-
-/* Adjust the button style for "SEND MESSAGE" (Golden button from original "CONTACT US") */
-.contact-submit-btn {
-	background-color: #a08040; /* Golden background */
-	color: white;
-	padding: 15px 35px; /* Larger padding for button */
-	border: none;
-	border-radius: 5px; /* Rounded corners */
-	font-size: 1.2em; /* Larger font size */
-	font-weight: bold;
-	text-transform: uppercase;
-	cursor: pointer;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-	margin-top: 20px; /* Space above button */
-	width: 100%;
-	max-width: 380px; /* Match form max-width */
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.contact-submit-btn:hover {
-	background-color: #8a6c30; /* Darker golden on hover */
-	transform: translateY(-2px);
-}
-
-/* Responsive adjustments for Contact Section */
-@media (max-width: 992px) {
-	.contact-grid {
-		grid-template-columns: 1fr;
-		gap: 20px; /* More gap when stacked */
-		padding: 0 15px;
-		min-height: auto;
-	}
-
-	.contact-image {
-		max-height: 280px; /* Adjusted max-height for mobile image */
-	}
-
-	.contact-form-container {
-		padding: 25px;
-	}
-
-	.contact-form-container .contact-title {
-		font-size: 2.5em; /* Adjusted for smaller mobile height */
-		margin-bottom: 10px;
-		gap: 10px;
-	}
-
-	.contact-intro {
-		font-size: 0.9em;
-		margin-bottom: 20px;
-		max-width: 100%;
-	}
-
-	.contact-form {
-		gap: 12px;
-		max-width: 100%;
-	}
-
-	.form-group input[type="email"],
-	.form-group input[type="text"],
-	.form-group textarea {
-		padding: 10px 12px;
-		font-size: 0.95em;
-	}
-
-	.contact-submit-btn {
-		padding: 12px 25px;
-		font-size: 1.1em;
-		margin-top: 15px;
-		width: 100%;
-		max-width: 300px; /* Match original mobile button max-width if needed */
-		margin-left: auto;
-		margin-right: auto;
 	}
 }
 

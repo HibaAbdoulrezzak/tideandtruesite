@@ -16,15 +16,21 @@
 		<header>
 			<div class="container">
 				<div class="logo">
-					<a href="#">tide and true</a>
+					<div class="logo">
+						<a href="#">
+							<img
+								src="images/logo.png"
+								alt="Tide and True Logo"
+							/>
+						</a>
+					</div>
 				</div>
 				<nav>
 					<ul>
 						<li><a href="#about">About Us</a></li>
 						<li><a href="services.html">Services</a></li>
-						<li><a href="#private-dining">Private Dining</a></li>
+						<li><a href="#private-dining">Gallery</a></li>
 						<li><a href="#contact">Contact</a></li>
-						<li><a href="#reservations">Reservations</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -36,7 +42,7 @@
 					<div
 						class="carousel-slide active"
 						style="
-							background-image: url('images/mandm/IMG_8676.JPG');
+							background-image: url('images/heropics/IMG_7407.JPG');
 						"
 					>
 						<div class="hero-content">
@@ -51,38 +57,29 @@
 					<div
 						class="carousel-slide"
 						style="
-							background-image: url('images/mandm/IMG_8664.JPG');
+							background-image: url('images/heropics/IMG_8671.JPG');
 						"
 					>
 						<div class="hero-content">
 							<h1>Savor Every Moment</h1>
 							<p>Exceptional Flavors, Unforgettable Ambiance</p>
-							<a href="#menu" class="btn">View Our Menu</a>
+							<a href="#menu" class="btn">Contact Us</a>
 						</div>
 					</div>
 					<div
 						class="carousel-slide"
 						style="
-							background-image: url('images/mandm/IMG_8681.JPG');
+							background-image: url('images/heropics/IMG_8666.JPG');
 						"
 					>
 						<div class="hero-content">
 							<h1>Your Next Event Awaits</h1>
 							<p>Host Private Functions with Us</p>
 							<a href="#private-dining" class="btn"
-								>Private Dining</a
+								>Private Events</a
 							>
 						</div>
 					</div>
-				</div>
-
-				<button class="carousel-prev">&#10094;</button>
-				<button class="carousel-next">&#10095;</button>
-
-				<div class="carousel-dots">
-					<span class="dot active"></span>
-					<span class="dot"></span>
-					<span class="dot"></span>
 				</div>
 			</div>
 		</section>
@@ -97,25 +94,25 @@
 					<div class="carousel-slides">
 						<div class="carousel-slide grid-item active">
 							<img
-								src="images/sarah-chris/IMG_3127.PNG"
+								src="images/heropics/Pink.PNG"
 								alt="Wedding rings and shoes"
 							/>
 						</div>
 						<div class="carousel-slide grid-item">
 							<img
-								src="images/sarah-chris/IMG_3130.PNG"
+								src="images/mandm/IMG_8676.JPG"
 								alt="Wedding reception table setting"
 							/>
 						</div>
 						<div class="carousel-slide grid-item">
 							<img
-								src="images/sarah-chris/IMG_3129.PNG"
+								src="images/mandm/IMG_8686.JPG"
 								alt="Bride and groom with vintage car"
 							/>
 						</div>
 						<div class="carousel-slide grid-item">
 							<img
-								src="images/sarah-chris/IMG_3131.PNG"
+								src="images/heropics/IMG_8675.JPG"
 								alt="Round table setting at wedding reception"
 							/>
 						</div>
@@ -143,80 +140,61 @@
 		</section>
 		<section id="menu-section" class="menu-dark-bg">
 			<div class="container">
-				<h2 class="menu-title">MENU</h2>
-
+				<h2 class="menu-title">SERVICES</h2>
 				<div class="menu-categories">
-					<button class="menu-btn">LUNCH</button>
-					<button class="menu-btn">BRUNCH</button>
-					<button class="menu-btn">DINNER</button>
-					<button class="menu-btn">DESSERT</button>
-					<button class="menu-btn active">HAPPY HOUR</button>
-					<button class="menu-btn">COCKTAILS</button>
+					<button class="menu-btn">Engagements</button>
+					<button class="menu-btn">Proposals</button>
+					<button class="menu-btn">Showers</button>
+					<button class="menu-btn active">Birthdays</button>
 				</div>
 
 				<div class="menu-wine">
-					<button class="menu-btn full-width">WINE</button>
+					<button class="menu-btn full-width">Weddings</button>
 				</div>
 
 				<div class="menu-view-full">
 					<a href="#full-menu" class="btn btn-secondary-dark"
-						>VIEW MENU</a
+						>VIEW SERVICES</a
 					>
 				</div>
 			</div>
 		</section>
-		<section id="contact-section">
-			<div class="container contact-grid">
-				<div class="contact-image">
-					<img
-						src="images/sarah-chris/IMG_3127.PNG"
-						alt="Wedding planning imagery"
+		<section id="contact-form-section">
+			<div class="contact-image-area"></div>
+			<div class="contact-form-area">
+				<div class="contact-header">
+					<h2>GET IN TOUCH</h2>
+				</div>
+				<p>
+					We'd love to hear from you. Please fill out the form below:
+				</p>
+
+				<form action="#" method="post">
+					<input
+						type="text"
+						placeholder="NAME"
+						name="name"
+						required
 					/>
-				</div>
-				<div class="contact-form-container">
-					<h2 class="contact-title">Contact Us</h2>
-					<p class="contact-intro">
-						Let's plan your unforgettable event. Fill out the form
-						below and we'll be in touch!
-					</p>
-
-					<form action="#" method="POST" class="contact-form">
-						<div class="form-group">
-							<label for="name">Name</label>
-							<input type="text" id="name" name="name" required />
-						</div>
-
-						<div class="form-group">
-							<label for="contact-info">Email or Phone</label>
-							<input
-								type="text"
-								id="contact-info"
-								name="contact_info"
-								placeholder="your@email.com or (123) 456-7890"
-								required
-							/>
-						</div>
-
-						<div class="form-group">
-							<label for="message">Your Message</label>
-							<textarea
-								id="message"
-								name="message"
-								rows="8"
-								placeholder="Tell us about your event, desired date, number of guests, and any special requests..."
-							></textarea>
-						</div>
-
-						<button type="submit" class="btn contact-submit-btn">
-							SEND MESSAGE
-						</button>
-					</form>
-				</div>
+					<input
+						type="email"
+						placeholder="E-MAIL"
+						name="email"
+						required
+					/>
+					<textarea
+						placeholder="MESSAGE"
+						name="message"
+						rows="5"
+						required
+					></textarea>
+					<button type="submit">GET IN TOUCH</button>
+				</form>
 			</div>
 		</section>
 		<footer>
 			<div class="container">
-				<p>&copy; 2025 Daphne Toronto Recreation</p>
+				<p>&copy; 2025 Tide and True</p>
 				<div class="social-links">
 					<a href="#">Facebook</a>
 					<a href="#">Instagram</a>
