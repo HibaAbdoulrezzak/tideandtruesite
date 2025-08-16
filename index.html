@@ -3,40 +3,58 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Daphne Toronto (Recreation)</title>
-		<link rel="stylesheet" href="style.css" />
+		<title>Tide & True Occasions</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700;1000&family=Smythe&family=Lora:ital@0;1&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap"
 			rel="stylesheet"
 		/>
+		<link rel="stylesheet" href="style.css" />
+
+		<!-- Optional: ensure content is visible if JS is disabled -->
+		<noscript>
+			<style>
+				[data-animate] {
+					opacity: 1 !important;
+					transform: none !important;
+				}
+			</style>
+		</noscript>
 	</head>
 	<body>
-		<header>
+		<header class="fade-slide" data-animate>
 			<div class="container">
 				<div class="logo">
-					<div class="logo">
-						<a href="#">
-							<img
-								src="images/logo.png"
-								alt="Tide and True Logo"
-							/>
-						</a>
-					</div>
+					<a href="index.html">
+						<img src="images/ttlogo.svg" alt="Tide and True Logo" />
+					</a>
 				</div>
 				<nav>
 					<ul>
-						<li><a href="#about">About Us</a></li>
+						<li><a href="about-us.html">About Us</a></li>
 						<li><a href="services.html">Services</a></li>
-						<li><a href="#private-dining">Gallery</a></li>
-						<li><a href="#contact">Contact</a></li>
+						<li><a href="#image-card-carousel">Gallery</a></li>
+						<li><a href="#contact-form-section">Contact</a></li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		<section id="carousel-section">
+		<section id="carousel-section" class="fade-slide" data-animate>
 			<div class="carousel-container">
 				<div class="carousel-slides">
 					<div
@@ -47,11 +65,7 @@
 					>
 						<div class="hero-content">
 							<h1>Experience Exquisite Events</h1>
-							<p>
-								Thoughtfully planned, effortlessly executed—Tide
-								& True Occasions brings your vision to life.
-							</p>
-							<a href="#reservations" class="btn">Contact Us</a>
+							<p>Thoughtfully planned, effortlessly executed.</p>
 						</div>
 					</div>
 					<div
@@ -62,8 +76,13 @@
 					>
 						<div class="hero-content">
 							<h1>Savor Every Moment</h1>
-							<p>Exceptional Flavors, Unforgettable Ambiance</p>
-							<a href="#menu" class="btn">Contact Us</a>
+							<p>
+								Tide & True Occasions brings your vision to
+								life.
+							</p>
+							<a href="#contact-form-section" class="btn"
+								>Contact Us</a
+							>
 						</div>
 					</div>
 					<div
@@ -75,16 +94,34 @@
 						<div class="hero-content">
 							<h1>Your Next Event Awaits</h1>
 							<p>Host Private Functions with Us</p>
-							<a href="#private-dining" class="btn"
-								>Private Events</a
-							>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section id="image-card-carousel">
+		<section id="text-section" class="slide-left" data-animate>
+			<div class="container">
+				<h2>PHILOSOPHY</h2>
+				<p>
+					At Tide & True Occasions, we believe that every event is a
+					unique story waiting to be told. Our passion lies in
+					crafting unforgettable experiences that reflect your
+					personal style and vision. <br /><br />
+					From intimate gatherings to grand celebrations, we
+					meticulously plan and execute every detail, ensuring a
+					seamless and stress-free journey from concept to conclusion.
+					Let us transform your dreams into cherished memories, where
+					every moment is thoughtfully curated and flawlessly
+					delivered.
+				</p>
+				<a href="#about-section" class="btn btn-secondary"
+					>Learn More</a
+				>
+			</div>
+		</section>
+
+		<section id="image-card-carousel" class="slide-right" data-animate>
 			<div class="container">
 				<h2>
 					bring your <br />
@@ -92,25 +129,41 @@
 				</h2>
 				<div class="carousel-container">
 					<div class="carousel-slides">
-						<div class="carousel-slide grid-item active">
+						<div
+							class="carousel-slide grid-item active"
+							data-animate
+							class="fade-slide"
+						>
 							<img
 								src="images/heropics/Pink.PNG"
 								alt="Wedding rings and shoes"
 							/>
 						</div>
-						<div class="carousel-slide grid-item">
+						<div
+							class="carousel-slide grid-item"
+							data-animate
+							class="fade-slide"
+						>
 							<img
 								src="images/mandm/IMG_8676.JPG"
 								alt="Wedding reception table setting"
 							/>
 						</div>
-						<div class="carousel-slide grid-item">
+						<div
+							class="carousel-slide grid-item"
+							data-animate
+							class="fade-slide"
+						>
 							<img
 								src="images/mandm/IMG_8686.JPG"
 								alt="Bride and groom with vintage car"
 							/>
 						</div>
-						<div class="carousel-slide grid-item">
+						<div
+							class="carousel-slide grid-item"
+							data-animate
+							class="fade-slide"
+						>
 							<img
 								src="images/heropics/IMG_8675.JPG"
 								alt="Round table setting at wedding reception"
@@ -120,28 +173,12 @@
 				</div>
 			</div>
 		</section>
-		<section id="about" class="text-section">
-			<div class="container">
-				<h2>Our Story</h2>
-				<p>
-					We’re Danielle and Maryam—two creative minds who joined
-					forces after discovering our shared passion for planning,
-					organizing, and making moments unforgettable. With over 20
-					years of combined experience in events, hospitality, and
-					coordination, we bring calm energy, sharp logistics, and a
-					love for the little details that make celebrations feel
-					personal. Tide & True Occasions is rooted in reliability,
-					creativity, and a deep love for bringing visions to
-					life—whether it’s a wedding, shower, or milestone event.
-				</p>
 
-				<a href="#reservations" class="btn btn-secondary">Contact Us</a>
-			</div>
-		</section>
-		<section id="menu-section" class="menu-dark-bg">
-			<div class="container">
+		<section id="menu-section" class="menu-dark-bg parallax">
+			<div class="container fade-only" data-animate>
 				<h2 class="menu-title">SERVICES</h2>
 				<div class="menu-categories">
+					<button class="menu-btn">Weddings</button>
 					<button class="menu-btn">Engagements</button>
 					<button class="menu-btn">Proposals</button>
 					<button class="menu-btn">Showers</button>
@@ -149,17 +186,85 @@
 				</div>
 
 				<div class="menu-wine">
-					<button class="menu-btn full-width">Weddings</button>
-				</div>
-
-				<div class="menu-view-full">
-					<a href="#full-menu" class="btn btn-secondary-dark"
-						>VIEW SERVICES</a
-					>
+					<button class="menu-btn full-width">View Services</button>
 				</div>
 			</div>
 		</section>
-		<section id="contact-form-section">
+
+		<section id="reviews-section" class="fade-slide" data-animate>
+			<div class="container">
+				<h2 class="reviews-title">love letters</h2>
+				<div class="reviews-grid">
+					<div
+						class="review-card fade-slide"
+						data-animate
+						style="transition-delay: 0.1s"
+					>
+						<div class="stars">
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+						</div>
+						<p class="review-text">
+							"Tide & True made our wedding day absolutely
+							magical. Every detail was perfect, and they handled
+							everything with such grace and professionalism. We
+							re so grateful!"
+						</p>
+						<p class="reviewer-name">— Sarah & Chris, Toronto</p>
+					</div>
+
+					<div
+						class="review-card fade-slide"
+						data-animate
+						style="transition-delay: 0.25s"
+					>
+						<div class="stars">
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+						</div>
+						<p class="review-text">
+							"From start to finish, the planning for my 30th
+							birthday party was seamless. Danielle and Maryam
+							have an incredible eye for design and truly listen
+							to your vision. Highly recommend!"
+						</p>
+						<p class="reviewer-name">— Jessica L., Oakville</p>
+					</div>
+
+					<div
+						class="review-card fade-slide"
+						data-animate
+						style="transition-delay: 0.4s"
+					>
+						<div class="stars">
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+							<i class="fas fa-heart"></i>
+						</div>
+						<p class="review-text">
+							"We couldn't have asked for better event planners.
+							Their creativity and calm approach took all the
+							stress out of organizing our corporate gala. The
+							feedback from attendees was outstanding!"
+						</p>
+						<p class="reviewer-name">— Michael T., Company XYZ</p>
+					</div>
+				</div>
+				<a href="#" class="btn btn-secondary reviews-button"
+					>VIEW ALL REVIEWS</a
+				>
+			</div>
+		</section>
+
+		<section id="contact-form-section" class="slide-left" data-animate>
 			<div class="contact-image-area"></div>
 			<div class="contact-form-area">
 				<div class="contact-header">
@@ -192,7 +297,8 @@
 				</form>
 			</div>
 		</section>
-		<footer>
+
+		<footer class="fade-slide" data-animate>
 			<div class="container">
 				<p>&copy; 2025 Tide and True</p>
 				<div class="social-links">

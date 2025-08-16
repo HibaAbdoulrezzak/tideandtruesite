@@ -3,326 +3,239 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Our Services - Daphne Toronto (Recreation)</title>
-		<link rel="stylesheet" href="style.css" />
+		<title>Tide & True Occasions — Services</title>
+
+		<!-- Fonts & Icons -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700;1000&family=Lora:ital@0;1&display=swap"
 			rel="stylesheet"
 		/>
-		<style>
-			/* Specific styles for the services page to give it a unique look */
-			.services-hero {
-				background-color: #5d6063; /* Placeholder background */
-				padding: 100px 20px;
-				color: #fff;
-				text-align: center;
-			}
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+		/>
 
-			.services-hero h1 {
-				font-family: "Playfair Display", serif;
-				font-size: 4em;
-				margin-bottom: 20px;
-			}
-
-			.services-hero p {
-				font-family: "Lora", serif;
-				font-size: 1.2em;
-				max-width: 800px;
-				margin: 0 auto;
-			}
-
-			.service-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-				gap: 40px;
-				padding: 80px 20px;
-				max-width: 1200px;
-				margin: 0 auto;
-			}
-
-			.service-card {
-				background-color: #fff;
-				border-radius: 8px;
-				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-				overflow: hidden;
-				text-align: center;
-				transition: transform 0.3s ease;
-				display: flex;
-				flex-direction: column;
-			}
-
-			.service-card:hover {
-				transform: translateY(-10px);
-			}
-
-			.service-card img {
-				width: 100%;
-				height: 250px;
-				object-fit: cover;
-			}
-
-			.service-card-content {
-				padding: 25px;
-				flex-grow: 1; /* Allows content area to expand */
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-			}
-
-			.service-card h3 {
-				font-family: "Playfair Display", serif;
-				font-size: 1.8em;
-				color: #333;
-				margin-bottom: 15px;
-			}
-
-			.service-card p {
-				font-family: "Lora", serif;
-				font-size: 1em;
-				color: #666;
-				line-height: 1.6;
-				margin-bottom: 20px;
-			}
-
-			.service-card .btn {
-				display: inline-block;
-				margin-top: auto; /* Pushes button to the bottom */
-				padding: 12px 25px;
-				background-color: #a08040; /* Accent color */
-				color: #fff;
-				text-decoration: none;
-				border-radius: 5px;
-				transition: background-color 0.3s ease;
-			}
-
-			.service-card .btn:hover {
-				background-color: #8a6f35;
-			}
-
-			/* Basic header/footer from index.html to maintain consistency */
-			header {
-				background-color: #333;
-				padding: 20px 0;
-			}
-
-			header .container {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 0 20px;
-			}
-
-			.logo a {
-				font-family: "Playfair Display", serif;
-				font-size: 2em;
-				font-weight: 700;
-				color: #fff;
-				text-decoration: none;
-				text-transform: uppercase;
-			}
-
-			nav ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-				display: flex;
-			}
-
-			nav ul li {
-				margin-left: 30px;
-			}
-
-			nav ul li a {
-				font-family: "Lora", serif;
-				font-size: 1.1em;
-				color: #fff;
-				text-decoration: none;
-				transition: color 0.3s ease;
-			}
-
-			nav ul li a:hover {
-				color: #a08040; /* Accent color */
-			}
-
-			footer {
-				background-color: #333;
-				color: #fff;
-				padding: 40px 0;
-				text-align: center;
-				font-family: "Lora", serif;
-			}
-
-			footer .container {
-				max-width: 1200px;
-				margin: 0 auto;
-				padding: 0 20px;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				flex-wrap: wrap; /* Allow wrapping on smaller screens */
-			}
-
-			footer .social-links a {
-				color: #fff;
-				text-decoration: none;
-				margin-left: 20px;
-				transition: color 0.3s ease;
-			}
-
-			footer .social-links a:hover {
-				color: #a08040; /* Accent color */
-			}
-
-			@media (max-width: 768px) {
-				header .container {
-					flex-direction: column;
-					text-align: center;
-				}
-				nav ul {
-					margin-top: 20px;
-					flex-direction: column;
-				}
-				nav ul li {
-					margin: 10px 0;
-				}
-				.services-hero h1 {
-					font-size: 3em;
-				}
-				.service-grid {
-					grid-template-columns: 1fr;
-				}
-				footer .container {
-					flex-direction: column;
-				}
-				footer .social-links {
-					margin-top: 20px;
-				}
-				footer .social-links a {
-					margin: 0 10px;
-				}
-			}
-		</style>
+		<!-- Styles -->
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js" defer></script>
 	</head>
 	<body>
+		<!-- HEADER -->
 		<header>
 			<div class="container">
 				<div class="logo">
-					<a href="index.html">tide and true</a>
+					<a href="index.html">
+						<img src="images/ttlogo.svg" alt="Tide and True Logo" />
+					</a>
 				</div>
 				<nav>
 					<ul>
-						<li><a href="index.html#about">About Us</a></li>
-						<li><a href="services.html">Services</a></li>
-						<li><a href="index.html#menu">Menu</a></li>
+						<li><a href="about-us.html">About Us</a></li>
 						<li>
-							<a href="index.html#private-dining"
-								>Private Dining</a
-							>
+							<a href="services.html" class="active">Services</a>
 						</li>
-						<li><a href="index.html#contact">Contact</a></li>
-						<li>
-							<a href="index.html#reservations">Reservations</a>
-						</li>
+						<li><a href="#image-card-carousel">Gallery</a></li>
+						<li><a href="#contact-form-section">Contact</a></li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		<section class="services-hero">
-			<div class="container">
-				<h1>Our Offerings</h1>
-				<p>
-					Discover the diverse range of experiences we can create for
-					your special moments, from intimate gatherings to grand
-					celebrations.
-				</p>
-			</div>
-		</section>
-
-		<section class="service-grid">
-			<div class="service-card">
-				<img
-					src="images/sarah-chris/IMG_3127.PNG"
-					alt="Wedding setup"
-				/>
-				<div class="service-card-content">
-					<h3>Weddings</h3>
-					<p>
-						Crafting unforgettable wedding experiences, tailored to
-						your vision for the perfect day. From intimate
-						ceremonies to lavish receptions.
-					</p>
-					<a href="services/weddings.html" class="btn">Learn More</a>
+		<!-- MAIN CONTENT -->
+		<main id="services">
+			<!-- HERO -->
+			<section class="srv-hero parallax">
+				<div class="srv-hero__inner fade-only" data-animate>
+					<h1 class="h1-serif">Services</h1>
 				</div>
-			</div>
+			</section>
 
-			<div class="service-card">
-				<img
-					src="images/mandm/IMG_8664.JPG"
-					alt="Corporate event setup"
-				/>
-				<div class="service-card-content">
-					<h3>Corporate Events</h3>
-					<p>
-						Elevate your corporate gatherings with professional
-						event planning, sophisticated catering, and a refined
-						atmosphere for success.
-					</p>
-					<a href="services/corporate-events.html" class="btn"
-						>Learn More</a
+			<!-- FULL SERVICE -->
+			<section class="srv-split section-pad" data-animate>
+				<div class="srv-split__inner">
+					<div
+						class="srv-split__content container fade-slide"
+						data-animate
 					>
-				</div>
-			</div>
+						<h2 class="h2-serif">Full Service Planning</h2>
+						<p>
+							We manage every detail from start to finish,
+							ensuring a seamless and stress-free experience.
+						</p>
+						<ul class="checklist">
+							<li>Budget management</li>
+							<li>Vendor sourcing</li>
+							<li>Design conceptualization</li>
+							<li>Timeline creation</li>
+							<li>Guest list management</li>
+						</ul>
+						<a href="#contact-form-section" class="text-link"
+							>Learn More →</a
+						>
+					</div>
 
-			<div class="service-card">
-				<img
-					src="images/sarah-chris/IMG_3130.PNG"
-					alt="Private party setting"
-				/>
-				<div class="service-card-content">
-					<h3>Private Parties</h3>
-					<p>
-						Celebrate life's milestones with bespoke private
-						parties, ensuring every detail reflects your unique
-						style and creates lasting memories.
-					</p>
-					<a href="services/private-parties.html" class="btn"
-						>Learn More</a
+					<!-- IMAGE -->
+					<div class="srv-split__media fade-slide" data-animate>
+						<img
+							src="images/tori/IMG_7403.PNG"
+							alt="Full Service Planning image"
+						/>
+					</div>
+				</div>
+			</section>
+
+			<!-- PARTIAL PLANNING -->
+			<section class="srv-split section-pad bg-dark" data-animate>
+				<div class="srv-split__inner reverse">
+					<!-- IMAGE -->
+					<div class="srv-split__media fade-slide" data-animate>
+						<img
+							src="images/sarah-chris/IMG_3135.PNG"
+							alt="Partial Planning image"
+						/>
+					</div>
+
+					<div
+						class="srv-split__content container fade-slide"
+						data-animate
 					>
+						<h2 class="h2-serif txt-light">Partial Planning</h2>
+						<p>
+							For couples who have started planning but need
+							expert guidance to finalize details.
+						</p>
+						<ul class="dark-checklist">
+							<li>Finalizing vendor contracts</li>
+							<li>Design and décor consultation</li>
+							<li>Timeline and logistics management</li>
+							<li>Rehearsal coordination</li>
+							<li>Unlimited communication</li>
+						</ul>
+						<a href="#contact-form-section" class="text-link"
+							>Learn More →</a
+						>
+					</div>
 				</div>
-			</div>
+			</section>
 
-			<div class="service-card">
-				<img
-					src="images/mandm/IMG_8676.JPG"
-					alt="Catering food display"
-				/>
-				<div class="service-card-content">
-					<h3>Catering Services</h3>
-					<p>
-						Exceptional culinary experiences brought directly to
-						your location, with custom menus designed to delight
-						your guests.
-					</p>
-					<a href="services/catering.html" class="btn">Learn More</a>
+			<!-- DAY-OF COORDINATION -->
+			<section class="srv-split section-pad" data-animate>
+				<div class="srv-split__inner">
+					<div
+						class="srv-split__content container fade-slide"
+						data-animate
+					>
+						<h2 class="h2-serif">Day-Of Coordination</h2>
+						<p>
+							We step in 6–8 weeks before your event to ensure
+							everything runs perfectly.
+						</p>
+						<ul class="checklist">
+							<li>Venue walkthrough</li>
+							<li>Vendor confirmation</li>
+							<li>Timeline management</li>
+							<li>Supervision of setup and teardown</li>
+							<li>Troubleshooting and problem-solving</li>
+						</ul>
+						<a href="#contact-form-section" class="text-link"
+							>Learn More →</a
+						>
+					</div>
+
+					<!-- IMAGE -->
+					<div class="srv-split__media fade-slide" data-animate>
+						<img
+							src="images/mandm/IMG_8688.JPG"
+							alt="Day Of Coordination image"
+						/>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
+			<!-- OTHER EVENTS BAND -->
+			<section class="events-band" aria-labelledby="events-band-title">
+				<div
+					class="container events-band__inner fade-only"
+					data-animate
+				>
+					<h2
+						id="events-band-title"
+						class="events-band__title h2-serif"
+					>
+						We plan other events, too
+					</h2>
+
+					<div class="events-cards" data-stagger>
+						<!-- Card: Social Events -->
+						<article class="events-card fade-slide" data-animate>
+							<div class="events-card__media">
+								<img
+									src="images/mandm/IMG_8679.JPG"
+									alt="Long tablescape with greenery"
+								/>
+							</div>
+							<div class="events-card__body">
+								<h3 class="events-card__title">
+									Social <em>Events</em>
+								</h3>
+								<p>
+									Celebrate in style with T&T! From milestone
+									birthdays to baby and bridal showers, we
+									specialize in elevating your event with our
+									signature flair. Let us bring creativity and
+									ease to the planning process.
+								</p>
+							</div>
+						</article>
+
+						<!-- Card: Corporate Events -->
+						<article class="events-card fade-slide" data-animate>
+							<div class="events-card__media">
+								<img
+									src="images/AmerNabulsi-513.jpg"
+									alt="Corporate gala bar with florals"
+								/>
+							</div>
+							<div class="events-card__body">
+								<h3 class="events-card__title">
+									Corporate <em>Events</em>
+								</h3>
+								<p>
+									From conferences and team-building retreats
+									to fundraisers and executive gatherings, we
+									craft seamless, impactful experiences that
+									foster connection and elevate professional
+									communities.
+								</p>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- QUOTE BAND -->
+			<section class="section-pad cta-band parallax-lite">
+				<div class="container narrow fade-only" data-animate>
+					<blockquote class="quote">
+						“Every event is an opportunity to create a timeless
+						memory.”
+					</blockquote>
+					<p class="quote-author">— Joy</p>
+				</div>
+			</section>
+		</main>
+
+		<!-- FOOTER -->
 		<footer>
 			<div class="container">
-				<p>&copy; 2025 Daphne Toronto Recreation</p>
+				<p>&copy; 2025 Tide and True</p>
 				<div class="social-links">
 					<a href="#">Facebook</a>
 					<a href="#">Instagram</a>
 				</div>
 			</div>
 		</footer>
-
-		<script src="script.js"></script>
 	</body>
 </html>
