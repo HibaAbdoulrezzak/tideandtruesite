@@ -3,107 +3,300 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Inspired Portfolio</title>
-		<link rel="stylesheet" href="style.css" />
+		<title>Tide & True Occasions — Portfolio</title>
+
+		<!-- Fonts -->
 		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
 			rel="stylesheet"
 		/>
+
+		<!-- Site CSS -->
+		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
+		<!-- ===== Header ===== -->
 		<header>
 			<div class="container">
-				<div class="logo">
-					<a href="index.html">
-						<img src="images/ttlogo.svg" alt="Tide and True Logo" />
-					</a>
-				</div>
-				<nav>
+				<a class="logo" href="index.html">
+					<img
+						src="images/assets/ttlogo.svg"
+						alt="Tide & True Logo"
+					/>
+				</a>
+
+				<button
+					class="nav-toggle"
+					aria-label="Open menu"
+					aria-expanded="false"
+					aria-controls="site-nav"
+				>
+					<span class="hamburger"><span></span></span>
+				</button>
+
+				<nav id="site-nav" aria-label="Primary">
 					<ul>
 						<li><a href="about-us.html">About Us</a></li>
 						<li><a href="services.html">Services</a></li>
-						<li><a href="#portfolio-gallery">Gallery</a></li>
-						<li><a href="#contact-form-section">Contact</a></li>
+						<li>
+							<a href="portfolio.html" aria-current="page"
+								>Gallery</a
+							>
+						</li>
+						<li>
+							<a href="index.html#contact-form-section"
+								>Contact</a
+							>
+						</li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		<div class="hero-header">
-			<h1>Your Event Co.</h1>
-			<p>Elegant Events & Lasting Memories</p>
-		</div>
+		<!-- ===== Hero ===== -->
+		<section
+			class="page-hero hero--portfolio"
+			style="--hero: url('images/couples/chelsnadray/13.jpg')"
+		></section>
 
+		<!-- ===== Vendor Logos ===== -->
 		<section class="vendor-section">
 			<div class="vendor-logos">
-				<img src="images/partnerlogos/guildinn.png" alt="Guild Inn" />
-				<img
-					src="images/partnerlogos/madisongh.webp"
-					alt="Madison Green House"
-				/>
-				<img src="images/partnerlogos/paradise.svg" alt="Paradise" />
 				<img
 					src="images/partnerlogos/deercreeklogo.png"
 					alt="Deer Creek"
+				/>
+				<img src="images/partnerlogos/guildinn.png" alt="Guild Inn" />
+				<img
+					src="images/partnerlogos/misslogo.webp"
+					alt="Mississauga Convention Centre"
+				/>
+				<img
+					src="images/partnerlogos/madisongh.webp"
+					alt="Madison Greenhouse"
+				/>
+				<img
+					src="images/partnerlogos/paradise.svg"
+					alt="Paradise Banquet Hall"
 				/>
 				<img
 					src="images/partnerlogos/royalambassador.png"
 					alt="Royal Ambassador"
 				/>
-				<img
-					src="images/partnerlogos/misslogo.webp"
-					alt="Mississauga Convention Centre"
-				/>
 			</div>
 		</section>
 
-		<section class="galleries-title-section">
-			<h2 class="galleries-title">EVENT Galleries</h2>
+		<!-- ===== Portfolio Grid ===== -->
+		<section class="me-gallery" style="padding: 48px 0 96px">
+			<div class="me-container">
+				<div class="me-grid">
+					<!-- Card 1 -->
+					<a href="galleries/charlene-garrett.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/charleneandgarrett/17.jpg"
+								alt="Charlene and Garrett"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Charlene and Garrett</h3>
+							<p>Rustic Barn Wedding</p>
+						</div>
+					</a>
+
+					<!-- Card 2 -->
+					<a href="galleries/chelsea-raymond.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/chelsnadray/2.jpg"
+								alt="Chelsea and Raymond"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Chelsea and Raymond</h3>
+							<p>Deer Creek</p>
+						</div>
+					</a>
+
+					<!-- Card 3 -->
+					<a href="galleries/francesca-john.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/fandj/photo13.jpg"
+								alt="Francesca and John"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Francesca and John</h3>
+							<p>Crystal Fountain Event Venue</p>
+						</div>
+					</a>
+
+					<!-- Card 4 -->
+					<a href="galleries/marwa-michael.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/marwaandmichael/11.jpg"
+								alt="Marwa and Michael"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Marwa and Michael</h3>
+							<p>Prestige Restaurant & Event Venue</p>
+						</div>
+					</a>
+
+					<!-- Card 5 -->
+					<a href="galleries/maryam-mustafa.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/maryamandmustafa/11.JPG"
+								alt="Maryam and Mustafa"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Maryam and Mustafa</h3>
+							<p>Mississauga Convention Centre</p>
+						</div>
+					</a>
+					<!-- 👈 this closing tag was missing -->
+
+					<!-- Card 6 -->
+					<a href="galleries/santana-daniel.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/santanaanddaniel/13.jpg"
+								alt="Santana and Daniel"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Santana and Daniel</h3>
+							<p>Royal Ambassador</p>
+						</div>
+					</a>
+
+					<!-- Card 7 -->
+					<a href="galleries/sarah-chris.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/sarahandchris/10.PNG"
+								alt="Sarah and Chris"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Sarah and Chris</h3>
+							<p>Barrie Country Club</p>
+						</div>
+					</a>
+
+					<!-- Card 8 -->
+					<a href="galleries/vic-john.html" class="me-card">
+						<div class="me-media">
+							<img
+								src="images/couples/vicandjohn/9.jpg"
+								alt="Victoria and Chris"
+							/>
+							<div class="me-overlay">
+								<span>View Gallery</span>
+							</div>
+						</div>
+						<div class="me-caption">
+							<h3>Victoria and Chris</h3>
+							<p>McMichael Canadian Art Collection</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+		<section
+			class="me-cta"
+			style="
+				background-image: url('../images/couples/charleneandgarrett/1.JPG');
+				background-position: center;
+				background-size: cover;
+			"
+		>
+			<div class="me-cta__inner">…</div>
 		</section>
 
-		<main class="portfolio-gallery">
-			<a href="link-to-event-page.html" class="gallery-item-link">
-				<div class="gallery-item">
-					<img
-						src="images/sarah-chris/IMG_3139.PNG"
-						alt="Sarah & Chris"
-					/>
-				</div>
-				<div class="gallery-text">
-					<h3>Sarah & Chris</h3>
-				</div>
-			</a>
-
-			<a href="link-to-event-page.html" class="gallery-item-link">
-				<div class="gallery-item">
-					<img
-						src="images/santana/santanaportfolio.png"
-						alt="Couple embracing"
-					/>
-				</div>
-				<div class="gallery-text">
-					<h3>Santana & Name</h3>
-				</div>
-			</a>
-
-			<a href="link-to-event-page.html" class="gallery-item-link">
-				<div class="gallery-item">
-					<img
-						src="images/AmerNabulsi-513.jpg"
-						alt="Description of event 3"
-					/>
-				</div>
-				<div class="gallery-text">
-					<h3>Project Title 3</h3>
-					<p>Royal Blue Golf Club</p>
-				</div>
-			</a>
-		</main>
-
+		<!-- ===== Footer ===== -->
 		<footer>
-			<div class="footer-content">
-				<p>&copy; 2024 Your Company. All rights reserved.</p>
+			<div class="container">
+				<p>&copy; 2025 Tide & True</p>
+				<div class="social-links">
+					<a href="#" aria-label="Facebook">Facebook</a>
+					<a href="#" aria-label="Instagram">Instagram</a>
+				</div>
 			</div>
 		</footer>
+
+		<!-- ===== JS for Mobile Nav ===== -->
+		<script>
+			(function () {
+				const btn = document.querySelector(".nav-toggle");
+				const nav = document.getElementById("site-nav");
+				if (!btn || !nav) return;
+				const setState = (open) => {
+					document.body.classList.toggle("nav-open", open);
+					btn.setAttribute("aria-expanded", String(open));
+					btn.setAttribute(
+						"aria-label",
+						open ? "Close menu" : "Open menu"
+					);
+				};
+				btn.addEventListener("click", () =>
+					setState(!document.body.classList.contains("nav-open"))
+				);
+				nav.addEventListener("click", (e) => {
+					if (e.target.closest("a")) setState(false);
+				});
+				document.addEventListener("keydown", (e) => {
+					if (e.key === "Escape") setState(false);
+				});
+			})();
+			(function () {
+				function build() {
+					const { basePath = "", images = [] } = window.GALLERY || {};
+
+					// …existing code…
+
+					// Update CTA background to use a gallery image (2nd if available, else 1st)
+					const cta = document.querySelector(".me-cta");
+					const ctaSrc = images[1]
+						? basePath + images[1]
+						: images[0]
+						? basePath + images[0]
+						: "";
+					if (cta && ctaSrc) {
+						cta.style.setProperty("--cta", `url("${ctaSrc}")`);
+					}
+				}
+
+				document.readyState === "loading"
+					? document.addEventListener("DOMContentLoaded", build)
+					: build();
+			})();
+		</script>
 	</body>
 </html>

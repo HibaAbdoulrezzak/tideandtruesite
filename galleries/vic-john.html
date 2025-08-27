@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Gallery · Tide & True Occasions</title>
+
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="../style.css" />
+		<!-- your global -->
+		<link rel="stylesheet" href="../gallery.css" />
+		<!-- new scoped -->
+	</head>
+	<body class="me-page">
+		<!-- HERO (moody, B/W) -->
+		<section
+			class="me-hero"
+			style="--hero-img: url('../images/couples/vicandjohn/1.JPG')"
+		>
+			<div class="me-hero__inner">
+				<h1 class="me-hero__title">Victoria & John</h1>
+				<p class="me-hero__lead">
+					Estate Grounds · Reception · Portraits
+				</p>
+			</div>
+		</section>
+
+		<!-- (Optional) slim intro line -->
+		<section class="me-intro">
+			<div class="me-container">
+				<p class="me-lead" id="meIntro">
+					From intimate garden ceremonies to grand ballroom soirées,
+					explore a selection of our recent celebrations.
+				</p>
+			</div>
+		</section>
+
+		<!-- GRID -->
+		<main class="me-container">
+			<section id="meGrid" class="me-grid" aria-label="Gallery"></section>
+		</main>
+
+		<!-- LIGHTBOX (auto-filled) -->
+		<div id="meLightboxes"></div>
+
+		<!-- CTA -->
+		<section class="me-cta">
+			<div class="me-cta__inner">
+				<h2 class="me-cta__title">
+					Ready to plan something beautiful?
+				</h2>
+				<p class="me-cta__lead">
+					Thoughtfully planned, effortlessly executed.
+				</p>
+				<a class="me-btn" href="../index.html#contact-form-section"
+					>Plan Your Event</a
+				>
+			</div>
+		</section>
+
+		<!-- QUOTES -->
+		<section class="me-quotes">
+			<p class="me-q" style="--d: 0s">
+				“They brought our vision to life and then some.”
+				<span>— Sarah &amp; Chris</span>
+			</p>
+			<p class="me-q" style="--d: 5s">
+				“Flawless from start to finish.”
+				<span>— Santana &amp; Daniel</span>
+			</p>
+			<p class="me-q" style="--d: 10s">
+				“Professional, creative, calm.”
+				<span>— Chelsea &amp; Raymond</span>
+			</p>
+		</section>
+
+		<!-- REUSABLE BUILDER (config first, then script) -->
+		<script>
+			window.GALLERY = {
+				title: "Victoria & John",
+				lead: "Estate Grounds · Reception · Portraits",
+				intro: "A modern garden celebration filled with sunlight, greenery, and warmth.",
+				basePath: "../images/couples/vicandjohn/",
+				images: [
+					"1.JPG",
+					"2.JPG",
+					"3.JPG",
+					"4.PNG",
+					"5.PNG",
+					"6.JPG",
+					"7.jpg",
+					"8.jpg",
+					"9.jpg",
+					"10.jpg",
+					"11.PNG",
+				],
+				hero: "1.JPG",
+			};
+		</script>
+		<!-- 1) Your per-page config (edit for each couple) -->
+		<script>
+			window.GALLERY = {
+				title: "Vic & John",
+				lead: "Estate Grounds · Reception · Portraits",
+				intro: "A modern garden celebration filled with sunlight, greenery, and warmth.",
+				basePath: "../images/couples/vicandjohn/", // note the ../ from /galleries/
+				images: [
+					"1.JPG",
+					"2.JPG",
+					"3.JPG",
+					"4.PNG",
+					"5.PNG",
+					"6.JPG",
+					"7.jpg",
+					"8.jpg",
+					"9.jpg",
+					"10.jpg",
+					"11.PNG",
+				],
+				hero: "1.JPG", // optional: which file to use for hero
+			};
+		</script>
+
+		<!-- 2) Tiny inline builder (no external JS needed) -->
+		<script>
+			(function () {
+				function build() {
+					const cfg = window.GALLERY || {};
+					const {
+						title,
+						lead,
+						intro,
+						basePath = "",
+						images = [],
+						hero,
+					} = cfg;
+
+					// Write texts
+					const t = document.getElementById("meTitle");
+					const l = document.getElementById("meLead");
+					const i = document.getElementById("meIntro");
+					if (t && title) t.textContent = title;
+					if (l && lead) l.textContent = lead;
+					if (i && intro) i.textContent = intro;
+
+					// Hero background
+					const heroEl = document.querySelector(".me-hero");
+					const heroSrc =
+						hero || images[0] ? basePath + (hero || images[0]) : "";
+					if (heroEl && heroSrc)
+						heroEl.style.backgroundImage = `url("${heroSrc}")`;
+
+					// Grid + lightboxes
+					const grid = document.getElementById("meGrid");
+					const lbs = document.getElementById("meLightboxes");
+					if (!grid || !lbs) return;
+
+					images.forEach((file, idx) => {
+						const id = `img-${idx + 1}`;
+						const src = basePath + file;
+
+						// card
+						const a = document.createElement("a");
+						a.className = "me-card";
+						a.href = `#${id}`;
+						a.innerHTML = `
+        <figure class="me-media">
+          <img src="${src}" alt="${title || "Gallery"} ${
+							idx + 1
+						}" loading="lazy">
+        </figure>
+        <div class="me-caption">
+          <h3>${title || ""}</h3>
+          <p>${lead || ""}</p>
+        </div>`;
+						grid.appendChild(a);
+
+						// lightbox (IMPORTANT: use the same basePath i.e. ../images/…)
+						const lb = document.createElement("div");
+						lb.id = id;
+						lb.className = "me-lightbox";
+						lb.innerHTML = `<a class="me-close" href="#"></a><img src="${src}" alt="">`;
+						lbs.appendChild(lb);
+					});
+				}
+
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", build);
+				} else {
+					build();
+				}
+			})();
+		</script>
+	</body>
+</html>
