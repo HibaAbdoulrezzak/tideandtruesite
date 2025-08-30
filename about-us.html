@@ -1,61 +1,1346 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>About Us</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>About Us · Tide & True Occasions</title>
 
+		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:wght@400;700&family=Smythe&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
 			rel="stylesheet"
 		/>
 
-		<link rel="stylesheet" href="style.css" />
+		<style>
+			/* ===== Tokens ===== */
+			:root {
+				--ink: #141a1f;
+				--muted: #6f7a82;
+				--navy: #0d1f2c;
+				--gold: #a88a54;
+				--ivory: #f7f3ee;
+				--ivory-2: #efe9df;
+				--hairline: #e8eef2;
+				--max: 1140px;
+				--header-h: 88px;
+				--step-0: clamp(14px, 0.9rem + 0.1vw, 15.5px);
+				--step-1: clamp(16px, 1rem + 0.35vw, 19px);
+				--step-2: clamp(22px, 1.25rem + 0.6vw, 26px);
+				--step-3: clamp(30px, 1.6rem + 1vw, 38px);
+				--step-4: clamp(40px, 2.2rem + 1.6vw, 60px);
+			}
+
+			/* ===== Base ===== */
+			* {
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				color: var(--ink);
+				font: 400 var(--step-0) / 1.75 "Montserrat", system-ui,
+					-apple-system, "Segoe UI", Roboto, sans-serif;
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+				background: #fff;
+			}
+			h1,
+			h2,
+			h3 {
+				font-family: "Playfair Display", ui-serif, Georgia, serif;
+				letter-spacing: 0.006em;
+				margin: 0 0 0.45em;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+				text-underline-offset: 2px;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			section {
+				padding: clamp(32px, 5vw, 68px) 0;
+			}
+			.wrap {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+			}
+
+			/* ===== Header (fixed, CLEAR, no borders ever) ===== */
+			header {
+				position: fixed;
+				inset: 0 0 auto 0;
+				height: var(--header-h);
+				z-index: 1000;
+				background: transparent !important;
+				border: 0 !important;
+				box-shadow: none !important;
+				backdrop-filter: none !important;
+			}
+			header .container {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+			}
+
+			/* desktop nav */
+			#site-nav ul {
+				display: flex;
+				gap: 28px;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			#site-nav a {
+				font-weight: 600;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				font-size: 0.78rem;
+				padding: 8px 10px;
+				border-radius: 2px;
+				color: #e9dbdb;
+			}
+			#site-nav a:hover {
+				text-decoration: none;
+				box-shadow: 0 0 0 1px rgba(168, 138, 84, 0.45);
+			}
+
+			/* hamburger hidden on desktop */
+			.nav-toggle {
+				display: none;
+			}
+
+			/* Rentals & Accent Décor — layout + typography */
+			.rentals {
+				width: min(1140px, 92%);
+				margin: 4px auto 0;
+				padding: 0 20px clamp(38px, 5vw, 68px);
+			}
+			.rentals h4 {
+				font-size: 1.15rem;
+				margin: 0 0 10px;
+				color: #0d1f2c;
+				text-align: center;
+			}
+			.rentals-grid {
+				display: grid;
+				gap: 16px;
+			}
+			@media (min-width: 820px) {
+				.rentals-grid {
+					grid-template-columns: repeat(4, 1fr);
+				}
+			}
+			.rent {
+				background: #fff;
+				border: 1px solid var(--hairline);
+				border-radius: 5px;
+				padding: 14px;
+				text-align: center;
+				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+			}
+			/* make name & price stack to separate lines */
+			.rent strong,
+			.rent span {
+				display: block;
+			}
+			.rent strong {
+				color: #0d1f2c;
+			}
+			.rent span {
+				color: var(--gold);
+				font-weight: 700;
+				margin-top: 2px;
+			}
+
+			/* ===== Mobile menu ===== */
+			@media (max-width: 860px) {
+				.nav-toggle {
+					display: inline-grid;
+					place-items: center;
+					width: 44px;
+					height: 44px;
+					border: 0;
+					background: transparent;
+					padding: 0;
+					cursor: pointer;
+				}
+				.nav-toggle .hamburger {
+					position: relative;
+					width: 22px;
+					height: 2px;
+					background: currentColor;
+					color: #1a1a1a;
+					transition: transform 0.25s ease;
+				}
+				.nav-toggle .hamburger::before,
+				.nav-toggle .hamburger::after {
+					content: "";
+					position: absolute;
+					left: 0;
+					right: 0;
+					height: 2px;
+					background: currentColor;
+					transition: transform 0.25s ease, top 0.25s ease,
+						bottom 0.25s ease, opacity 0.2s ease;
+				}
+				.nav-toggle .hamburger::before {
+					top: -7px;
+				}
+				.nav-toggle .hamburger::after {
+					bottom: -7px;
+				}
+
+				/* panel */
+				#site-nav {
+					position: fixed;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					width: min(78vw, 360px);
+					transform: translateX(100%);
+					transition: transform 0.32s ease;
+					background: rgba(16, 18, 22, 0.92);
+					backdrop-filter: blur(10px);
+					padding: 28px 22px;
+					z-index: 1001;
+				}
+				#site-nav ul {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 18px;
+					margin-top: 64px;
+				}
+				#site-nav a {
+					color: #f2f4f6;
+				}
+
+				/* scrim */
+				body.nav-open::before {
+					content: "";
+					position: fixed;
+					inset: 0;
+					background: rgba(0, 0, 0, 0.35);
+					backdrop-filter: blur(2px);
+					z-index: 1000;
+				}
+				body.nav-open #site-nav {
+					transform: translateX(0);
+				}
+				body.nav-open .nav-toggle .hamburger {
+					background: transparent;
+				}
+				body.nav-open .nav-toggle .hamburger::before {
+					top: 0;
+					transform: rotate(45deg);
+				}
+				body.nav-open .nav-toggle .hamburger::after {
+					bottom: 0;
+					transform: rotate(-45deg);
+				}
+			}
+
+			/* ===== HERO (full-bleed; no outer gaps) ===== */
+			.about-hero {
+				--hero-img: url("images/couples/maryamandmustafa/5.JPG");
+				position: relative;
+				display: grid;
+				place-items: center;
+				min-height: 100vh;
+				text-align: center;
+				overflow: hidden;
+				margin: 0; /* flush to top */
+				padding-top: var(--header-h); /* so text isn't under the logo */
+			}
+			.about-hero::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: var(--hero-img) center/cover no-repeat;
+				filter: saturate(1.02) contrast(1.02);
+			}
+			.about-hero::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(
+						120% 80% at 50% 8%,
+						rgba(8, 12, 16, 0.36),
+						rgba(8, 12, 16, 0.16) 62%,
+						rgba(8, 12, 16, 0.12)
+					),
+					linear-gradient(
+						180deg,
+						rgba(10, 12, 14, 0.18) 0%,
+						rgba(10, 12, 14, 0.42) 70%,
+						rgba(10, 12, 14, 0.2) 100%
+					);
+				mix-blend-mode: multiply;
+			}
+			.about-hero__inner {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				max-width: 780px;
+				padding: 20px;
+			}
+			.about-title {
+				font-size: var(--step-4);
+				line-height: 1.03;
+				margin-bottom: 0.25em;
+			}
+			.about-lead {
+				font-size: var(--step-1);
+				color: #eef4f7;
+				opacity: 0.98;
+				margin: 0 0 0.6em;
+			}
+			.btn {
+				display: inline-block;
+				padding: 12px 22px;
+				border-radius: 500px;
+				border: 1px solid rgba(255, 255, 255, 0.8);
+				color: #111;
+				background: #fff;
+				letter-spacing: 0.12em;
+				font-weight: 600;
+				text-transform: uppercase;
+				font-size: 0.78rem;
+				transition: transform 0.2s, background 0.25s, border-color 0.25s,
+					color 0.25s, box-shadow 0.25s;
+			}
+			.btn:hover {
+				background: var(--gold);
+				border-color: var(--gold);
+				color: #0b0b0b;
+				transform: translateY(-2px);
+				box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+			}
+
+			/* ===== Story ===== */
+			.about-story {
+				padding-top: clamp(18px, 5vw, 44px);
+			}
+			.about-grid {
+				display: grid;
+				gap: clamp(28px, 3.4vw, 44px);
+				align-items: start;
+			}
+			@media (min-width: 900px) {
+				.about-grid {
+					grid-template-columns: 1.05fr 0.95fr;
+					align-items: center;
+				}
+			}
+			.about-img {
+				border-radius: 5px;
+				overflow: hidden;
+				background: #f3f5f6;
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+			}
+			.about-img img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.about-sub {
+				color: var(--muted);
+				text-transform: uppercase;
+				letter-spacing: 0.16em;
+				font: 700 0.78rem/1 "Montserrat", sans-serif;
+				margin-bottom: var(--space-1);
+			}
+			.about-text p {
+				margin: 0.4em 0 0;
+			}
+			.about-text p + p {
+				margin-top: 0.9em;
+			}
+
+			/* ===== Section variants ===== */
+			.section {
+				position: relative;
+				z-index: 1;
+				background: #fff;
+			}
+			.section--soft {
+				background: linear-gradient(#faf7f1, #f1ecdf);
+			}
+
+			/* ===== Process ===== */
+			.proc {
+				background: var(--ivory);
+				color: var(--ink);
+			}
+			.proc__frame {
+				max-width: 1000px;
+				margin-inline: auto;
+				padding: clamp(32px, 6vw, 72px) 20px;
+			}
+			.proc__band {
+				text-align: center;
+				padding-bottom: 0;
+			}
+			.proc__title {
+				font-weight: 400;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				font-size: clamp(30px, 5vw, 52px);
+				color: #3b322a;
+				margin: 0;
+			}
+			.proc__rule {
+				height: 1px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					#d9d3c9,
+					transparent
+				);
+				margin: 18px 0 0;
+				opacity: 0.9;
+			}
+			.proc__grid {
+				display: grid;
+				gap: clamp(22px, 2.4vw, 32px);
+				padding: clamp(26px, 5vw, 48px) 0 clamp(38px, 6vw, 56px);
+			}
+			@media (min-width: 860px) {
+				.proc__grid {
+					grid-template-columns: repeat(3, 1fr);
+				}
+			}
+			.step {
+				text-align: center;
+				background: linear-gradient(#fff, #fff) padding-box,
+					linear-gradient(180deg, #efe7dc, #e7dccd) border-box;
+				border: 1px solid transparent;
+				border-radius: 14px;
+				padding: clamp(20px, 2.4vw, 26px);
+				box-shadow: 0 16px 44px rgba(66, 48, 24, 0.08);
+				transition: transform 0.25s, box-shadow 0.25s;
+			}
+			.step:hover {
+				transform: translateY(-4px);
+				box-shadow: 0 24px 66px rgba(66, 48, 24, 0.12);
+			}
+			.step__num {
+				font-family: "Playfair Display", serif;
+				font-weight: 400;
+				font-size: clamp(32px, 5.6vw, 56px);
+				line-height: 1;
+				color: #5e5245;
+				margin: 2px 0 10px;
+			}
+			.step__eyebrow {
+				font: 700 0.72rem/1 "Montserrat", sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 0.14em;
+				color: #6c645d;
+				margin-bottom: 8px;
+			}
+
+			/* ===== Wedding ===== */
+			.wed-hero {
+				--wed-img: url("images/heropics/IMG_8671.JPG");
+				position: relative;
+				isolation: isolate;
+				min-height: 68vh;
+				display: grid;
+				place-items: center;
+				text-align: center;
+				background: var(--wed-img) center/cover no-repeat;
+				margin: 0; /* no negative margins */
+			}
+			.wed-hero::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+						180deg,
+						rgba(18, 16, 12, 0.15),
+						rgba(18, 16, 12, 0.45)
+					),
+					linear-gradient(
+						0deg,
+						rgba(247, 243, 238, 0.12),
+						rgba(247, 243, 238, 0.12)
+					);
+				mix-blend-mode: multiply;
+			}
+			.wed-hero__inner {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				max-width: 820px;
+				padding: 64px 20px;
+			}
+			.wed-pack {
+				background: linear-gradient(#fff, #fff) padding-box,
+					linear-gradient(180deg, #e8dfd3, #efe7dc) border-box;
+				border: 1px solid transparent;
+				border-radius: 5px;
+				width: min(1140px, 92%);
+				margin: 0 auto;
+				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
+			}
+			.wed-wrap {
+				display: grid;
+				gap: 24px;
+				padding: clamp(24px, 4vw, 34px);
+			}
+			@media (min-width: 980px) {
+				.wed-wrap {
+					grid-template-columns: 1.15fr 0.85fr;
+					align-items: start;
+				}
+			}
+			.wed-figure {
+				position: relative;
+				border-radius: 5px;
+				overflow: hidden;
+				background: #f3f5f6;
+				border: 1px solid #eadfce;
+				max-height: 680px;
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+			}
+			@media (min-width: 980px) {
+				.wed-figure {
+					position: sticky;
+					top: calc(var(--header-h) + 18px);
+				}
+			}
+			.wed-figure img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.wed-stack {
+				display: grid;
+				gap: 18px;
+			}
+			.pkg {
+				background: #fff;
+				border: 1px solid rgba(234, 223, 206, 0.9);
+				border-radius: 5px;
+				padding: 18px 16px;
+				box-shadow: 0 10px 28px rgba(66, 48, 24, 0.06);
+			}
+			.pkg h3 {
+				font-size: 1.15rem;
+				margin: 0 0 4px;
+				color: #0d1f2c;
+				letter-spacing: 0.02em;
+			}
+			.pkg .sub {
+				display: block;
+				color: #6b635b;
+				text-transform: uppercase;
+				letter-spacing: 0.12em;
+				font: 700 0.72rem/1 "Montserrat", sans-serif;
+				margin-bottom: 6px;
+			}
+			.pkg .price {
+				font: 700 1rem/1 "Montserrat", sans-serif;
+				color: var(--gold);
+				margin: 6px 0 8px;
+			}
+			.pkg ul {
+				margin: 0 0 8px 18px;
+				padding: 0;
+			}
+			.pkg li {
+				margin: 6px 0;
+				color: #444;
+			}
+			.pkg .btnline {
+				margin-top: 10px;
+			}
+			.pkg .btnline a {
+				display: inline-block;
+				border: 1px solid var(--gold);
+				padding: 10px 14px;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				font-weight: 600;
+				font-size: 0.76rem;
+				border-radius: 500px;
+				transition: 0.25s;
+				text-decoration: none;
+			}
+			.pkg .btnline a:hover {
+				background: var(--gold);
+				color: #111;
+				transform: translateY(-2px);
+			}
+
+			.wed-collage {
+				width: min(1140px, 92%);
+				margin: 22px auto 0;
+				display: grid;
+				gap: 14px;
+			}
+			@media (min-width: 820px) {
+				.wed-collage {
+					grid-template-columns: 2fr 1fr 1fr;
+				}
+			}
+			.wed-tile {
+				border-radius: 5px;
+				overflow: hidden;
+				border: 1px solid #eadfce;
+				background: #f6f2eb;
+				box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+			}
+			.wed-tile img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+
+			/* ===== Services / Rentals ===== */
+			.svc {
+				background: linear-gradient(#faf7f1, #efe9df);
+				border-top: 1px solid rgba(0, 0, 0, 0.05);
+			}
+			.svc-head {
+				text-align: center;
+				padding-bottom: 0;
+			}
+			.svc-title {
+				font-weight: 400;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				font-size: clamp(30px, 5vw, 52px);
+				color: #3b322a;
+				margin: 0;
+			}
+			.svc-lead {
+				max-width: 760px;
+				margin: 10px auto clamp(18px, 2.5vw, 28px);
+				font-size: var(--step-1);
+				color: #2c2a27;
+				opacity: 0.95;
+			}
+			.svc-grid {
+				width: min(1140px, 92%);
+				margin-inline: auto;
+				display: grid;
+				gap: 18px;
+				padding: 0 20px clamp(38px, 5vw, 68px);
+			}
+			@media (min-width: 980px) {
+				.svc-grid {
+					grid-template-columns: repeat(3, 1fr);
+				}
+			}
+			.svc-card {
+				background: #fff;
+				border: 1px solid var(--hairline);
+				border-radius: 5px;
+				overflow: hidden;
+				transition: transform 0.25s, box-shadow 0.25s;
+				box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+			}
+			.svc-card:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 20px 46px rgba(0, 0, 0, 0.1);
+			}
+			.svc-media {
+				aspect-ratio: 4/3;
+				background: #f3f5f6;
+				border-bottom: 1px solid var(--hairline);
+			}
+			.svc-media img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.svc-body {
+				padding: 16px;
+			}
+			.svc-tag {
+				display: inline-block;
+				font: 700 0.72rem/1 "Montserrat", sans-serif;
+				letter-spacing: 0.14em;
+				color: var(--gold);
+				text-transform: uppercase;
+			}
+
+			/* ===== Feature & Quotes ===== */
+			.about-feature {
+				position: relative;
+				isolation: isolate;
+				margin: clamp(28px, 4vw, 44px) 0;
+				border-radius: 5px;
+				overflow: hidden;
+				border: 1px solid var(--hairline);
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+			}
+			.about-feature::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: url("images/AmerNabulsi-513.jpg") center/cover
+					no-repeat;
+			}
+			.about-feature::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					180deg,
+					rgba(0, 0, 0, 0.22),
+					rgba(0, 0, 0, 0.38)
+				);
+			}
+			.about-feature__inner {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				text-align: center;
+				padding: clamp(54px, 10vw, 120px) 16px;
+			}
+
+			.about-quotes {
+				background: #0c1216;
+				color: #e5ebee;
+				text-align: center;
+			}
+			.about-quote {
+				font-family: "Playfair Display", serif;
+				font-size: clamp(18px, 1.6rem, 28px);
+				line-height: 1.55;
+				max-width: 780px;
+				margin: 0 auto clamp(18px, 3vw, 28px);
+				position: relative;
+			}
+			.about-quote::before {
+				content: "“";
+				position: absolute;
+				left: -0.25em;
+				top: -0.25em;
+				opacity: 0.25;
+				font-size: 1.6em;
+			}
+			.about-quote span {
+				display: block;
+				margin-top: 8px;
+				font: 600 0.86rem/1 "Montserrat", sans-serif;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: #b8c2ca;
+			}
+
+			/* ===== CTA & Footer ===== */
+			.about-cta {
+				--cta: url("images/services/IMG_7401.PNG");
+				position: relative;
+				isolation: isolate;
+				border-radius: 16px;
+				overflow: hidden;
+				border: 1px solid var(--hairline);
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+			}
+			.about-cta::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: var(--cta) center/cover no-repeat;
+				filter: saturate(1.02);
+			}
+			.about-cta::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					180deg,
+					rgba(0, 0, 0, 0.22),
+					rgba(0, 0, 0, 0.35)
+				);
+			}
+			.about-cta__inner {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				text-align: center;
+				padding: clamp(54px, 10vw, 120px) 16px;
+			}
+			.about-btn {
+				display: inline-block;
+				padding: 12px 22px;
+				border: 1px solid var(--gold);
+				border-radius: 500px;
+				color: #111;
+				background: #fff;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				font-weight: 700;
+				font-size: 0.78rem;
+			}
+			.about-btn:hover {
+				background: var(--gold);
+				color: #0b0b0b;
+			}
+
+			footer {
+				padding: 28px 0;
+				border-top: 1px solid var(--hairline);
+			}
+			footer .container {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 16px;
+				flex-wrap: wrap;
+			}
+
+			/* ===== Reveal on scroll ===== */
+			[data-animate] {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.6s ease, transform 0.6s ease;
+			}
+			.inview {
+				opacity: 1 !important;
+				transform: none !important;
+			}
+		</style>
 	</head>
+
 	<body>
+		<!-- Header -->
 		<header>
 			<div class="container">
-				<div class="logo">
-					<a href="index.html">
-						<h2>tide and true</h2>
-					</a>
-				</div>
-				<nav>
+				<a class="logo" href="index.html" aria-label="Tide & True">
+					<img
+						src="images/assets/ttlogo.svg"
+						alt="Tide & True"
+						style="height: 48px"
+					/>
+				</a>
+
+				<!-- Hamburger (mobile) -->
+				<button
+					class="nav-toggle"
+					aria-label="Open menu"
+					aria-expanded="false"
+					aria-controls="site-nav"
+				>
+					<span class="hamburger"></span>
+				</button>
+
+				<!-- Primary Nav -->
+				<nav id="site-nav" aria-label="Primary">
 					<ul>
-						<li><a href="#about">About Us</a></li>
+						<li>
+							<a href="about-us.html" aria-current="page"
+								>About Us</a
+							>
+						</li>
 						<li><a href="services.html">Services</a></li>
 						<li><a href="portfolio.html">Gallery</a></li>
-						<li><a href="#contact">Contact</a></li>
+						<li>
+							<a href="index.html#contact-form-section"
+								>Contact</a
+							>
+						</li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		<section id="about" class="text-section about-section">
-			<div class="about-content">
-				<div class="about-image">
-					<img src="images/maranddan.JPG" alt="Danielle and Maryam" />
-				</div>
-				<div class="about-text">
-					<h2>Our Story</h2>
+		<!-- HERO -->
+		<section
+			class="about-hero"
+			style="--hero-img: url('images/couples/maryamandmustafa/5.JPG')"
+		>
+			<div class="about-hero__inner">
+				<h1 class="about-title">
+					Thoughtful Planning, Effortless Celebrations
+				</h1>
+				<p class="about-lead">
+					Understated, editorial events rooted in your story—and
+					delivered with calm precision.
+				</p>
+				<a class="btn" href="contact.html">Start Planning</a>
+			</div>
+		</section>
+
+		<!-- STORY -->
+		<section class="about-story">
+			<div class="wrap about-grid">
+				<figure class="about-img" data-animate>
+					<img
+						src="images/assets/mnd.jpg"
+						alt="Founders Maryam and Danielle"
+					/>
+				</figure>
+
+				<div class="about-text" data-animate>
+					<div class="about-sub">Our Story</div>
+					<h2>Where artistry meets organization</h2>
 					<p>
-						We’re Danielle and Maryam—two creative minds who joined
-						forces after discovering our shared passion for
-						planning, organizing, and making moments unforgettable.
+						We’re Maryam and Danielle—two creative minds who came
+						together through a shared love of hospitality, design,
+						and the quiet rhythm of seamless coordination. We
+						founded Tide &amp; True to bring a refined yet welcoming
+						approach to weddings and events.
 					</p>
 					<p>
-						With over 20 years of combined experience in events,
-						hospitality, and coordination, we bring calm energy,
-						sharp logistics, and a love for the little details that
-						make celebrations feel personal.
+						From intimate garden gatherings to full-weekend
+						celebrations, our work balances aesthetic direction with
+						meticulous logistics—so you can feel present, grounded,
+						and truly celebrated.
 					</p>
-					<a href="contact.html" class="btn btn-secondary"
-						>Contact Us</a
-					>
 				</div>
 			</div>
 		</section>
+
+		<!-- APPROACH BAND -->
+		<section class="section section--soft">
+			<div class="wrap">
+				<div class="proc__band">
+					<h2 class="proc__title">Our Approach</h2>
+					<div class="proc__rule"></div>
+					<p
+						style="
+							max-width: 780px;
+							margin: 16px auto 0;
+							opacity: 0.95;
+						"
+					>
+						For us, planning an event always starts with people. We
+						take the time to get to know you—what excites you, what
+						makes you feel at home, and what will make your
+						celebration feel like yours.
+					</p>
+					<p
+						style="
+							max-width: 780px;
+							margin: 10px auto 0;
+							opacity: 0.95;
+						"
+					>
+						From there, we bring together the creative and the
+						practical: moodboards and floorplans, timelines and
+						tastings. When the day arrives, you’ll be laughing,
+						dancing, and making memories while we quietly take care
+						of everything behind the scenes.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- PROCESS -->
+		<section class="section proc" id="process">
+			<div class="proc__frame">
+				<div class="proc__band" data-animate>
+					<h2 class="proc__title">Our Process</h2>
+					<div class="proc__rule"></div>
+				</div>
+
+				<div class="proc__grid">
+					<article class="step" data-animate>
+						<div class="step__num">1</div>
+						<div class="step__eyebrow">Discovery</div>
+						<h3 class="step__title">
+							Design begins with listening
+						</h3>
+						<p>
+							After you submit the
+							<a href="#contact-form-section">Inquiry Form</a>, we
+							learn your vision and guest experience goals—then
+							translate them into a cohesive creative direction
+							and plan.
+						</p>
+					</article>
+
+					<article class="step" data-animate>
+						<div class="step__num">2</div>
+						<div class="step__eyebrow">Direction</div>
+						<h3 class="step__title">
+							Elevated, editorial, effortless
+						</h3>
+						<p>
+							Moodboards, floorplans, tastings, timelines—guided
+							with clarity and an eye for understated luxury.
+						</p>
+					</article>
+
+					<article class="step" data-animate>
+						<div class="step__num">3</div>
+						<div class="step__eyebrow">Execution</div>
+						<h3 class="step__title">Calm orchestration</h3>
+						<p>
+							We manage production, vendors, and day-of logistics
+							so you can be fully present. Expect graceful pacing
+							and beautiful flow.
+						</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- WEDDING -->
+		<section id="wedding" class="wed">
+			<div class="wed-hero">
+				<div class="wed-hero__inner" data-animate>
+					<span
+						class="about-eyebrow"
+						style="
+							border: 1px solid rgba(255, 255, 255, 0.4);
+							padding: 6px 10px;
+							display: inline-block;
+							text-transform: uppercase;
+							letter-spacing: 0.18em;
+							font: 600 0.78rem/1 Montserrat, sans-serif;
+						"
+						>Wedding</span
+					>
+					<h2 class="wed-title">Full-scope wedding support</h2>
+					<p class="wed-lead">
+						From first ideas to last dance, we handle design,
+						logistics and vendor orchestration—so you stay present.
+					</p>
+				</div>
+			</div>
+
+			<div class="wed-pack" data-animate>
+				<div class="wed-wrap">
+					<div class="wed-stack">
+						<article class="pkg">
+							<span class="sub">Day-of Coordination</span>
+							<h3>Effortless execution on the day</h3>
+							<div class="price">$1,750+</div>
+							<ul>
+								<li>
+									Pre-wedding coordination &amp; timeline
+									assistance
+								</li>
+								<li>
+									Point of contact for vendors &amp; guests
+								</li>
+								<li>
+									Setup/takedown supervision, procession &amp;
+									reception cueing
+								</li>
+								<li>
+									Guest/seating management &amp; vendor
+									payments
+								</li>
+							</ul>
+							<small>HST extra.</small>
+							<div class="btnline">
+								<a href="index.html#contact-form-section"
+									>Inquire</a
+								>
+							</div>
+						</article>
+
+						<article class="pkg">
+							<span class="sub">Partial Planning</span>
+							<h3>Collaborative support where you need it</h3>
+							<div class="price">$2,000+</div>
+							<ul>
+								<li>
+									Preferred vendor referrals &amp; budget
+									creation
+								</li>
+								<li>
+									Meeting attendance &amp; custom timeline
+								</li>
+								<li>Wedding rehearsal + 8–10 hours day-of</li>
+							</ul>
+							<small
+								>Includes everything in Day-of, plus added
+								planning support.</small
+							>
+							<div class="btnline">
+								<a href="index.html#contact-form-section"
+									>Check Dates</a
+								>
+							</div>
+						</article>
+
+						<article class="pkg">
+							<span class="sub"
+								>Full Planning &amp; Execution</span
+							>
+							<h3>Concept-to-celebration, entirely handled</h3>
+							<div class="price">$5,000+</div>
+							<ul>
+								<li>
+									Design direction &amp; wedding website +
+									guest management
+								</li>
+								<li>Unlimited access to Lead Planner</li>
+								<li>
+									Up to 12 hours day-of with two coordinators
+								</li>
+							</ul>
+							<small
+								>Custom packages available on request. HST
+								extra.</small
+							>
+							<div class="btnline">
+								<a href="index.html#contact-form-section"
+									>Start Full Planning</a
+								>
+							</div>
+						</article>
+					</div>
+
+					<!-- Sticky editorial image -->
+					<figure
+						class="wed-figure"
+						aria-label="Editorial wedding imagery"
+					>
+						<img
+							src="images/heropics/kiss.png"
+							alt="Bridal editorial detail"
+						/>
+					</figure>
+				</div>
+			</div>
+
+			<div class="wed-collage">
+				<div class="wed-tile" data-animate>
+					<img
+						src="images/proposal/2.png"
+						alt="Tablescape with florals"
+					/>
+				</div>
+				<div class="wed-tile" data-animate>
+					<img
+						src="images/couples/maryamandmustafa/6.JPG"
+						alt="Ceremony installation"
+					/>
+				</div>
+				<div class="wed-tile" data-animate>
+					<img
+						src="images/couples/santanaanddaniel/9.jpg"
+						alt="Bridal suite moment"
+					/>
+				</div>
+			</div>
+		</section>
+
+		<!-- OTHER SERVICES & OFFERINGS -->
+		<section class="svc" aria-label="Other Services & Offerings">
+			<div class="svc-head">
+				<h2 class="svc-title">Other Services &amp; Offerings</h2>
+				<p class="svc-lead">
+					From proposals to corporate gatherings and baby showers, we
+					craft polished experiences with warmth and precision.
+				</p>
+			</div>
+
+			<div class="svc-grid">
+				<article class="svc-card" data-animate>
+					<div class="svc-media">
+						<img
+							src="images/sarah-chris/IMG_3127.PNG"
+							alt="Romantic proposal setup"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Proposal</span>
+						<h3>Unforgettable “yes” moments</h3>
+						<p>
+							Concept, location, décor and timing—every detail
+							handled for a seamless, romantic proposal.
+						</p>
+					</div>
+				</article>
+
+				<article class="svc-card" data-animate>
+					<div class="svc-media">
+						<img
+							src="images/specialevents/Coach.svg"
+							alt="Corporate event ambience"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Corporate</span>
+						<h3>Polished brand experiences</h3>
+						<p>
+							On-message events without the scheduling
+							stress—let’s hit your goals with style.
+						</p>
+					</div>
+				</article>
+
+				<article class="svc-card" data-animate>
+					<div class="svc-media">
+						<img
+							src="images/specialevents/IMG_4367.png"
+							alt="Baby shower details"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Baby Shower</span>
+						<h3>Celebrate without the stress</h3>
+						<p>
+							Theme, setup, takedown—so the parents-to-be can
+							simply enjoy the day.
+						</p>
+					</div>
+				</article>
+			</div>
+
+			<div class="rentals" data-animate>
+				<h4>Rentals &amp; Accent Décor</h4>
+				<div class="rentals-grid">
+					<div class="rent">
+						<strong>Dessert / Coffee Cart</strong
+						><span>from $399.99</span>
+					</div>
+					<div class="rent">
+						<strong>Custom Flower Wall</strong
+						><span>from $349.00</span>
+					</div>
+					<div class="rent">
+						<strong>Balloon Garland (8–24ft)</strong
+						><span>from $299.00</span>
+					</div>
+					<div class="rent">
+						<strong>Marquee Letters/Numbers</strong
+						><span>from $99.99</span>
+					</div>
+				</div>
+				<p style="text-align: center; margin-top: 10px">
+					<small
+						>Ask about photo booths, arch backdrops, canopy
+						installs, luxe florals &amp; more. Add-ons like content
+						creation available.</small
+					>
+				</p>
+			</div>
+		</section>
+
+		<!-- FEATURE IMAGE -->
+		<section class="about-feature" aria-label="Signature aesthetic">
+			<div class="about-feature__inner">
+				<h3>Refined celebrations with soul</h3>
+				<p>
+					Considered palettes. Intentional textures. Meaningful
+					details that last beyond the day.
+				</p>
+			</div>
+		</section>
+
+		<!-- TESTIMONIALS -->
+		<section class="about-quotes" aria-label="Client words">
+			<p class="about-quote">
+				Flawless from start to finish—calm, creative, and so
+				intentional. Our guests are still talking about it.<span
+					>— Santana &amp; Daniel</span
+				>
+			</p>
+			<p class="about-quote">
+				They brought our vision to life and then some. We felt so
+				present and taken care of.<span>— Sarah &amp; Chris</span>
+			</p>
+			<p class="about-quote">
+				Professional, warm, and impeccably organized. The day flowed
+				beautifully.<span>— Chelsea &amp; Raymond</span>
+			</p>
+		</section>
+
+		<!-- CTA -->
+		<section class="about-cta">
+			<div class="about-cta__inner">
+				<h3>Ready to plan something beautiful?</h3>
+				<a class="about-btn" href="index.html#contact-form-section"
+					>Plan Your Event</a
+				>
+			</div>
+		</section>
+
+		<!-- FOOTER -->
+		<footer>
+			<div class="container">
+				<p>&copy; 2025 Tide &amp; True</p>
+				<div class="social-links">
+					<a href="#" aria-label="Facebook">Facebook</a>
+					<a href="#" aria-label="Instagram">Instagram</a>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Minimal JS: mobile menu + fade-ins -->
+		<script>
+			(function () {
+				// Mobile menu
+				const btn = document.querySelector(".nav-toggle");
+				const nav = document.getElementById("site-nav");
+				function setState(open) {
+					document.body.classList.toggle("nav-open", open);
+					if (btn) {
+						btn.setAttribute("aria-expanded", String(open));
+						btn.setAttribute(
+							"aria-label",
+							open ? "Close menu" : "Open menu"
+						);
+					}
+				}
+				if (btn && nav) {
+					btn.addEventListener("click", () =>
+						setState(!document.body.classList.contains("nav-open"))
+					);
+					nav.addEventListener("click", (e) => {
+						if (e.target.closest("a")) setState(false);
+					});
+					document.addEventListener("keydown", (e) => {
+						if (e.key === "Escape") setState(false);
+					});
+					// close when tapping scrim
+					document.addEventListener(
+						"click",
+						(e) => {
+							if (!document.body.classList.contains("nav-open"))
+								return;
+							const inside =
+								e.target.closest("#site-nav") ||
+								e.target.closest(".nav-toggle");
+							if (!inside) setState(false);
+						},
+						true
+					);
+				}
+
+				// Fade-ins
+				const els = document.querySelectorAll("[data-animate]");
+				const io = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((e) => {
+							if (e.isIntersecting) {
+								e.target.classList.add("inview");
+								io.unobserve(e.target);
+							}
+						});
+					},
+					{ rootMargin: "-10% 0px -10% 0px", threshold: 0.01 }
+				);
+				els.forEach((el) => io.observe(el));
+			})();
+		</script>
 	</body>
 </html>

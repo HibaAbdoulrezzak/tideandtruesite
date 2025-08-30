@@ -22,7 +22,7 @@
 		<!-- The background image is injected via the --hero CSS variable -->
 		<section
 			class="page-hero hero--portfolio"
-			style="--hero: url('../images/couples/charleneandgarrett/5.jpg')"
+			style="--hero: url('../images/couples/charleneandgarrett/2.jpg')"
 		>
 			<div class="page-hero__inner">
 				<h1 class="page-hero__title" id="meTitle">
@@ -52,33 +52,28 @@
 		<div id="meLightboxes"></div>
 
 		<!-- ===== CTA ===== -->
-		<section class="me-cta">
-			<div class="me-cta__inner">
-				<h2 class="me-cta__title">
-					Ready to plan something beautiful?
-				</h2>
-				<p class="me-cta__lead">
-					Thoughtfully planned, effortlessly executed.
-				</p>
-				<a class="me-btn" href="../index.html#contact-form-section"
-					>Plan Your Event</a
-				>
-			</div>
+		<section
+			class="me-cta"
+			style="--cta: url('images/couples/charleneandgarrett/8.JPG')"
+		>
+			<div class="me-cta__inner"></div>
 		</section>
 
 		<!-- ===== QUOTES ===== -->
+		<!-- QUOTES -->
 		<section class="me-quotes">
 			<p class="me-q" style="--d: 0s">
-				“They brought our vision to life and then some.”
-				<span>— Sarah &amp; Chris</span>
+				“I didn’t have to stress or even think — you made it flawless.”
+				<span>— Marwa &amp; Michael</span>
 			</p>
 			<p class="me-q" style="--d: 5s">
-				“Flawless from start to finish.”
-				<span>— Santana &amp; Daniel</span>
+				“I couldn't have done it without their support”
+				<span>— Francesca &amp; John</span>
 			</p>
 			<p class="me-q" style="--d: 10s">
-				“Professional, creative, calm.”
-				<span>— Chelsea &amp; Raymond</span>
+				"Every detail was meticulously planned and thoughtfully
+				managed."
+				<span>— Sarah &amp; Chris</span>
 			</p>
 		</section>
 
@@ -87,8 +82,8 @@
 			// Per-page gallery config (edit filenames as needed)
 			window.GALLERY = {
 				title: "Charlene & Garrett",
-				lead: "Estate Grounds · Reception · Portraits",
-				intro: "A modern garden celebration filled with sunlight, greenery, and warmth.",
+				lead: "Rustic farm · Reception · Portraits",
+				intro: "A cozy barn celebration filled with sunlight, greenery, and warmth.",
 				basePath: "../images/couples/charleneandgarrett/",
 				images: [
 					"1.JPG",
@@ -103,7 +98,7 @@
 					"10.jpg",
 					"11.jpg",
 				],
-				hero: "1.JPG", // which image to use for the hero (falls back to images[0])
+				hero: "5.JPG", // which image to use for the hero (falls back to images[0])
 			};
 		</script>
 
@@ -137,6 +132,18 @@
 					if (heroEl && heroSrc) {
 						heroEl.style.setProperty("--hero", `url("${heroSrc}")`);
 					}
+					// after you compute heroSrc and set --hero-img
+					const ctaEl = document.querySelector(".me-cta");
+					const ctaFile =
+						window.GALLERY.cta ||
+						images[images.length - 1] ||
+						hero ||
+						images[0];
+					if (ctaEl && ctaFile)
+						ctaEl.style.setProperty(
+							"--cta",
+							`url("${join(basePath, ctaFile)}")`
+						);
 
 					// Grid + lightboxes
 					const grid = document.getElementById("meGrid");
@@ -176,6 +183,16 @@
 					? document.addEventListener("DOMContentLoaded", build)
 					: build();
 			})();
+			// HERO background (reads --hero in CSS). Only set it if none exists.
+			const heroEl = document.querySelector(".page-hero.hero--portfolio");
+			const alreadyHasHero =
+				heroEl && heroEl.style.getPropertyValue("--hero");
+			const heroSrc =
+				hero || images[0] ? basePath + (hero || images[0]) : "";
+
+			if (heroEl && heroSrc && !alreadyHasHero) {
+				heroEl.style.setProperty("--hero", `url("${heroSrc}")`);
+			}
 		</script>
 	</body>
 </html>

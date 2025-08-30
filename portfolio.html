@@ -14,7 +14,8 @@
 		<!-- Site CSS -->
 		<link rel="stylesheet" href="style.css" />
 	</head>
-	<body>
+
+	<body class="me-page portfolio-page">
 		<!-- ===== Header ===== -->
 		<header>
 			<div class="container">
@@ -43,17 +44,13 @@
 								>Gallery</a
 							>
 						</li>
-						<li>
-							<a href="index.html#contact-form-section"
-								>Contact</a
-							>
-						</li>
+						<li><a href="contact.html">Contact</a></li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		<!-- ===== Hero ===== -->
+		<!-- ===== Hero (B/W image via CSS var) ===== -->
 		<section
 			class="page-hero hero--portfolio"
 			style="--hero: url('images/couples/chelsnadray/13.jpg')"
@@ -96,6 +93,7 @@
 							<img
 								src="images/couples/charleneandgarrett/17.jpg"
 								alt="Charlene and Garrett"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -113,6 +111,7 @@
 							<img
 								src="images/couples/chelsnadray/2.jpg"
 								alt="Chelsea and Raymond"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -130,6 +129,7 @@
 							<img
 								src="images/couples/fandj/photo13.jpg"
 								alt="Francesca and John"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -147,6 +147,7 @@
 							<img
 								src="images/couples/marwaandmichael/11.jpg"
 								alt="Marwa and Michael"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -154,7 +155,7 @@
 						</div>
 						<div class="me-caption">
 							<h3>Marwa and Michael</h3>
-							<p>Prestige Restaurant & Event Venue</p>
+							<p>Prestige Restaurant &amp; Event Venue</p>
 						</div>
 					</a>
 
@@ -164,6 +165,7 @@
 							<img
 								src="images/couples/maryamandmustafa/11.JPG"
 								alt="Maryam and Mustafa"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -174,14 +176,14 @@
 							<p>Mississauga Convention Centre</p>
 						</div>
 					</a>
-					<!-- 👈 this closing tag was missing -->
 
 					<!-- Card 6 -->
 					<a href="galleries/santana-daniel.html" class="me-card">
 						<div class="me-media">
 							<img
-								src="images/couples/santanaanddaniel/13.jpg"
+								src="images/couples/santanaanddaniel/22.jpg"
 								alt="Santana and Daniel"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -199,6 +201,7 @@
 							<img
 								src="images/couples/sarahandchris/10.PNG"
 								alt="Sarah and Chris"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -216,6 +219,7 @@
 							<img
 								src="images/couples/vicandjohn/9.jpg"
 								alt="Victoria and Chris"
+								loading="lazy"
 							/>
 							<div class="me-overlay">
 								<span>View Gallery</span>
@@ -229,34 +233,35 @@
 				</div>
 			</div>
 		</section>
-		<section
-			class="me-cta"
-			style="
-				background-image: url('../images/couples/charleneandgarrett/1.JPG');
-				background-position: center;
-				background-size: cover;
-			"
-		>
-			<div class="me-cta__inner">…</div>
+
+		<!-- ===== CTA ===== -->
+		<!-- Optional: set a specific image via data-cta="images/…/file.jpg" -->
+		<section class="me-cta" data-cta="">
+			<div class="me-cta__inner">
+				<h2 class="me-cta__title">
+					Ready to plan something beautiful?
+				</h2>
+
+				<a class="me-btn" href="index.html#contact-form-section"
+					>Plan Your Event</a
+				>
+			</div>
 		</section>
 
 		<!-- ===== Footer ===== -->
 		<footer>
 			<div class="container">
 				<p>&copy; 2025 Tide & True</p>
-				<div class="social-links">
-					<a href="#" aria-label="Facebook">Facebook</a>
-					<a href="#" aria-label="Instagram">Instagram</a>
-				</div>
 			</div>
 		</footer>
 
-		<!-- ===== JS for Mobile Nav ===== -->
+		<!-- ===== JS: Mobile Nav ===== -->
 		<script>
 			(function () {
 				const btn = document.querySelector(".nav-toggle");
 				const nav = document.getElementById("site-nav");
 				if (!btn || !nav) return;
+
 				const setState = (open) => {
 					document.body.classList.toggle("nav-open", open);
 					btn.setAttribute("aria-expanded", String(open));
@@ -265,6 +270,7 @@
 						open ? "Close menu" : "Open menu"
 					);
 				};
+
 				btn.addEventListener("click", () =>
 					setState(!document.body.classList.contains("nav-open"))
 				);
@@ -275,28 +281,30 @@
 					if (e.key === "Escape") setState(false);
 				});
 			})();
-			(function () {
-				function build() {
-					const { basePath = "", images = [] } = window.GALLERY || {};
+		</script>
 
-					// …existing code…
+		<!-- ===== JS: Set CTA background from first grid image (fallback-able) ===== -->
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				const ctaEl = document.querySelector(".me-cta");
+				if (!ctaEl) return;
 
-					// Update CTA background to use a gallery image (2nd if available, else 1st)
-					const cta = document.querySelector(".me-cta");
-					const ctaSrc = images[1]
-						? basePath + images[1]
-						: images[0]
-						? basePath + images[0]
-						: "";
-					if (cta && ctaSrc) {
-						cta.style.setProperty("--cta", `url("${ctaSrc}")`);
-					}
+				// 1) Optional hard override via data-cta
+				const override = ctaEl.getAttribute("data-cta");
+				let src = override && override.trim() ? override.trim() : "";
+
+				// 2) Otherwise take the first grid image
+				if (!src) {
+					const firstImg = document.querySelector(
+						".me-gallery .me-card .me-media img"
+					);
+					if (firstImg) src = firstImg.getAttribute("src");
 				}
 
-				document.readyState === "loading"
-					? document.addEventListener("DOMContentLoaded", build)
-					: build();
-			})();
+				if (src) {
+					ctaEl.style.backgroundImage = `url("${src}")`;
+				}
+			});
 		</script>
 	</body>
 </html>

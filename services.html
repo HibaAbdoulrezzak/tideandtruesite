@@ -1,244 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Tide & True Occasions — Services</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Services · Tide & True Occasions</title>
 
-		<!-- Fonts & Icons -->
+		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700;1000&family=Lora:ital@0;1&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
 			rel="stylesheet"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
 		/>
 
-		<!-- Styles -->
-		<link rel="stylesheet" href="style.css" />
-		<script src="script.js" defer></script>
+		<style>
+			/* ===== Tokens ===== */
+			:root {
+				--ink: #141a1f;
+				--muted: #6f7a82;
+				--navy: #0d1f2c;
+				--gold: #a88a54;
+				--ivory: #f7f3ee;
+				--ivory-2: #efe9df;
+				--hairline: #e8eef2;
+				--max: 1140px;
+				--header-h: 88px;
+				--step-0: clamp(14px, 0.9rem + 0.1vw, 15.5px);
+				--step-1: clamp(16px, 1rem + 0.35vw, 19px);
+				--step-2: clamp(22px, 1.25rem + 0.6vw, 26px);
+				--step-3: clamp(30px, 1.6rem + 1vw, 38px);
+				--step-4: clamp(40px, 2.2rem + 1.6vw, 60px);
+			}
+
+			/* ===== Base ===== */
+			* {
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				color: var(--ink);
+				font: 400 var(--step-0) / 1.75 "Montserrat", system-ui,
+					-apple-system, "Segoe UI", Roboto, sans-serif;
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+				background: #fff;
+			}
+			h1,
+			h2,
+			h3 {
+				font-family: "Playfair Display", ui-serif, Georgia, serif;
+				letter-spacing: 0.006em;
+				margin: 0 0 0.45em;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+				text-underline-offset: 2px;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			section {
+				padding: clamp(32px, 5vw, 68px) 0;
+			}
+			.wrap {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+			}
+
+			/* ===== Header: fixed, transparent, no borders ===== */
+			header {
+				position: fixed;
+				inset: 0 0 auto 0;
+				height: var(--header-h);
+				z-index: 1000;
+				background: transparent !important;
+				border: 0 !important;
+				box-shadow: none !important;
+				backdrop-filter: none !important;
+			}
+			header .container {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+			}
+
+			/* desktop nav */
+			#site-nav ul {
+				display: flex;
+				gap: 28px;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			#site-nav a {
+				font-weight: 600;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				font-size: 0.78rem;
+				padding: 8px 10px;
+				border-radius: 2px;
+			}
+			#site-nav a:hover {
+				text-decoration: none;
+				box-shadow: 0 0 0 1px rgba(168, 138, 84, 0.45);
+			}
+			/* current page hint */
+			#site-nav a[aria-current="page"] {
+				box-shadow: 0 0 0 1px rgba(168, 138, 84, 0.6);
+			}
+
+			/* hamburger hidden on desktop */
+			.nav-toggle {
+				display: none;
+			}
+
+			/* ===== Mobile menu ===== */
+			@media (max-width: 860px) {
+				.nav-toggle {
+					display: inline-grid;
+					place-items: center;
+					width: 44px;
+					height: 44px;
+					border: 0;
+					background: transparent;
+					padding: 0;
+					cursor: pointer;
+				}
+				.nav-toggle .hamburger {
+					position: relative;
+					width: 22px;
+					height: 2px;
+					background: currentColor;
+					color: #1a1a1a;
+					transition: transform 0.25s ease;
+				}
+				.nav-toggle .hamburger::before,
+				.nav-toggle .hamburger::after {
+					content: "";
+					position: absolute;
+					left: 0;
+					right: 0;
+					height: 2px;
+					background: currentColor;
+					transition: transform 0.25s ease, top 0.25s ease,
+						bottom 0.25s ease, opacity 0.2s ease;
+				}
+				.nav-toggle .hamburger::before {
+					top: -7px;
+				}
+				.nav-toggle .hamburger::after {
+					bottom: -7px;
+				}
+				#site-nav {
+					position: fixed;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					width: min(78vw, 360px);
+					transform: translateX(100%);
+					transition: transform 0.32s ease;
+					background: rgba(16, 18, 22, 0.92);
+					backdrop-filter: blur(10px);
+					padding: 28px 22px;
+					z-index: 1001;
+				}
+				#site-nav ul {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 18px;
+					margin-top: 64px;
+				}
+				#site-nav a {
+					color: #f2f4f6;
+				}
+				body.nav-open::before {
+					content: "";
+					position: fixed;
+					inset: 0;
+					background: rgba(0, 0, 0, 0.35);
+					backdrop-filter: blur(2px);
+					z-index: 1000;
+				}
+				body.nav-open #site-nav {
+					transform: translateX(0);
+				}
+				body.nav-open .nav-toggle .hamburger {
+					background: transparent;
+				}
+				body.nav-open .nav-toggle .hamburger::before {
+					top: 0;
+					transform: rotate(45deg);
+				}
+				body.nav-open .nav-toggle .hamburger::after {
+					bottom: 0;
+					transform: rotate(-45deg);
+				}
+			}
+
+			/* ===== HERO ===== */
+			.svc-hero {
+				--hero: url("images/AmerNabulsi-513.jpg");
+				position: relative;
+				display: grid;
+				place-items: center;
+				min-height: 72vh;
+				text-align: center;
+				overflow: hidden;
+				margin: 0;
+				padding-top: var(--header-h);
+				background: var(--hero) center/cover no-repeat;
+			}
+
+			/* Make the Services hero fill the viewport */
+			.svc-hero {
+				min-height: 100vh; /* full screen height */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				padding-top: var(--header-h); /* keep space for fixed header */
+			}
+
+			/* Large headline like home page */
+			.svc-hero__inner h1,
+			.about-title {
+				font: 400 clamp(32px, 6vw, 72px) / 1.1 "Playfair Display", serif;
+				color: #fff;
+				text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+				margin: 0 0 16px;
+			}
+
+			/* Subtitle (lead text) */
+			.svc-lead {
+				font-size: clamp(18px, 2vw, 24px);
+				color: #f2f6f9;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.svc-hero::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+						180deg,
+						rgba(12, 14, 16, 0.18),
+						rgba(12, 14, 16, 0.42)
+					),
+					linear-gradient(
+						0deg,
+						rgba(247, 243, 238, 0.12),
+						rgba(247, 243, 238, 0.12)
+					);
+			}
+			.svc-hero__inner {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				max-width: 840px;
+				padding: 48px 20px;
+			}
+			.svc-lead {
+				font-size: var(--step-1);
+				color: #eef4f7;
+				opacity: 0.98;
+				margin: 0;
+			}
+
+			.btn {
+				display: inline-block;
+				padding: 12px 22px;
+				border-radius: 500px;
+				border: 1px solid rgba(255, 255, 255, 0.8);
+				color: #111;
+				background: #fff;
+				letter-spacing: 0.12em;
+				font-weight: 600;
+				text-transform: uppercase;
+				font-size: 0.78rem;
+				transition: transform 0.2s, background 0.25s, border-color 0.25s,
+					color 0.25s, box-shadow 0.25s;
+			}
+			.btn:hover {
+				background: var(--gold);
+				border-color: var(--gold);
+				color: #0b0b0b;
+				transform: translateY(-2px);
+				box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+			}
+
+			/* ===== Package cards ===== */
+			.pack-wrap {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+				display: grid;
+				gap: 18px;
+			}
+			@media (min-width: 980px) {
+				.pack-wrap {
+					grid-template-columns: 1.15fr 0.85fr;
+					align-items: start;
+				}
+			}
+			.pack-stack {
+				display: grid;
+				gap: 18px;
+			}
+			.pkg {
+				background: #fff;
+				border: 1px solid rgba(234, 223, 206, 0.9);
+				border-radius: 5px;
+				padding: 18px 16px;
+				box-shadow: 0 10px 28px rgba(66, 48, 24, 0.06);
+			}
+			.pkg h3 {
+				font-size: 1.15rem;
+				margin: 0 0 4px;
+				color: #0d1f2c;
+				letter-spacing: 0.02em;
+			}
+			.pkg .sub {
+				display: block;
+				color: #6b635b;
+				text-transform: uppercase;
+				letter-spacing: 0.12em;
+				font: 700 0.72rem/1 "Montserrat", sans-serif;
+				margin-bottom: 6px;
+			}
+			.pkg .price {
+				font: 700 1rem/1 "Montserrat", sans-serif;
+				color: var(--gold);
+				margin: 6px 0 8px;
+			}
+			.pkg ul {
+				margin: 0 0 8px 18px;
+				padding: 0;
+			}
+			.pkg li {
+				margin: 6px 0;
+				color: #444;
+			}
+			.pkg .btnline {
+				margin-top: 10px;
+			}
+			.pkg .btnline a {
+				display: inline-block;
+				border: 1px solid var(--gold);
+				padding: 10px 14px;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				font-weight: 600;
+				font-size: 0.76rem;
+				border-radius: 500px;
+				transition: 0.25s;
+				text-decoration: none;
+			}
+			.pkg .btnline a:hover {
+				background: var(--gold);
+				color: #111;
+				transform: translateY(-2px);
+			}
+
+			.pack-figure {
+				position: relative;
+				border-radius: 5px;
+				overflow: hidden;
+				background: #f3f5f6;
+				border: 1px solid #eadfce;
+				max-height: 680px;
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+			}
+			.pack-figure img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			@media (min-width: 980px) {
+				.pack-figure {
+					position: sticky;
+					top: calc(var(--header-h) + 18px);
+				}
+			}
+
+			/* ===== Other services grid ===== */
+			.svc-grid {
+				width: min(1140px, 92%);
+				margin-inline: auto;
+				display: grid;
+				gap: 18px;
+			}
+			@media (min-width: 980px) {
+				.svc-grid {
+					grid-template-columns: repeat(3, 1fr);
+				}
+			}
+			.svc-card {
+				background: #fff;
+				border: 1px solid var(--hairline);
+				border-radius: 5px;
+				overflow: hidden;
+				box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+				transition: transform 0.25s, box-shadow 0.25s;
+			}
+			.svc-card:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 20px 46px rgba(0, 0, 0, 0.1);
+			}
+			.svc-media {
+				aspect-ratio: 4/3;
+				background: #f3f5f6;
+				border-bottom: 1px solid var(--hairline);
+			}
+			.svc-media img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+			}
+			.svc-body {
+				padding: 16px;
+			}
+			.svc-tag {
+				display: inline-block;
+				font: 700 0.72rem/1 "Montserrat", sans-serif;
+				letter-spacing: 0.14em;
+				color: var(--gold);
+				text-transform: uppercase;
+			}
+
+			/* ===== Add-ons strip ===== */
+			.addons {
+				background: linear-gradient(#faf7f1, #efe9df);
+				border-top: 1px solid rgba(0, 0, 0, 0.05);
+			}
+			.addons-grid {
+				display: grid;
+				gap: 16px;
+			}
+			@media (min-width: 820px) {
+				.addons-grid {
+					grid-template-columns: repeat(4, 1fr);
+				}
+			}
+			.add {
+				background: #fff;
+				border: 1px solid var(--hairline);
+				border-radius: 5px;
+				padding: 14px;
+				text-align: center;
+				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+			}
+			.add strong {
+				display: block;
+				color: #0d1f2c;
+			}
+			.add span {
+				display: block;
+				color: var(--gold);
+				font-weight: 700;
+				margin-top: 2px;
+			}
+
+			/* ===== FAQs ===== */
+			.faqs details {
+				border: 1px solid var(--hairline);
+				border-radius: 8px;
+				padding: 14px 16px;
+				background: #fff;
+				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04);
+			}
+			.faqs details + details {
+				margin-top: 12px;
+			}
+			.faqs summary {
+				cursor: pointer;
+				font-weight: 600;
+			}
+			.faqs summary::-webkit-details-marker {
+				display: none;
+			}
+			.faqs summary::after {
+				content: "+";
+				float: right;
+				transition: 0.2s;
+			}
+			.faqs details[open] summary::after {
+				content: "–";
+			}
+			.faqs p {
+				margin: 0.6em 0 0;
+			}
+
+			/* ===== CTA & Footer ===== */
+			.cta {
+				--cta: url("images/services/IMG_7401.PNG");
+				position: relative;
+				isolation: isolate;
+				border-radius: 16px;
+				overflow: hidden;
+				border: 1px solid var(--hairline);
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+				background: var(--cta) center/cover no-repeat;
+				color: #fff;
+				text-align: center;
+			}
+			.cta::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					180deg,
+					rgba(0, 0, 0, 0.22),
+					rgba(0, 0, 0, 0.35)
+				);
+			}
+			.cta-inner {
+				position: relative;
+				z-index: 1;
+				padding: clamp(54px, 10vw, 120px) 16px;
+			}
+			.cta .about-btn {
+				display: inline-block;
+				padding: 12px 22px;
+				border: 1px solid var(--gold);
+				border-radius: 500px;
+				color: #111;
+				background: #fff;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				font-weight: 700;
+				font-size: 0.78rem;
+			}
+			.cta .about-btn:hover {
+				background: var(--gold);
+				color: #0b0b0b;
+			}
+
+			footer {
+				padding: 28px 0;
+				border-top: 1px solid var(--hairline);
+			}
+			footer .container {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 16px;
+				flex-wrap: wrap;
+			}
+
+			/* reveal on scroll */
+			[data-animate] {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.6s ease, transform 0.6s ease;
+			}
+			.inview {
+				opacity: 1 !important;
+				transform: none !important;
+			}
+		</style>
 	</head>
+
 	<body>
-		<!-- HEADER -->
+		<!-- Header -->
 		<header>
 			<div class="container">
-				<div class="logo">
-					<a href="index.html">
-						<img
-							src="images/assets/ttlogo.svg"
-							alt="Tide and True Logo"
-						/>
-					</a>
-				</div>
-				<nav>
+				<a class="logo" href="index.html" aria-label="Tide & True">
+					<img
+						src="images/assets/ttlogo.svg"
+						alt="Tide & True"
+						style="height: 48px"
+					/>
+				</a>
+
+				<!-- Hamburger (mobile) -->
+				<button
+					class="nav-toggle"
+					aria-label="Open menu"
+					aria-expanded="false"
+					aria-controls="site-nav"
+				>
+					<span class="hamburger"></span>
+				</button>
+
+				<!-- Primary Nav -->
+				<nav id="site-nav" aria-label="Primary">
 					<ul>
 						<li><a href="about-us.html">About Us</a></li>
 						<li>
-							<a href="services.html" class="active">Services</a>
+							<a href="services.html" aria-current="page"
+								>Services</a
+							>
 						</li>
-						<li><a href="#image-card-carousel">Gallery</a></li>
-						<li><a href="#contact-form-section">Contact</a></li>
+						<li><a href="portfolio.html">Gallery</a></li>
+						<li>
+							<a href="contact.html">Contact</a>
+						</li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		<!-- MAIN CONTENT -->
-		<main id="services">
-			<!-- HERO -->
-			<section class="srv-hero parallax">
-				<div class="srv-hero__inner fade-only" data-animate>
-					<h1 class="h1-serif">Services</h1>
-				</div>
-			</section>
+		<!-- HERO -->
+		<section
+			class="svc-hero"
+			style="--hero: url('images/couples/santanaanddaniel/28.jpg')"
+		>
+			<div class="svc-hero__inner">
+				<h1 class="about-title">Services & Packages</h1>
+				<p class="svc-lead">
+					Design-forward planning with calm, meticulous execution —
+					from intimate gatherings to full-weekend weddings.
+				</p>
+				<p style="margin-top: 12px">
+					<a class="btn" href="#wedding-packages">See Packages</a>
+				</p>
+			</div>
+		</section>
 
-			<!-- FULL SERVICE -->
-			<section class="srv-split section-pad" data-animate>
-				<div class="srv-split__inner">
-					<div
-						class="srv-split__content container fade-slide"
-						data-animate
-					>
-						<h2 class="h2-serif">Full Service Planning</h2>
-						<p>
-							We manage every detail from start to finish,
-							ensuring a seamless and stress-free experience.
-						</p>
-						<ul class="checklist">
-							<li>Budget management</li>
-							<li>Vendor sourcing</li>
-							<li>Design conceptualization</li>
-							<li>Timeline creation</li>
-							<li>Guest list management</li>
+		<!-- WEDDING PACKAGES -->
+		<section id="wedding-packages">
+			<div class="wrap" style="text-align: center" data-animate>
+				<h2>Wedding Planning</h2>
+				<p style="max-width: 760px; margin: 10px auto 0; opacity: 0.95">
+					Choose the support level that fits your vision. Every
+					package includes our signature timelines, vendor
+					coordination, and day-of orchestration.
+				</p>
+			</div>
+
+			<div class="pack-wrap" style="margin-top: 18px">
+				<div class="pack-stack" data-animate>
+					<article class="pkg">
+						<span class="sub">Day-of Coordination</span>
+						<h3>Effortless execution on the day</h3>
+						<div class="price">$1,750+</div>
+						<ul>
+							<li>
+								Pre-wedding coordination &amp; run-of-show
+								timeline
+							</li>
+							<li>Vendor &amp; guest point-of-contact</li>
+							<li>
+								Setup/takedown supervision, procession &amp;
+								reception cueing
+							</li>
+							<li>
+								Seating oversight &amp; vendor payment
+								coordination
+							</li>
 						</ul>
-						<a href="#contact-form-section" class="text-link"
-							>Learn More →</a
-						>
-					</div>
+						<small>HST extra.</small>
+						<div class="btnline">
+							<a href="contact.html">Plan your dream event</a>
+						</div>
+					</article>
 
-					<!-- IMAGE -->
-					<div class="srv-split__media fade-slide" data-animate>
-						<img
-							src="images/services/IMG_8682.JPG"
-							alt="Full Service Planning image"
-						/>
-					</div>
-				</div>
-			</section>
-
-			<!-- PARTIAL PLANNING -->
-			<section class="srv-split section-pad bg-dark" data-animate>
-				<div class="srv-split__inner reverse">
-					<!-- IMAGE -->
-					<div class="srv-split__media fade-slide" data-animate>
-						<img
-							src="images/heropics/IMG123.jpg"
-							alt="Partial Planning image"
-						/>
-					</div>
-
-					<div
-						class="srv-split__content container fade-slide"
-						data-animate
-					>
-						<h2 class="h2-serif txt-light">Partial Planning</h2>
-						<p>
-							For couples who have started planning but need
-							expert guidance to finalize details.
-						</p>
-						<ul class="dark-checklist">
-							<li>Finalizing vendor contracts</li>
-							<li>Design and décor consultation</li>
-							<li>Timeline and logistics management</li>
-							<li>Rehearsal coordination</li>
-							<li>Unlimited communication</li>
+					<article class="pkg">
+						<span class="sub">Partial Planning</span>
+						<h3>Collaborative support where you need it</h3>
+						<div class="price">$2,000+</div>
+						<ul>
+							<li>
+								Preferred vendor referrals &amp; budget creation
+							</li>
+							<li>
+								Meeting attendance &amp; custom planning roadmap
+							</li>
+							<li>Rehearsal + 8–10 hours day-of management</li>
 						</ul>
-						<a href="#contact-form-section" class="text-link"
-							>Learn More →</a
+						<small
+							>Includes everything in Day-of plus added planning
+							support.</small
 						>
-					</div>
-				</div>
-			</section>
+						<div class="btnline">
+							<a href="contact.html">Check Dates</a>
+						</div>
+					</article>
 
-			<!-- DAY-OF COORDINATION -->
-			<section class="srv-split section-pad" data-animate>
-				<div class="srv-split__inner">
-					<div
-						class="srv-split__content container fade-slide"
-						data-animate
-					>
-						<h2 class="h2-serif">Day-Of Coordination</h2>
-						<p>
-							We step in 6–8 weeks before your event to ensure
-							everything runs perfectly.
-						</p>
-						<ul class="checklist">
-							<li>Venue walkthrough</li>
-							<li>Vendor confirmation</li>
-							<li>Timeline management</li>
-							<li>Supervision of setup and teardown</li>
-							<li>Troubleshooting and problem-solving</li>
+					<article class="pkg">
+						<span class="sub">Full Planning &amp; Execution</span>
+						<h3>Concept-to-celebration, entirely handled</h3>
+						<div class="price">$5,000+</div>
+						<ul>
+							<li>
+								Design direction; wedding website &amp; guest
+								management
+							</li>
+							<li>Unlimited access to Lead Planner</li>
+							<li>Up to 12 hours day-of with two coordinators</li>
 						</ul>
-						<a href="#contact-form-section" class="text-link"
-							>Learn More →</a
+						<small
+							>Custom packages available on request. HST
+							extra.</small
 						>
-					</div>
-
-					<!-- IMAGE -->
-					<div class="srv-split__media fade-slide" data-animate>
-						<img
-							src="images/services/dayof.png"
-							alt="Day Of Coordination image"
-						/>
-					</div>
+						<div class="btnline">
+							<a href="contact.html">Start Planning</a>
+						</div>
+					</article>
 				</div>
-			</section>
 
-			<!-- OTHER EVENTS BAND -->
-			<section class="events-band" aria-labelledby="events-band-title">
-				<div
-					class="container events-band__inner fade-only"
+				<figure
+					class="pack-figure"
+					aria-label="Editorial wedding imagery"
 					data-animate
 				>
-					<h2
-						id="events-band-title"
-						class="events-band__title h2-serif"
-					>
-						We plan other events, too
-					</h2>
+					<img
+						src="images/heropics/kiss.png"
+						alt="Bridal editorial detail"
+					/>
+				</figure>
+			</div>
+		</section>
 
-					<div class="events-cards" data-stagger>
-						<!-- Card: Social Events -->
-						<article class="events-card fade-slide" data-animate>
-							<div class="events-card__media">
-								<img
-									src="images/mandm/IMG_8679.JPG"
-									alt="Long tablescape with greenery"
-								/>
-							</div>
-							<div class="events-card__body">
-								<h3 class="events-card__title">
-									Social <em>Events</em>
-								</h3>
-								<p>
-									Celebrate in style with T&T! From milestone
-									birthdays to baby and bridal showers, we
-									specialize in elevating your event with our
-									signature flair. Let us bring creativity and
-									ease to the planning process.
-								</p>
-							</div>
-						</article>
+		<!-- OTHER SERVICES -->
+		<section class="section addons" aria-label="Other Services & Offerings">
+			<div class="wrap" style="text-align: center">
+				<h2>Other Services &amp; Experiences</h2>
+				<p style="max-width: 760px; margin: 10px auto 0; opacity: 0.95">
+					Proposals, corporate gatherings, showers and more — styled
+					with intention, run with precision.
+				</p>
+			</div>
 
-						<!-- Card: Corporate Events -->
-						<article class="events-card fade-slide" data-animate>
-							<div class="events-card__media">
-								<img
-									src="images/AmerNabulsi-513.jpg"
-									alt="Corporate gala bar with florals"
-								/>
-							</div>
-							<div class="events-card__body">
-								<h3 class="events-card__title">
-									Corporate <em>Events</em>
-								</h3>
-								<p>
-									From conferences and team-building retreats
-									to fundraisers and executive gatherings, we
-									craft seamless, impactful experiences that
-									foster connection and elevate professional
-									communities.
-								</p>
-							</div>
-						</article>
+			<div class="svc-grid" style="padding-top: 18px">
+				<article class="svc-card" data-animate>
+					<div class="svc-media">
+						<img
+							src="images/sarah-chris/IMG_3127.PNG"
+							alt="Romantic proposal setup"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Proposal</span>
+						<h3>Unforgettable “yes” moments</h3>
+						<p>
+							Concept, location, décor and timing — every detail
+							handled for a seamless, romantic proposal.
+						</p>
+					</div>
+				</article>
+
+				<article class="svc-card" data-animate>
+					<div class="svc-media">
+						<img
+							src="images/specialevents/Coach.svg"
+							alt="Corporate ambience"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Corporate</span>
+						<h3>Polished brand experiences</h3>
+						<p>
+							On-message events without the scheduling stress —
+							let’s hit your goals with style.
+						</p>
+					</div>
+				</article>
+
+				<article class="svc-card" data-animate>
+					<div class="svc-media">
+						<img
+							src="images/specialevents/IMG_4367.png"
+							alt="Baby shower details"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Baby Shower</span>
+						<h3>Celebrate without the stress</h3>
+						<p>
+							Theme, setup, takedown — so the parents-to-be can
+							simply enjoy the day.
+						</p>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<!-- ADD-ONS / RENTALS -->
+		<section class="addons">
+			<div class="wrap" style="text-align: center">
+				<h2>Add-Ons &amp; Rentals</h2>
+				<p style="max-width: 760px; margin: 10px auto 0; opacity: 0.95">
+					Elevate your event with curated accents and content
+					creation.
+				</p>
+				<div class="addons-grid" style="margin-top: 14px">
+					<div class="add">
+						<strong>Dessert / Coffee Cart</strong
+						><span>from $399.99</span>
+					</div>
+					<div class="add">
+						<strong>Custom Flower Wall</strong
+						><span>from $349.00</span>
+					</div>
+					<div class="add">
+						<strong>Balloon Garland (8–24ft)</strong
+						><span>from $299.00</span>
+					</div>
+					<div class="add">
+						<strong>Marquee Letters/Numbers</strong
+						><span>from $99.99</span>
 					</div>
 				</div>
-			</section>
+				<p style="margin-top: 10px">
+					<small
+						>Ask about photo booths, arch backdrops, canopy
+						installs, luxe florals &amp; more.</small
+					>
+				</p>
+			</div>
+		</section>
 
-			<!-- QUOTE BAND -->
-			<section class="section-pad cta-band parallax-lite">
-				<div class="container narrow fade-only" data-animate>
-					<blockquote class="quote">
-						“Every event is an opportunity to create a timeless
-						memory.”
-					</blockquote>
-					<p class="quote-author">— Joy</p>
+		<!-- FAQs -->
+		<section class="faqs">
+			<div class="wrap">
+				<h2 style="text-align: center">FAQs</h2>
+				<div style="max-width: 860px; margin: 12px auto 0">
+					<details>
+						<summary>How far in advance should we book?</summary>
+						<p>
+							Popular dates fill quickly — 9–12 months for full
+							planning is ideal; day-of coordination can be booked
+							2–4 months out if available.
+						</p>
+					</details>
+					<details>
+						<summary>Do you travel?</summary>
+						<p>
+							Yes! We plan across Ontario and beyond. Travel fees
+							depend on distance and logistics — we’ll outline
+							everything in your proposal.
+						</p>
+					</details>
+					<details>
+						<summary>Can packages be customized?</summary>
+						<p>
+							Absolutely. We’ll tailor scope and add-ons to match
+							your vision and budget.
+						</p>
+					</details>
 				</div>
-			</section>
-		</main>
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section class="wrap cta" style="margin-top: 8px">
+			<div class="cta-inner">
+				<h3>Ready to plan something beautiful?</h3>
+				<a class="about-btn" href="contact.html">Inquire Now</a>
+			</div>
+		</section>
 
 		<!-- FOOTER -->
 		<footer>
 			<div class="container">
-				<p>&copy; 2025 Tide and True</p>
-				<div class="social-links">
-					<a href="#">Facebook</a>
-					<a href="#">Instagram</a>
-				</div>
+				<p>&copy; 2025 Tide &amp; True</p>
 			</div>
 		</footer>
+
+		<!-- Minimal JS: mobile menu + fade-ins -->
+		<script>
+			(function () {
+				// Mobile menu
+				const btn = document.querySelector(".nav-toggle");
+				const nav = document.getElementById("site-nav");
+				function setState(open) {
+					document.body.classList.toggle("nav-open", open);
+					if (btn) {
+						btn.setAttribute("aria-expanded", String(open));
+						btn.setAttribute(
+							"aria-label",
+							open ? "Close menu" : "Open menu"
+						);
+					}
+				}
+				if (btn && nav) {
+					btn.addEventListener("click", () =>
+						setState(!document.body.classList.contains("nav-open"))
+					);
+					nav.addEventListener("click", (e) => {
+						if (e.target.closest("a")) setState(false);
+					});
+					document.addEventListener("keydown", (e) => {
+						if (e.key === "Escape") setState(false);
+					});
+					// close via scrim tap
+					document.addEventListener(
+						"click",
+						(e) => {
+							if (!document.body.classList.contains("nav-open"))
+								return;
+							const inside =
+								e.target.closest("#site-nav") ||
+								e.target.closest(".nav-toggle");
+							if (!inside) setState(false);
+						},
+						true
+					);
+				}
+
+				// Fade-ins
+				const els = document.querySelectorAll("[data-animate]");
+				const io = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((e) => {
+							if (e.isIntersecting) {
+								e.target.classList.add("inview");
+								io.unobserve(e.target);
+							}
+						});
+					},
+					{ rootMargin: "-10% 0px -10% 0px", threshold: 0.01 }
+				);
+				els.forEach((el) => io.observe(el));
+			})();
+		</script>
 	</body>
 </html>

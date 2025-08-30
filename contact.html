@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Contact · Tide & True Occasions</title>
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			/* ===== Tokens (reused) ===== */
+			:root {
+				--ink: #141a1f;
+				--muted: #6f7a82;
+				--navy: #0d1f2c;
+				--gold: #a88a54;
+				--ivory: #f7f3ee;
+				--ivory-2: #efe9df;
+				--hairline: #e8eef2;
+				--max: 1140px;
+				--header-h: 88px;
+				--step-0: clamp(14px, 0.9rem + 0.1vw, 15.5px);
+				--step-1: clamp(16px, 1rem + 0.35vw, 19px);
+				--step-2: clamp(22px, 1.25rem + 0.6vw, 26px);
+				--step-3: clamp(30px, 1.6rem + 1vw, 38px);
+				--step-4: clamp(40px, 2.2rem + 1.6vw, 60px);
+				--ring: 0 0 0 1px rgba(168, 138, 84, 0.5),
+					0 8px 24px rgba(0, 0, 0, 0.06);
+			}
+
+			/* ===== Base ===== */
+			* {
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				color: var(--ink);
+				font: 400 var(--step-0) / 1.75 "Montserrat", system-ui,
+					-apple-system, "Segoe UI", Roboto, sans-serif;
+				-webkit-font-smoothing: antialiased;
+				text-rendering: optimizeLegibility;
+				background: #fff;
+			}
+			h1,
+			h2,
+			h3 {
+				font-family: "Playfair Display", ui-serif, Georgia, serif;
+				letter-spacing: 0.006em;
+				margin: 0 0 0.45em;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+				text-underline-offset: 2px;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			section {
+				padding: clamp(32px, 5vw, 68px) 0;
+			}
+			.wrap {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+			}
+
+			/* ===== Header (fixed, clear) ===== */
+			header {
+				position: fixed;
+				inset: 0 0 auto 0;
+				height: var(--header-h);
+				z-index: 1000;
+				background: transparent !important;
+				border: 0 !important;
+				box-shadow: none !important;
+				backdrop-filter: none !important;
+			}
+			header .container {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 16px;
+			}
+			/* desktop nav */
+			#site-nav ul {
+				display: flex;
+				gap: 28px;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			#site-nav a {
+				font-weight: 600;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				font-size: 0.78rem;
+				padding: 8px 10px;
+				border-radius: 2px;
+				color: #e9dbdb;
+			}
+			#site-nav a:hover {
+				box-shadow: 0 0 0 1px rgba(168, 138, 84, 0.45);
+				text-decoration: none;
+			}
+			.nav-toggle {
+				display: none;
+			}
+
+			/* ===== Mobile menu ===== */
+			@media (max-width: 860px) {
+				.nav-toggle {
+					display: inline-grid;
+					place-items: center;
+					width: 44px;
+					height: 44px;
+					border: 0;
+					background: transparent;
+					padding: 0;
+					cursor: pointer;
+				}
+				.nav-toggle .hamburger {
+					position: relative;
+					width: 22px;
+					height: 2px;
+					background: currentColor;
+					color: #1a1a1a;
+					transition: transform 0.25s ease;
+				}
+				.nav-toggle .hamburger::before,
+				.nav-toggle .hamburger::after {
+					content: "";
+					position: absolute;
+					left: 0;
+					right: 0;
+					height: 2px;
+					background: currentColor;
+					transition: transform 0.25s ease, top 0.25s ease,
+						bottom 0.25s ease, opacity 0.2s ease;
+				}
+				.nav-toggle .hamburger::before {
+					top: -7px;
+				}
+				.nav-toggle .hamburger::after {
+					bottom: -7px;
+				}
+
+				/* slide-in panel */
+				#site-nav {
+					position: fixed;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					width: min(78vw, 360px);
+					transform: translateX(100%);
+					transition: transform 0.32s ease;
+					background: rgba(16, 18, 22, 0.92);
+					backdrop-filter: blur(10px);
+					padding: 28px 22px;
+					z-index: 1001;
+				}
+				#site-nav ul {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 18px;
+					margin-top: 64px;
+				}
+				#site-nav a {
+					color: #f2f4f6;
+				}
+
+				/* scrim */
+				body.nav-open::before {
+					content: "";
+					position: fixed;
+					inset: 0;
+					background: rgba(0, 0, 0, 0.35);
+					backdrop-filter: blur(2px);
+					z-index: 1000;
+				}
+				body.nav-open #site-nav {
+					transform: translateX(0);
+				}
+				body.nav-open .nav-toggle .hamburger {
+					background: transparent;
+				}
+				body.nav-open .nav-toggle .hamburger::before {
+					top: 0;
+					transform: rotate(45deg);
+				}
+				body.nav-open .nav-toggle .hamburger::after {
+					bottom: 0;
+					transform: rotate(-45deg);
+				}
+			}
+
+			/* ===== Hero ===== */
+			.hero {
+				--img: url("images/heropics/IMG_8671.JPG");
+				position: relative;
+				min-height: 70vh;
+				display: grid;
+				place-items: center;
+				text-align: center;
+				overflow: hidden;
+				padding-top: var(--header-h);
+			}
+			.hero::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: var(--img) center/cover no-repeat;
+				filter: saturate(1.02) contrast(1.02);
+			}
+			.hero::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					180deg,
+					rgba(10, 12, 14, 0.18) 0%,
+					rgba(10, 12, 14, 0.46) 70%,
+					rgba(10, 12, 14, 0.22) 100%
+				);
+				mix-blend-mode: multiply;
+			}
+			.hero__inner {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				max-width: 800px;
+				padding: 20px;
+			}
+			.eyebrow {
+				display: inline-block;
+				border: 1px solid rgba(255, 255, 255, 0.45);
+				padding: 6px 10px;
+				margin-bottom: 8px;
+				text-transform: uppercase;
+				letter-spacing: 0.18em;
+				font: 600 0.78rem/1 "Montserrat", sans-serif;
+			}
+			.hero h1 {
+				font-size: var(--step-4);
+				line-height: 1.03;
+				margin: 0.15em 0;
+			}
+			.hero p {
+				font-size: var(--step-1);
+				color: #eef4f7;
+				opacity: 0.98;
+				margin: 0.2em 0 0;
+			}
+
+			/* ===== Contact block ===== */
+			.contact {
+				background: linear-gradient(#faf7f1, #f1ecdf);
+			}
+			.card {
+				background: linear-gradient(#fff, #fff) padding-box,
+					linear-gradient(180deg, #e8dfd3, #efe7dc) border-box;
+				border: 1px solid transparent;
+				border-radius: 14px;
+				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
+			}
+			.contact-grid {
+				display: grid;
+				gap: clamp(20px, 3vw, 28px);
+				padding: clamp(22px, 3.8vw, 36px);
+			}
+			@media (min-width: 980px) {
+				.contact-grid {
+					grid-template-columns: 1.1fr 0.9fr;
+					align-items: start;
+				}
+			}
+
+			/* Left: form */
+			form .row {
+				display: grid;
+				gap: 14px;
+			}
+			@media (min-width: 700px) {
+				form .row--2 {
+					grid-template-columns: 1fr 1fr;
+				}
+				form .row--3 {
+					grid-template-columns: 1fr 1fr 1fr;
+				}
+			}
+			label {
+				display: block;
+				font: 600 0.76rem/1 "Montserrat", sans-serif;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: #6c645d;
+				margin: 6px 0;
+			}
+			input,
+			select,
+			textarea {
+				width: 100%;
+				border: 1px solid var(--hairline);
+				border-radius: 8px;
+				padding: 12px 12px;
+				font: inherit;
+				color: var(--ink);
+				background: #fff;
+				outline: none;
+				transition: border-color 0.2s, box-shadow 0.2s;
+			}
+			textarea {
+				min-height: 130px;
+				resize: vertical;
+			}
+			input:focus,
+			select:focus,
+			textarea:focus {
+				border-color: rgba(168, 138, 84, 0.7);
+				box-shadow: var(--ring);
+			}
+			.help {
+				color: var(--muted);
+				font-size: 0.86em;
+				margin-top: 6px;
+			}
+
+			.btn {
+				display: inline-block;
+				padding: 12px 22px;
+				border-radius: 500px;
+				border: 1px solid var(--gold);
+				background: #fff;
+				color: #111;
+				font-weight: 700;
+				font-size: 0.78rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				transition: transform 0.2s, background 0.25s, border-color 0.25s,
+					color 0.25s, box-shadow 0.25s;
+				cursor: pointer;
+			}
+			.btn:hover {
+				background: var(--gold);
+				color: #0b0b0b;
+				transform: translateY(-2px);
+				box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+			}
+
+			/* Right: details */
+			.aside {
+				background: #fff;
+				border: 1px solid var(--hairline);
+				border-radius: 12px;
+				padding: 18px;
+				box-shadow: 0 16px 44px rgba(66, 48, 24, 0.08);
+			}
+			.aside h3 {
+				font-size: 1.15rem;
+				margin: 0 0 6px;
+				color: #0d1f2c;
+			}
+			.aside p {
+				margin: 0.4em 0;
+			}
+			.list {
+				list-style: none;
+				padding: 0;
+				margin: 0.8em 0 0;
+				display: grid;
+				gap: 10px;
+			}
+			.list li {
+				display: grid;
+				gap: 2px;
+			}
+			.list small {
+				color: var(--muted);
+			}
+			.divider {
+				height: 1px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					#d9d3c9,
+					transparent
+				);
+				margin: 14px 0;
+			}
+
+			/* ===== Footer ===== */
+			footer {
+				padding: 28px 0;
+				border-top: 1px solid var(--hairline);
+			}
+			footer .container {
+				width: min(var(--max), 92%);
+				margin-inline: auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 16px;
+				flex-wrap: wrap;
+			}
+
+			/* Reveal on scroll (optional) */
+			[data-animate] {
+				opacity: 0;
+				transform: translateY(20px);
+				transition: opacity 0.6s ease, transform 0.6s ease;
+			}
+			.inview {
+				opacity: 1 !important;
+				transform: none !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Header -->
+		<header>
+			<div class="container">
+				<a class="logo" href="index.html" aria-label="Tide & True">
+					<img
+						src="images/assets/ttlogo.svg"
+						alt="Tide & True"
+						style="height: 48px"
+					/>
+				</a>
+
+				<!-- Hamburger (mobile) -->
+				<button
+					class="nav-toggle"
+					aria-label="Open menu"
+					aria-expanded="false"
+					aria-controls="site-nav"
+				>
+					<span class="hamburger"></span>
+				</button>
+
+				<!-- Primary Nav -->
+				<nav id="site-nav" aria-label="Primary">
+					<ul>
+						<li><a href="about-us.html">About Us</a></li>
+						<li><a href="services.html">Services</a></li>
+						<li><a href="portfolio.html">Gallery</a></li>
+						<li>
+							<a href="contact.html" aria-current="page"
+								>Contact</a
+							>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<!-- HERO -->
+		<section
+			class="hero"
+			style="--img: url('images/heropics/IMG_8671.JPG')"
+		>
+			<div class="hero__inner">
+				<span class="eyebrow">Get In Touch</span>
+				<h1>Let’s plan something beautiful</h1>
+				<p>
+					Share a few details below—then we’ll set up a discovery
+					call.
+				</p>
+			</div>
+		</section>
+
+		<!-- CONTACT -->
+		<section class="contact">
+			<div class="wrap">
+				<div class="card contact-grid" data-animate>
+					<!-- Form (FormSubmit integration) -->
+					<form
+						id="contact-form"
+						action="https://formsubmit.co/tideandtrueoccassions@gmail.com"
+						method="POST"
+						novalidate
+					>
+						<!-- FormSubmit helpers -->
+						<input
+							type="hidden"
+							name="_subject"
+							value="New Inquiry from Tide &amp; True"
+						/>
+						<!-- Change this to your own thank-you page, or remove to use their default -->
+						<input
+							type="hidden"
+							name="_next"
+							value="https://yourwebsite.com/thank-you.html"
+						/>
+						<!-- Disable captcha prompt (optional) -->
+						<input type="hidden" name="_captcha" value="false" />
+						<!-- Nicely formatted email -->
+						<input type="hidden" name="_template" value="table" />
+						<!-- Honeypot (spam trap) -->
+						<input
+							type="text"
+							name="_honey"
+							tabindex="-1"
+							autocomplete="off"
+							style="display: none"
+						/>
+
+						<div class="row row--2">
+							<div>
+								<label for="name">Your Name*</label>
+								<input
+									id="name"
+									name="name"
+									type="text"
+									required
+									autocomplete="name"
+								/>
+							</div>
+							<div>
+								<label for="email">Email*</label>
+								<input
+									id="email"
+									name="email"
+									type="email"
+									required
+									autocomplete="email"
+								/>
+							</div>
+						</div>
+
+						<div class="row row--2">
+							<div>
+								<label for="phone">Phone</label>
+								<input
+									id="phone"
+									name="phone"
+									type="tel"
+									inputmode="tel"
+									autocomplete="tel"
+								/>
+							</div>
+							<div>
+								<label for="service">Service Interest*</label>
+								<select id="service" name="service" required>
+									<option value="" disabled selected>
+										Select…
+									</option>
+									<option>Full Planning</option>
+									<option>Partial Planning</option>
+									<option>Day-of / Event Management</option>
+									<option>Proposal</option>
+									<option>Corporate</option>
+									<option>Other</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row row--3">
+							<div>
+								<label for="date">Event Date</label>
+								<input id="date" name="date" type="date" />
+							</div>
+							<div>
+								<label for="guests">Guest Count</label>
+								<input
+									id="guests"
+									name="guests"
+									type="number"
+									min="1"
+									placeholder="e.g., 120"
+								/>
+							</div>
+							<div>
+								<label for="budget">Estimated Budget</label>
+								<select id="budget" name="budget">
+									<option value="" disabled selected>
+										Select…
+									</option>
+									<option>$5k–$10k</option>
+									<option>$10k–$20k</option>
+									<option>$20k–$40k</option>
+									<option>$40k–$75k</option>
+									<option>$75k+</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="row">
+							<label for="venue">Venue / Location</label>
+							<input
+								id="venue"
+								name="venue"
+								type="text"
+								placeholder="If booked"
+							/>
+						</div>
+
+						<div class="row">
+							<label for="message"
+								>Tell us about your celebration*</label
+							>
+							<textarea
+								id="message"
+								name="message"
+								required
+								placeholder="Vision, priorities, must-haves…"
+							></textarea>
+						</div>
+
+						<div class="row" style="margin: 6px 0 12px">
+							<label
+								style="
+									display: flex;
+									gap: 10px;
+									align-items: flex-start;
+									font-weight: 500;
+									letter-spacing: 0.02em;
+									text-transform: none;
+									color: var(--ink);
+								"
+							>
+								<input
+									type="checkbox"
+									name="consent"
+									required
+									style="margin-top: 4px; width: auto"
+								/>
+								I agree to be contacted about my inquiry. My
+								information won’t be shared.
+							</label>
+							<p class="help">*Required fields</p>
+						</div>
+
+						<button class="btn" type="submit">Send Inquiry</button>
+					</form>
+
+					<!-- Details -->
+					<aside class="aside">
+						<h3>Details</h3>
+						<p>We typically reply within 1–2 business days.</p>
+						<ul class="list">
+							<li>
+								<strong>Email</strong>
+								<a href="mailto:tideandtrueoccassions@gmail.com"
+									>tideandtrueoccassions@gmail.com</a
+								>
+							</li>
+							<li>
+								<strong>Service Area</strong>
+								<small
+									>Greater Toronto Area & destinations by
+									request</small
+								>
+							</li>
+							<li>
+								<strong>Availability</strong>
+								<small
+									>2025 select dates · 2026 booking now</small
+								>
+							</li>
+						</ul>
+						<div class="divider"></div>
+						<h3>What to expect</h3>
+						<p>
+							We’ll start with a discovery call to understand your
+							story, vision, and guest experience goals. From
+							there, we’ll share a tailored proposal.
+						</p>
+					</aside>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA (optional – keeps parity with site) -->
+		<section class="wrap" style="padding-top: 0">
+			<div class="card" style="border-radius: 16px; overflow: hidden">
+				<div style="position: relative; isolation: isolate">
+					<div
+						style="
+							position: absolute;
+							inset: 0;
+							background: url('images/couples/charleneandgarrett/5.JPG')
+								center/cover no-repeat;
+							filter: saturate(1.02);
+						"
+					></div>
+					<div
+						style="
+							position: absolute;
+							inset: 0;
+							background: linear-gradient(
+								180deg,
+								rgba(0, 0, 0, 0.22),
+								rgba(0, 0, 0, 0.35)
+							);
+						"
+					></div>
+					<div
+						style="
+							position: relative;
+							z-index: 1;
+							color: #fff;
+							text-align: center;
+							padding: clamp(48px, 9vw, 110px) 16px;
+						"
+					>
+						<h3
+							style="
+								font-family: 'Playfair Display', serif;
+								font-size: clamp(22px, 1.6rem, 28px);
+								margin: 0 0 8px;
+							"
+						>
+							Refined celebrations with soul
+						</h3>
+						<p style="margin: 0; opacity: 0.95">
+							Considered palettes. Intentional textures.
+							Effortless flow.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- FOOTER -->
+		<footer>
+			<div class="container">
+				<p>&copy; 2025 Tide &amp; True</p>
+			</div>
+		</footer>
+
+		<!-- Minimal JS: mobile menu + fade-ins (form handler removed so submission reaches FormSubmit) -->
+		<script>
+			(function () {
+				// Mobile menu
+				const btn = document.querySelector(".nav-toggle");
+				const nav = document.getElementById("site-nav");
+				function setState(open) {
+					document.body.classList.toggle("nav-open", open);
+					if (btn) {
+						btn.setAttribute("aria-expanded", String(open));
+						btn.setAttribute(
+							"aria-label",
+							open ? "Close menu" : "Open menu"
+						);
+					}
+				}
+				if (btn && nav) {
+					btn.addEventListener("click", () =>
+						setState(!document.body.classList.contains("nav-open"))
+					);
+					nav.addEventListener("click", (e) => {
+						if (e.target.closest("a")) setState(false);
+					});
+					document.addEventListener("keydown", (e) => {
+						if (e.key === "Escape") setState(false);
+					});
+					document.addEventListener(
+						"click",
+						(e) => {
+							if (!document.body.classList.contains("nav-open"))
+								return;
+							const inside =
+								e.target.closest("#site-nav") ||
+								e.target.closest(".nav-toggle");
+							if (!inside) setState(false);
+						},
+						true
+					);
+				}
+
+				// Fade-ins
+				const els = document.querySelectorAll("[data-animate]");
+				const io = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((e) => {
+							if (e.isIntersecting) {
+								e.target.classList.add("inview");
+								io.unobserve(e.target);
+							}
+						});
+					},
+					{ rootMargin: "-10% 0px -10% 0px", threshold: 0.01 }
+				);
+				els.forEach((el) => io.observe(el));
+			})();
+		</script>
+	</body>
+</html>

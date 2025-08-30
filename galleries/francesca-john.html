@@ -59,18 +59,20 @@
 		</section>
 
 		<!-- QUOTES -->
+		<!-- QUOTES -->
 		<section class="me-quotes">
 			<p class="me-q" style="--d: 0s">
-				“They brought our vision to life and then some.”
-				<span>— Sarah &amp; Chris</span>
+				“I didn’t have to stress or even think — you made it flawless.”
+				<span>— Marwa &amp; Michael</span>
 			</p>
 			<p class="me-q" style="--d: 5s">
-				“Flawless from start to finish.”
-				<span>— Santana &amp; Daniel</span>
+				“I couldn't have done it without their support”
+				<span>— Francesca &amp; John</span>
 			</p>
 			<p class="me-q" style="--d: 10s">
-				“Professional, creative, calm.”
-				<span>— Chelsea &amp; Raymond</span>
+				"Every detail was meticulously planned and thoughtfully
+				managed."
+				<span>— Sarah &amp; Chris</span>
 			</p>
 		</section>
 		<!-- put this BEFORE the builder script -->
@@ -94,7 +96,7 @@
 					"photo10.jpg",
 					"photo11.jpg",
 				],
-				hero: "photo7.jpg", // must match the actual filename + case
+				hero: "photo9.jpg", // must match the actual filename + case
 			};
 		</script>
 
@@ -170,6 +172,28 @@
 					build();
 				}
 			})();
+			// HERO background (reads --hero in CSS). Only set it if none exists.
+			const heroEl = document.querySelector(".page-hero.hero--portfolio");
+			const alreadyHasHero =
+				heroEl && heroEl.style.getPropertyValue("--hero");
+			const heroSrc =
+				hero || images[0] ? basePath + (hero || images[0]) : "";
+
+			if (heroEl && heroSrc && !alreadyHasHero) {
+				heroEl.style.setProperty("--hero", `url("${heroSrc}")`);
+			}
+			// after you compute heroSrc and set --hero-img
+			const ctaEl = document.querySelector(".me-cta");
+			const ctaFile =
+				window.GALLERY.cta ||
+				images[images.length - 1] ||
+				hero ||
+				images[0];
+			if (ctaEl && ctaFile)
+				ctaEl.style.setProperty(
+					"--cta",
+					`url("${join(basePath, ctaFile)}")`
+				);
 		</script>
 	</body>
 </html>
