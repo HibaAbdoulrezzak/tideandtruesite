@@ -1,97 +1,113 @@
 document.addEventListener("DOMContentLoaded", () => {
-	// ====== Carousels ======
+	// =========================
+	// CAROUSELS (pixel-based)
+	// =========================
 	function initializeCarousel(
 		carouselId,
 		numVisibleSlides = 1,
-		autoSlideIntervalTime = 5000
+		autoSlideMs = 5000
 	) {
-		const carouselSection = document.getElementById(carouselId);
-		if (!carouselSection) return;
+		const root = document.getElementById(carouselId);
+		if (!root) return;
 
-		const slidesContainer =
-			carouselSection.querySelector(".carousel-slides");
-		const slides = carouselSection.querySelectorAll(".carousel-slide");
-		const dots = carouselSection.querySelectorAll(".dot");
-		const prevBtn = carouselSection.querySelector(".carousel-prev");
-		const nextBtn = carouselSection.querySelector(".carousel-next");
+		const track = root.querySelector(".carousel-slides");
+		const slides = Array.from(root.querySelectorAll(".carousel-slide"));
+		const dots = Array.from(root.querySelectorAll(".dot"));
+		const prev = root.querySelector(".carousel-prev");
+		const next = root.querySelector(".carousel-next");
 
-		let currentSlideIndex = 0;
-		let autoSlideTimer;
+		let index = 0;
+		let timer = null;
+		let slideW = 0;
 
-		slides.forEach((slide) => {
-			slide.style.minWidth = `${100 / numVisibleSlides}%`;
+		// Each slide takes equal fraction of the track width
+		slides.forEach((s) => {
+			s.style.minWidth = `${100 / numVisibleSlides}%`;
 		});
 
-		function updateCarouselPosition() {
-			const translateXValue = -(
-				currentSlideIndex *
-				(100 / numVisibleSlides)
-			);
-			if (slidesContainer)
-				slidesContainer.style.transform = `translateX(${translateXValue}%)`;
-			dots.forEach((dot, index) =>
-				dot.classList.toggle("active", index === currentSlideIndex)
-			);
+		function measure() {
+			// width of ONE slide (based on the first)
+			slideW = slides[0]?.getBoundingClientRect().width || 0;
 		}
 
-		function maxIndex() {
-			return Math.max(0, slides.length - numVisibleSlides);
+		function go(to, withAnim = true) {
+			if (!slides.length || !track) return;
+			const max = Math.max(0, slides.length - numVisibleSlides);
+			// wrap within range [0..max]
+			index = ((to % (max + 1)) + (max + 1)) % (max + 1);
+
+			track.style.transition = withAnim
+				? "transform 0.5s ease-in-out"
+				: "none";
+			track.style.transform = `translateX(${-index * slideW}px)`;
+
+			// update dots if present
+			dots.forEach((d, i) => d.classList.toggle("active", i === index));
 		}
 
 		function nextSlide() {
-			const m = maxIndex();
-			currentSlideIndex =
-				currentSlideIndex < m ? currentSlideIndex + 1 : 0;
-			updateCarouselPosition();
+			go(index + 1);
 		}
-
 		function prevSlide() {
-			const m = maxIndex();
-			currentSlideIndex =
-				currentSlideIndex > 0 ? currentSlideIndex - 1 : m;
-			updateCarouselPosition();
+			go(index - 1);
 		}
 
-		function startAutoSlide() {
-			stopAutoSlide();
-			autoSlideTimer = setInterval(nextSlide, autoSlideIntervalTime);
+		function start() {
+			stop();
+			if (autoSlideMs > 0) timer = setInterval(nextSlide, autoSlideMs);
 		}
-		function stopAutoSlide() {
-			if (autoSlideTimer) clearInterval(autoSlideTimer);
+		function stop() {
+			if (timer) clearInterval(timer);
 		}
 
-		nextBtn?.addEventListener("click", () => {
-			stopAutoSlide();
+		// Controls
+		next?.addEventListener("click", () => {
+			stop();
 			nextSlide();
-			startAutoSlide();
+			start();
 		});
-		prevBtn?.addEventListener("click", () => {
-			stopAutoSlide();
+		prev?.addEventListener("click", () => {
+			stop();
 			prevSlide();
-			startAutoSlide();
+			start();
 		});
-		dots.forEach((dot, index) =>
-			dot.addEventListener("click", () => {
-				stopAutoSlide();
-				currentSlideIndex = index;
-				updateCarouselPosition();
-				startAutoSlide();
+		dots.forEach((d, i) =>
+			d.addEventListener("click", () => {
+				stop();
+				go(i);
+				start();
 			})
 		);
 
-		if (slides.length) {
-			updateCarouselPosition();
-			startAutoSlide();
+		// Resize (handles mobile URL bar & rotation)
+		let rAF;
+		const onResize = () => {
+			cancelAnimationFrame(rAF);
+			rAF = requestAnimationFrame(() => {
+				measure();
+				go(index, false);
+			});
+		};
+		window.addEventListener("resize", onResize, { passive: true });
+
+		// Init
+		if (slides.length && track) {
+			measure();
+			go(0, false);
+			start();
 		}
 	}
 
-	// init carousels
+	// Init your two carousels
 	initializeCarousel("carousel-section", 1, 5000);
 	initializeCarousel("image-card-carousel", 3, 7000);
 
-	// ====== Scroll-in animations ======
-	const els = Array.from(document.querySelectorAll("[data-animate]"));
-	els.forEach((el) => {
+	// ===================================
+	// SCROLL-IN ANIMATIONS (unchanged)
+	// ===================================
+	const animatedEls = Array.from(document.querySelectorAll("[data-animate]"));
+
+	animatedEls.forEach((el) => {
 		const parent = el.parentElement;
 		if (parent?.hasAttribute("data-stagger")) {
 			const siblings = Array.from(parent.children).filter((c) =>
@@ -116,16 +132,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 
 	if ("IntersectionObserver" in window) {
-		const observer = new IntersectionObserver(onIntersect, {
+		const io = new IntersectionObserver(onIntersect, {
 			threshold: 0.12,
 			rootMargin: "0px 0px -10% 0px",
 		});
-		els.forEach((el) => observer.observe(el));
+		animatedEls.forEach((el) => io.observe(el));
 	} else {
+		// Fallback
 		const revealIfInView = () => {
 			const vh =
 				window.innerHeight || document.documentElement.clientHeight;
-			els.forEach((el) => {
+			animatedEls.forEach((el) => {
 				if (el.getBoundingClientRect().top < vh * 0.88)
 					el.classList.add("show");
 			});
@@ -135,7 +152,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		revealIfInView();
 	}
 
-	// ====== Mobile nav (single source of truth) ======
+	// ==========================
+	// MOBILE NAV (unchanged)
+	// ==========================
 	const btn = document.querySelector(".nav-toggle");
 	const nav = document.getElementById("site-nav");
 	if (btn && nav) {
