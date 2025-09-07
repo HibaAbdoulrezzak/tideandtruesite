@@ -1,74 +1,80 @@
 document.addEventListener("DOMContentLoaded", () => {
 	// =========================
-	// CAROUSELS (pixel-based)
+	// SINGLE RESPONSIVE CAROUSEL
 	// =========================
-	function initializeCarousel(
-		carouselId,
-		numVisibleSlides = 1,
-		autoSlideMs = 5000
+	function makeCarousel(
+		id,
+		{ auto = 5000, breakpoints = [{ max: Infinity, count: 1 }] } = {}
 	) {
-		const root = document.getElementById(carouselId);
+		const root = document.getElementById(id);
 		if (!root) return;
 
 		const track = root.querySelector(".carousel-slides");
 		const slides = Array.from(root.querySelectorAll(".carousel-slide"));
-		const dots = Array.from(root.querySelectorAll(".dot"));
 		const prev = root.querySelector(".carousel-prev");
 		const next = root.querySelector(".carousel-next");
+		const dots = Array.from(root.querySelectorAll(".dot"));
 
-		let index = 0;
-		let timer = null;
-		let slideW = 0;
+		let index = 0,
+			timer = null,
+			visible = 1,
+			stepX = 0;
 
-		// Each slide takes equal fraction of the track width
-		slides.forEach((s) => {
-			s.style.minWidth = `${100 / numVisibleSlides}%`;
-		});
+		const getVisible = () => {
+			const w = window.innerWidth;
+			for (const bp of breakpoints) if (w <= bp.max) return bp.count;
+			return 1;
+		};
 
-		function measure() {
-			// width of ONE slide (based on the first)
-			slideW = slides[0]?.getBoundingClientRect().width || 0;
-		}
+		const applyWidths = () => {
+			visible = getVisible();
+			const basis = `${100 / visible}%`;
+			slides.forEach((s) => {
+				s.style.flex = `0 0 ${basis}`;
+				s.style.minWidth = basis;
+				s.style.marginRight = "0";
+			});
+		};
 
-		function go(to, withAnim = true) {
-			if (!slides.length || !track) return;
-			const max = Math.max(0, slides.length - numVisibleSlides);
-			// wrap within range [0..max]
-			index = ((to % (max + 1)) + (max + 1)) % (max + 1);
+		const measure = () => {
+			if (!slides.length) {
+				stepX = 0;
+				return;
+			}
+			const cs = getComputedStyle(track);
+			const gap = parseFloat(cs.columnGap || cs.gap || "0") || 0;
+			const w = slides[0].getBoundingClientRect().width;
+			stepX = w + gap; // distance to move by 1 slide (incl. gap)
+		};
 
-			track.style.transition = withAnim
-				? "transform 0.5s ease-in-out"
+		const maxIndex = () => Math.max(0, slides.length - visible);
+
+		const go = (to, animate = true) => {
+			index =
+				((to % (maxIndex() + 1)) + (maxIndex() + 1)) % (maxIndex() + 1);
+			track.style.transition = animate
+				? "transform .5s ease-in-out"
 				: "none";
-			track.style.transform = `translateX(${-index * slideW}px)`;
-
-			// update dots if present
+			track.style.transform = `translateX(${-index * stepX}px)`;
 			dots.forEach((d, i) => d.classList.toggle("active", i === index));
-		}
+		};
 
-		function nextSlide() {
-			go(index + 1);
-		}
-		function prevSlide() {
-			go(index - 1);
-		}
-
-		function start() {
+		const start = () => {
 			stop();
-			if (autoSlideMs > 0) timer = setInterval(nextSlide, autoSlideMs);
-		}
-		function stop() {
+			if (auto > 0) timer = setInterval(() => go(index + 1), auto);
+		};
+		const stop = () => {
 			if (timer) clearInterval(timer);
-		}
+		};
 
-		// Controls
 		next?.addEventListener("click", () => {
 			stop();
-			nextSlide();
+			go(index + 1);
 			start();
 		});
 		prev?.addEventListener("click", () => {
 			stop();
-			prevSlide();
+			go(index - 1);
 			start();
 		});
 		dots.forEach((d, i) =>
@@ -79,31 +85,37 @@ document.addEventListener("DOMContentLoaded", () => {
 			})
 		);
 
-		// Resize (handles mobile URL bar & rotation)
-		let rAF;
 		const onResize = () => {
-			cancelAnimationFrame(rAF);
-			rAF = requestAnimationFrame(() => {
-				measure();
-				go(index, false);
-			});
+			applyWidths();
+			measure();
+			go(index, false);
 		};
 		window.addEventListener("resize", onResize, { passive: true });
 
-		// Init
-		if (slides.length && track) {
-			measure();
-			go(0, false);
-			start();
-		}
+		applyWidths();
+		measure();
+		go(0, false);
+		start();
 	}
 
-	// Init your two carousels
-	initializeCarousel("carousel-section", 1, 5000);
-	initializeCarousel("image-card-carousel", 3, 7000);
+	// HERO: always 1-up
+	makeCarousel("carousel-section", {
+		auto: 5000,
+		breakpoints: [{ max: Infinity, count: 1 }],
+	});
+
+	// IMAGE CARDS: 1 / 2 / 3 across
+	makeCarousel("image-card-carousel", {
+		auto: 7000,
+		breakpoints: [
+			{ max: 520, count: 1 }, // phones
+			{ max: 768, count: 2 }, // small tablets
+			{ max: Infinity, count: 3 }, // desktop
+		],
+	});
 
 	// ===================================
-	// SCROLL-IN ANIMATIONS (unchanged)
+	// SCROLL-IN ANIMATIONS
 	// ===================================
 	const animatedEls = Array.from(document.querySelectorAll("[data-animate]"));
 
@@ -138,7 +150,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 		animatedEls.forEach((el) => io.observe(el));
 	} else {
-		// Fallback
 		const revealIfInView = () => {
 			const vh =
 				window.innerHeight || document.documentElement.clientHeight;
@@ -153,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 
 	// ==========================
-	// MOBILE NAV (unchanged)
+	// MOBILE NAV
 	// ==========================
 	const btn = document.querySelector(".nav-toggle");
 	const nav = document.getElementById("site-nav");

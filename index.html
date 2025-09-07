@@ -129,9 +129,7 @@
 					every moment is thoughtfully curated and flawlessly
 					delivered.
 				</p>
-				<a href="#about-section" class="btn btn-secondary"
-					>Learn More</a
-				>
+				<a href="about-us.html" class="btn btn-secondary">Learn More</a>
 			</div>
 		</section>
 
@@ -231,14 +229,14 @@
 							“Every detail was meticulously planned and
 							thoughtfully managed. The team at Tide &amp; True
 							Occasions’ attention to detail in bringing our
-							vision to life was really impressive. The planning
-							was effortless on our end, as they handled
-							everything, allowing us to relax and enjoy the
-							process. On the day, everything ran seamlessly, and
-							we couldn’t be happier with how it all came
+							vision to life was really impressive.<br /><br />
+							The planning was effortless on our end, as they
+							handled everything, allowing us to relax and enjoy
+							the process. On the day, everything ran seamlessly,
+							and we couldn’t be happier with how it all came
 							together!”
 						</p>
-						<p class="reviewer-name">— Sarah</p>
+						<p class="reviewer-name">— Sarah & Chris</p>
 					</div>
 
 					<div
@@ -257,12 +255,12 @@
 							“The team at Tide & True Occasions was amazing every
 							step of the way. They made my vision come to life
 							and kept me sane! Their creative ideas and
-							recommendations were extremely helpful. They had
-							great vendor recommendations and found solutions to
-							any problem I faced! I couldn’t have done it without
-							their support!”
+							recommendations were extremely helpful.
+							<br /><br />They had great vendor recommendations
+							and found solutions to any problem I faced! I
+							couldn’t have done it without their support!”
 						</p>
-						<p class="reviewer-name">— Francesca</p>
+						<p class="reviewer-name">— Francesca & John</p>
 					</div>
 
 					<div
@@ -279,13 +277,14 @@
 						</div>
 						<p class="review-text">
 							Thank you for making my big day a success! I didn’t
-							have to stress or even think — you made it flawless.
+							have to stress or even think — you made it
+							flawless.<br /><br />
 							Your attention to detail from weeks leading up to
 							the wedding to the timeline to the execution was
 							above and beyond. You killed it! Thank you for
 							caring about this day 🤍✨
 						</p>
-						<p class="reviewer-name">— Marwa</p>
+						<p class="reviewer-name">— Marwa & Michael</p>
 					</div>
 					<div
 						class="review-card fade-slide"
@@ -305,12 +304,12 @@
 							our wedding planning process. They did everything we
 							asked for, kept us organized, stayed in touch with
 							all of our vendors, and gave us helpful
-							recommendations. They made sure everything ran
-							smoothly on the day of! (They even took BTS shots
-							for us and made special videos which was a bonus).
-							Thanks for all your hard work!”
+							recommendations. <br /><br />They made sure
+							everything ran smoothly on the day of! (They even
+							took BTS shots for us and made special videos which
+							was a bonus). Thanks for all your hard work!”
 						</p>
-						<p class="reviewer-name">— Charlene</p>
+						<p class="reviewer-name">— Charlene & Raymond</p>
 					</div>
 				</div>
 				<a href="contact.html" class="btn btn-secondary reviews-button"
@@ -320,35 +319,56 @@
 		</section>
 
 		<!-- Contact -->
-		<section id="contact-form-section" class="slide-left" data-animate>
+		<section id="contact-form-section">
 			<div class="contact-image-area"></div>
 			<div class="contact-form-area">
-				<div class="contact-header">
-					<h2>GET IN TOUCH</h2>
-				</div>
-				<p>
-					We'd love to hear from you. Please fill out the form below:
-				</p>
+				<form
+					class="lux-form"
+					action="https://formsubmit.co/tideandtrueoccasions@gmail.com"
+					method="POST"
+				>
+					<input
+						type="hidden"
+						name="_subject"
+						value="New Inquiry from Tide & True (Home Page)"
+					/>
+					<input
+						type="hidden"
+						name="_next"
+						value="https://hibaabdoulrezzak.github.io/tideandtruesite/thank-you.html"
+					/>
+					<input type="hidden" name="_captcha" value="false" />
+					<input type="hidden" name="_template" value="table" />
 
-				<form action="#" method="post">
+					<!-- Honeypot -->
 					<input
 						type="text"
-						placeholder="NAME"
+						name="_honey"
+						tabindex="-1"
+						autocomplete="off"
+						aria-hidden="true"
+					/>
+
+					<!-- Visible fields -->
+					<input
+						type="text"
 						name="name"
+						placeholder="NAME"
 						required
 					/>
 					<input
 						type="email"
-						placeholder="E-MAIL"
 						name="email"
+						placeholder="E-MAIL"
 						required
 					/>
 					<textarea
-						placeholder="MESSAGE"
 						name="message"
+						placeholder="MESSAGE"
 						rows="5"
 						required
 					></textarea>
+
 					<button type="submit">GET IN TOUCH</button>
 				</form>
 			</div>

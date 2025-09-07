@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Contact · Tide & True Occasions</title>
 
-		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -14,25 +13,29 @@
 		/>
 
 		<style>
-			/* ===== Tokens ===== */
+			/* =========================
+         EDITORIAL LUXE (spacing fix)
+         ========================= */
+
 			:root {
-				--ink: #141a1f;
+				--ink: #141416;
 				--muted: #6f7a82;
-				--gold: #8b6a3c;
+				--stone: #9aa2a8;
 				--ivory: #f7f3ee;
-				--hairline: #e8eef2;
+				--hair: #e6e0d7;
+				--gold: #a88a54;
 				--max: 1140px;
 				--header-h: 88px;
 				--s0: clamp(14px, 0.9rem + 0.1vw, 15.5px);
 				--s1: clamp(16px, 1rem + 0.35vw, 19px);
 				--s2: clamp(22px, 1.25rem + 0.6vw, 26px);
 				--s3: clamp(30px, 1.6rem + 1vw, 38px);
-				--s4: clamp(40px, 2.2rem + 1.6vw, 60px);
-				--ring: 0 0 0 1px rgba(139, 106, 60, 0.45),
-					0 10px 28px rgba(0, 0, 0, 0.08);
+				--s4: clamp(42px, 2.3rem + 1.8vw, 64px);
+				--ring: 0 0 0 2px rgba(168, 138, 84, 0.18),
+					0 0 0 1px rgba(168, 138, 84, 0.55);
+				--soft: 0 26px 80px rgba(0, 0, 0, 0.1);
 			}
 
-			/* ===== Base ===== */
 			* {
 				box-sizing: border-box;
 			}
@@ -43,15 +46,17 @@
 			body {
 				margin: 0;
 				color: var(--ink);
-				font: 400 var(--s0) / 1.7 "Montserrat", system-ui, sans-serif;
+				font: 400 var(--s0) / 1.7 "Montserrat", system-ui, -apple-system,
+					"Segoe UI", Roboto, sans-serif;
 				-webkit-font-smoothing: antialiased;
 				background: #fff;
 			}
+
 			h1,
 			h2,
 			h3 {
 				font-family: "Playfair Display", serif;
-				margin: 0 0 0.45em;
+				margin: 0 0 0.5em;
 			}
 			a {
 				color: inherit;
@@ -60,20 +65,24 @@
 			a:hover {
 				text-decoration: underline;
 			}
-			section {
-				padding: clamp(28px, 5vw, 68px) 0;
-			}
 			.wrap {
 				width: min(var(--max), 92%);
 				margin-inline: auto;
 			}
+			section {
+				padding: clamp(32px, 5vw, 72px) 0;
+			}
+			/* utility: make a grid item span both columns inside .row--2 */
+			.span-2 {
+				grid-column: 1 / -1;
+			}
 
-			/* ===== Header / Nav ===== */
+			/* Header */
 			header {
 				position: fixed;
 				inset: 0 0 auto 0;
 				height: var(--header-h);
-				z-index: 1000;
+				z-index: 10;
 				background: transparent;
 			}
 			header .container {
@@ -93,22 +102,20 @@
 				padding: 0;
 			}
 			#site-nav a {
-				font-weight: 600;
-				letter-spacing: 0.06em;
+				font-weight: 700;
+				letter-spacing: 0.08em;
 				text-transform: uppercase;
 				font-size: 0.78rem;
-				padding: 8px 10px;
-				border-radius: 2px;
-				color: #e9dbdb;
+				padding: 5px 10px;
+				border-radius: 3px;
+				color: #efe9df;
 			}
 			#site-nav a:hover {
-				box-shadow: 0 0 0 1px rgba(139, 106, 60, 0.45);
-				text-decoration: none;
+				box-shadow: 0 0 0 1px rgba(168, 138, 84, 0.5);
 			}
 			.nav-toggle {
 				display: none;
 			}
-
 			@media (max-width: 860px) {
 				.nav-toggle {
 					display: inline-grid;
@@ -117,44 +124,16 @@
 					height: 44px;
 					border: 0;
 					background: transparent;
-					cursor: pointer;
 				}
-				.nav-toggle .hamburger {
-					position: relative;
-					width: 22px;
-					height: 2px;
-					background: currentColor;
-					transition: 0.25s;
-				}
-				.nav-toggle .hamburger::before,
-				.nav-toggle .hamburger::after {
-					content: "";
-					position: absolute;
-					left: 0;
-					right: 0;
-					height: 2px;
-					background: currentColor;
-					transition: 0.25s;
-				}
-				.nav-toggle .hamburger::before {
-					top: -7px;
-				}
-				.nav-toggle .hamburger::after {
-					bottom: -7px;
-				}
-
 				#site-nav {
 					position: fixed;
-					top: 0;
-					right: 0;
-					bottom: 0;
+					inset: 0 0 0 auto;
 					width: min(78vw, 360px);
 					transform: translateX(100%);
-					transition: 0.32s ease;
+					transition: 0.32s;
 					background: rgba(16, 18, 22, 0.92);
 					backdrop-filter: blur(10px);
 					padding: 28px 22px;
-					z-index: 1001;
 				}
 				#site-nav ul {
 					flex-direction: column;
@@ -164,40 +143,21 @@
 				#site-nav a {
 					color: #f2f4f6;
 				}
-
-				body.nav-open::before {
-					content: "";
-					position: fixed;
-					inset: 0;
-					background: rgba(0, 0, 0, 0.35);
-					backdrop-filter: blur(2px);
-					z-index: 1000;
-				}
 				body.nav-open #site-nav {
 					transform: translateX(0);
 				}
-				body.nav-open .nav-toggle .hamburger {
-					background: transparent;
-				}
-				body.nav-open .nav-toggle .hamburger::before {
-					top: 0;
-					transform: rotate(45deg);
-				}
-				body.nav-open .nav-toggle .hamburger::after {
-					bottom: 0;
-					transform: rotate(-45deg);
-				}
 			}
 
-			/* ===== Hero ===== */
+			/* Hero */
 			.hero {
 				--img: url("images/heropics/IMG_8671.JPG");
 				position: relative;
-				min-height: 70vh;
+				min-height: 72vh;
 				display: grid;
 				place-items: center;
 				text-align: center;
 				padding-top: var(--header-h);
+				overflow: hidden;
 			}
 			.hero::before {
 				content: "";
@@ -210,11 +170,16 @@
 				position: absolute;
 				inset: 0;
 				background: linear-gradient(
-					180deg,
-					rgba(10, 12, 14, 0.18) 0%,
-					rgba(10, 12, 14, 0.46) 70%,
-					rgba(10, 12, 14, 0.22) 100%
-				);
+						180deg,
+						rgba(12, 14, 16, 0.16),
+						rgba(12, 14, 16, 0.46) 70%,
+						rgba(12, 14, 16, 0.18)
+					),
+					radial-gradient(
+						1000px 520px at 50% 100%,
+						rgba(168, 138, 84, 0.22),
+						transparent 60%
+					);
 				mix-blend-mode: multiply;
 			}
 			.hero__inner {
@@ -226,152 +191,282 @@
 			}
 			.eyebrow {
 				display: inline-block;
-				border: 1px solid rgba(255, 255, 255, 0.45);
-				padding: 6px 10px;
-				margin-bottom: 10px;
+				border: 1px solid rgba(255, 255, 255, 0.55);
+				padding: 6px 12px;
+				margin-bottom: 12px;
 				text-transform: uppercase;
 				letter-spacing: 0.18em;
-				font: 600 0.78rem/1 "Montserrat", sans-serif;
+				font: 700 0.74rem/1 "Montserrat", sans-serif;
+				border-radius: 999px;
 			}
 			.hero h1 {
 				font-size: var(--s4);
-				line-height: 1.03;
-			}
-			.hero p {
-				font-size: var(--s1);
-				color: #eef4f7;
-				opacity: 0.98;
+				line-height: 1.02;
 			}
 
-			/* ===== Contact ===== */
+			/* Contact card */
 			.contact {
-				background: linear-gradient(#faf7f1, #f1ecdf);
+				background: linear-gradient(#fbf8f3, #f3ede4);
 			}
 			.card {
-				background: #fff;
-				border: 1px solid transparent;
-				border-radius: 16px;
-				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
+				background: rgba(255, 255, 255, 0.88);
+				backdrop-filter: blur(10px);
+				border: 1px solid #eadfce;
+				border-radius: 5px;
+				box-shadow: var(--soft);
 			}
 			.contact-grid {
 				display: grid;
-				gap: clamp(18px, 3vw, 28px);
-				padding: clamp(22px, 3.8vw, 36px);
+				gap: clamp(20px, 3vw, 32px);
+				padding: clamp(26px, 4vw, 44px);
 			}
 			@media (min-width: 980px) {
 				.contact-grid {
-					grid-template-columns: 1.1fr 0.9fr;
+					/* wider form column, slimmer aside */
+					grid-template-columns: 1.35fr 0.65fr;
 				}
 			}
 
-			/* Inputs – luxe / mobile-first */
-			label {
-				display: block;
-				font: 700 0.75rem/1 "Montserrat", sans-serif;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
-				color: #736b64;
-				margin: 6px 0;
+			/* --------- FORM: Floating labels + pills ---------- */
+			.row {
+				display: grid;
+				gap: 26px;
+				margin-bottom: 25px;
 			}
-			.contact input,
-			.contact select,
-			.contact textarea {
-				width: 100%;
-				background: #faf7f1;
-				border: 1px solid #e6e0d7;
-				border-radius: 14px;
-				padding: 16px;
-				font-size: 16px;
-				transition: 0.2s;
+			.row--2 {
+				grid-template-columns: repeat(2, 1fr);
 			}
-			.contact textarea {
-				min-height: 130px;
-				resize: vertical;
-			}
-			.contact input:focus,
-			.contact select:focus,
-			.contact textarea:focus {
-				background: #fff;
-				border-color: rgba(139, 106, 60, 0.45);
-				box-shadow: var(--ring);
-				outline: none;
-			}
-			.contact ::placeholder {
-				color: #9aa2a8;
-			}
-			/* Custom select caret */
-			.contact select {
-				appearance: none;
-				background-image: linear-gradient(
-						45deg,
-						transparent 50%,
-						var(--gold) 50%
-					),
-					linear-gradient(135deg, var(--gold) 50%, transparent 50%),
-					linear-gradient(#e6e0d7, #e6e0d7);
-				background-position: calc(100% - 18px) 50%,
-					calc(100% - 12px) 50%, calc(100% - 36px) 50%;
-				background-size: 6px 6px, 6px 6px, 1px 22px;
-				background-repeat: no-repeat;
-				padding-right: 44px;
+			/* adds top margin when a .row--2 (Date/Guests) follows any .row (Service) */
+			.row + .row--2 {
+				margin-top: 14px;
 			}
 
+			@media (max-width: 780px) {
+				.row--2 {
+					grid-template-columns: 1fr;
+				}
+			}
+
+			/* Fields */
+			.field {
+				position: relative;
+			}
+			.input {
+				width: 100%;
+				height: 64px;
+				border: 1px solid var(--hair);
+				background: #fff;
+				border-radius: 16px;
+				padding: 32px 30px 10px;
+				font-size: 16px;
+				transition: border-color 0.25s, box-shadow 0.25s,
+					transform 0.15s, background 0.25s;
+			}
+
+			.textarea {
+				min-height: 160px;
+				resize: vertical;
+				padding: 28px 16px 14px;
+			}
+			.input::placeholder,
+			.textarea::placeholder {
+				color: transparent;
+			}
+
+			.label {
+				position: absolute;
+				left: 14px;
+				top: 20px;
+				font: 700 0.72rem/1 "Montserrat", sans-serif;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: #8b827a;
+				background: #fff;
+				padding: 0 6px;
+				border-radius: 6px;
+				transform-origin: left top;
+				transition: transform 0.18s ease, top 0.18s ease,
+					color 0.18s ease;
+				pointer-events: none;
+			}
+			.input:focus,
+			.textarea:focus {
+				border-color: rgba(168, 138, 84, 0.7);
+				box-shadow: var(--ring);
+				transform: translateY(-1px);
+			}
+			.input:focus + .label,
+			.textarea:focus + .label,
+			.input:not(:placeholder-shown) + .label,
+			.textarea:not(:placeholder-shown) + .label {
+				top: -10px;
+				transform: scale(0.86);
+				color: var(--gold);
+			}
+
+			/* Segmented radio pills (with better spacing) */
+			.group-label {
+				display: block;
+				font: 700 0.72rem/1 "Montserrat", sans-serif;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: #6b635b;
+				margin: 4px 0 8px;
+			}
+			.seg {
+				display: grid;
+				grid-auto-flow: column;
+				gap: 10px;
+				background: #faf7f1;
+				padding: 8px;
+				border: 1px solid #e6e0d7;
+				border-radius: 16px;
+			}
+			.seg input {
+				position: absolute;
+				opacity: 0;
+				pointer-events: none;
+			}
+			.seg label {
+				display: grid;
+				place-items: center;
+				padding: 12px 14px;
+				border-radius: 12px;
+				font-weight: 700;
+				font-size: 0.82rem;
+				letter-spacing: 0.06em;
+				color: #6d655e;
+				border: 1px solid transparent;
+				cursor: pointer;
+				transition: 0.2s;
+			}
+			.seg input:checked + label {
+				background: #fff;
+				color: #111;
+				border: 1px solid rgba(168, 138, 84, 0.5);
+				box-shadow: var(--ring);
+			}
+			@media (max-width: 640px) {
+				.seg {
+					grid-auto-flow: row;
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+
+			/* ================================
+         CONSENT CHECKBOX (custom, with ✓)
+         ================================ */
+			#contact-form input[type="checkbox"] {
+				appearance: none;
+				width: 18px;
+				height: 18px;
+				border: 1px solid #ccbda5;
+				border-radius: 4px;
+				background: #fff;
+				display: inline-grid;
+				place-content: center;
+				vertical-align: top;
+				box-sizing: border-box;
+				transition: background 0.2s ease, border-color 0.2s ease;
+			}
+			/* the tick itself */
+			#contact-form input[type="checkbox"]::after {
+				content: "✓";
+				color: #fff;
+				font-size: 12px;
+				font-weight: 700;
+				line-height: 1;
+				transform: scale(0);
+				transition: transform 0.12s ease;
+			}
+			#contact-form input[type="checkbox"]:checked {
+				background: var(--gold);
+				border-color: var(--gold);
+			}
+			#contact-form input[type="checkbox"]:checked::after {
+				transform: scale(1);
+			}
+
+			/* ================================
+         CALENDAR SPACING FIXES
+         - extra space between label “EVENT DATE” and the box
+         - extra space between date text and the calendar icon
+         ================================ */
+			/* make the date input’s top inner padding larger so the label sits farther from the field */
+			#contact-form #date.input {
+				padding-top: 38px !important; /* more space above the date text */
+				padding-right: 60px !important; /* room for the icon on the right */
+			}
+			/* lift the floating label a bit more when active, only for the date field */
+			#contact-form #date.input:focus + .label,
+			#contact-form #date.input:not(:placeholder-shown) + .label {
+				top: -16px !important;
+			}
+			/* bump the built-in picker icon away from the date text (WebKit) */
+			#contact-form #date::-webkit-calendar-picker-indicator {
+				margin-left: 10px !important; /* gap between text and icon */
+				padding: 0 6px !important;
+			}
+			/* extra breathing room inside the editable date area (WebKit) */
+			#contact-form #date::-webkit-datetime-edit {
+				padding-right: 6px !important;
+			}
+
+			/* widen the gap between Date and Guests, if desired */
+			#contact-form .row.row--2 {
+				gap: 32px !important;
+			}
+
+			/* Button */
 			.btn {
 				display: inline-block;
-				padding: 14px 22px;
-				border-radius: 12px;
-				border: 1px solid rgba(139, 106, 60, 0.55);
+				width: 100%;
+				padding: 16px 28px;
+				border-radius: 999px;
+				border: 1px solid rgba(168, 138, 84, 0.6);
 				background: #111;
 				color: #fff;
 				font-weight: 800;
-				letter-spacing: 0.14em;
+				letter-spacing: 0.16em;
 				text-transform: uppercase;
-				transition: 0.2s;
-				cursor: pointer;
+				font-size: 0.82rem;
+				transition: 0.25s;
 			}
 			.btn:hover {
-				background: #1a1a1a;
 				transform: translateY(-2px);
-				box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
-			}
-			@media (max-width: 720px) {
-				.btn {
-					width: 100%;
-				}
+				box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+				background: var(--gold);
+				color: #111;
+				border-color: var(--gold);
 			}
 
 			/* Aside */
 			.aside {
 				background: #fff;
-				border: 1px solid #eee5d8;
+				border: 1px solid #eadfce;
 				border-radius: 16px;
 				padding: 18px;
-				box-shadow: 0 18px 50px rgba(45, 33, 20, 0.06);
+				box-shadow: var(--soft);
 			}
-
-			/* Footer */
-			footer {
-				padding: 28px 0;
-				border-top: 1px solid var(--hairline);
-			}
-			footer .container {
-				width: min(var(--max), 92%);
-				margin-inline: auto;
-				display: flex;
-				justify-content: space-between;
-				gap: 16px;
-				flex-wrap: wrap;
+			.aside h3 {
+				font-size: clamp(20px, 1.2rem + 0.2vw, 24px);
+				margin-bottom: 6px;
 			}
 
 			/* Reveal on scroll */
 			[data-animate] {
 				opacity: 0;
 				transform: translateY(20px);
-				transition: opacity 0.6s ease, transform 0.6s ease;
+				transition: 0.6s;
 			}
 			.inview {
 				opacity: 1 !important;
 				transform: none !important;
+			}
+			@media (prefers-reduced-motion: reduce) {
+				* {
+					transition: none !important;
+				}
 			}
 		</style>
 	</head>
@@ -379,12 +474,13 @@
 		<!-- Header -->
 		<header>
 			<div class="container">
-				<a class="logo" href="index.html" aria-label="Tide & True"
-					><img
+				<a class="logo" href="index.html" aria-label="Tide & True">
+					<img
 						src="images/assets/ttlogo.svg"
 						alt="Tide & True"
 						style="height: 48px"
-				/></a>
+					/>
+				</a>
 				<button
 					class="nav-toggle"
 					aria-label="Open menu"
@@ -427,10 +523,9 @@
 		<section class="contact">
 			<div class="wrap">
 				<div class="card contact-grid" data-animate>
-					<!-- FormSubmit integration -->
 					<form
 						id="contact-form"
-						action="https://formsubmit.co/tideandtrueoccassions@gmail.com"
+						action="https://formsubmit.co/tideandtrueoccasions@gmail.com"
 						method="POST"
 						novalidate
 					>
@@ -454,115 +549,160 @@
 							style="display: none"
 						/>
 
+						<!-- Name / Email -->
 						<div class="row row--2">
-							<div>
-								<label for="name">Your Name*</label>
+							<div class="field">
 								<input
+									class="input"
 									id="name"
 									name="name"
 									type="text"
 									required
 									autocomplete="name"
+									placeholder=" "
 								/>
+								<label class="label" for="name"
+									>Your Name*</label
+								>
 							</div>
-							<div>
-								<label for="email">Email*</label>
+							<div class="field">
 								<input
+									class="input"
 									id="email"
 									name="email"
 									type="email"
 									required
 									autocomplete="email"
+									placeholder=" "
 								/>
+								<label class="label" for="email">Email*</label>
 							</div>
 						</div>
 
-						<div class="row row--2">
-							<div>
-								<label for="phone">Phone</label>
+						<!-- Phone (full-width, own line) -->
+						<div class="row">
+							<div class="field">
 								<input
+									class="input"
 									id="phone"
 									name="phone"
 									type="tel"
 									autocomplete="tel"
+									placeholder=" "
 								/>
-							</div>
-							<div>
-								<label for="service">Service Interest*</label>
-								<select id="service" name="service" required>
-									<option value="" disabled selected>
-										Select…
-									</option>
-									<option>Full Planning</option>
-									<option>Partial Planning</option>
-									<option>Day-of / Event Management</option>
-									<option>Proposal</option>
-									<option>Corporate</option>
-									<option>Other</option>
-								</select>
+								<label class="label" for="phone">Phone</label>
 							</div>
 						</div>
 
-						<div
-							class="row row--3"
-							style="
-								display: grid;
-								gap: 14px;
-								grid-template-columns: repeat(
-									auto-fit,
-									minmax(160px, 1fr)
-								);
-							"
-						>
+						<!-- SERVICE — segmented pills (full-width) -->
+						<div class="row">
 							<div>
-								<label for="date">Event Date</label>
-								<input id="date" name="date" type="date" />
+								<span class="group-label" id="service-label"
+									>Service Interest*</span
+								>
+								<div
+									class="seg"
+									role="radiogroup"
+									aria-labelledby="service-label"
+								>
+									<input
+										type="radio"
+										name="service"
+										id="svc-full"
+										value="Full Planning"
+										required
+									/><label for="svc-full">Full</label>
+									<input
+										type="radio"
+										name="service"
+										id="svc-partial"
+										value="Partial Planning"
+									/><label for="svc-partial">Partial</label>
+									<input
+										type="radio"
+										name="service"
+										id="svc-day"
+										value="Day-of / Event Management"
+									/><label for="svc-day">Day-of</label>
+									<input
+										type="radio"
+										name="service"
+										id="svc-proposal"
+										value="Proposal"
+									/><label for="svc-proposal">Proposal</label>
+									<input
+										type="radio"
+										name="service"
+										id="svc-corp"
+										value="Corporate"
+									/><label for="svc-corp">Corporate</label>
+									<input
+										type="radio"
+										name="service"
+										id="svc-other"
+										value="Other"
+									/><label for="svc-other">Other</label>
+								</div>
 							</div>
-							<div>
-								<label for="guests">Guest Count</label>
+						</div>
+
+						<!-- DATE & GUESTS -->
+						<div class="row row--2">
+							<div class="field">
 								<input
+									class="input"
+									id="date"
+									name="date"
+									type="date"
+									placeholder=" "
+								/>
+								<label class="label" for="date"
+									>Event Date</label
+								>
+							</div>
+							<div class="field">
+								<input
+									class="input"
 									id="guests"
 									name="guests"
 									type="number"
 									min="1"
-									placeholder="e.g., 120"
+									placeholder=" "
 								/>
-							</div>
-							<div>
-								<label for="budget">Estimated Budget</label>
-								<select id="budget" name="budget">
-									<option value="" disabled selected>
-										Select…
-									</option>
-									<option>$5k–$10k</option>
-									<option>$10k–$20k</option>
-									<option>$20k–$40k</option>
-									<option>$40k–$75k</option>
-									<option>$75k+</option>
-								</select>
+								<label class="label" for="guests"
+									>Guest Count</label
+								>
 							</div>
 						</div>
 
 						<div class="row">
-							<label for="venue">Venue / Location</label>
-							<input
-								id="venue"
-								name="venue"
-								type="text"
-								placeholder="If booked"
-							/>
+							<div class="field">
+								<input
+									class="input"
+									id="venue"
+									name="venue"
+									type="text"
+									placeholder=" "
+								/>
+								<label class="label" for="venue"
+									>Venue / Location</label
+								>
+							</div>
 						</div>
 
 						<div class="row">
-							<label for="message"
-								>Tell us about your celebration*</label
-							>
-							<textarea
-								id="message"
-								name="message"
-								required
-								placeholder="Vision, priorities, must-haves…"
-							></textarea>
+							<div class="field">
+								<textarea
+									class="input textarea"
+									id="message"
+									name="message"
+									required
+									placeholder=" "
+								></textarea>
+								<label class="label" for="message"
+									>Tell us about your celebration*</label
+								>
+							</div>
 						</div>
 
 						<div class="row" style="margin: 6px 0 12px">
@@ -581,7 +721,7 @@
 									type="checkbox"
 									name="consent"
 									required
-									style="margin-top: 4px; width: auto"
+									style="margin-top: 4px"
 								/>
 								I agree to be contacted about my inquiry. My
 								information won’t be shared.
@@ -608,14 +748,14 @@
 						>
 							<li>
 								<strong>Email</strong>
-								<a href="mailto:tideandtrueoccassions@gmail.com"
-									>tideandtrueoccassions@gmail.com</a
+								<a href="mailto:tideandtrueoccasions@gmail.com"
+									>tideandtrueoccasions@gmail.com</a
 								>
 							</li>
 							<li>
 								<strong>Service Area</strong>
 								<small
-									>Greater Toronto Area & destinations by
+									>Greater Toronto Area &amp; destinations by
 									request</small
 								>
 							</li>
@@ -652,7 +792,7 @@
 
 		<!-- CTA -->
 		<section class="wrap" style="padding-top: 0">
-			<div class="card" style="border-radius: 16px; overflow: hidden">
+			<div class="card" style="border-radius: 5px; overflow: hidden">
 				<div style="position: relative; isolation: isolate">
 					<div
 						style="
@@ -700,17 +840,14 @@
 			</div>
 		</section>
 
-		<!-- FOOTER -->
 		<footer>
 			<div class="container">
 				<p>&copy; 2025 Tide &amp; True</p>
 			</div>
 		</footer>
 
-		<!-- Minimal JS: mobile nav + fade-ins -->
 		<script>
 			(function () {
-				// Mobile menu
 				const btn = document.querySelector(".nav-toggle");
 				const nav = document.getElementById("site-nav");
 				function setState(open) {

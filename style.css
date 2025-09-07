@@ -63,7 +63,7 @@ body {
 }
 
 .vendor-logos img {
-	max-height: 60px; /* cap the height */
+	max-height: 50px; /* cap the height */
 	width: auto; /* keep proportions */
 	object-fit: contain;
 	display: block;
@@ -504,6 +504,10 @@ body:not(.solid-header).nav-open .nav-toggle {
 	display: flex;
 	transition: transform 0.5s;
 	padding: 0 20px 30px;
+	display: flex;
+	gap: 12px; /* spacing between cards */
+	transition: transform 0.5s;
+	padding: 0 12px 24px;
 }
 #image-card-carousel .carousel-slide.grid-item {
 	min-width: 31%;
@@ -558,7 +562,6 @@ body:not(.solid-header).nav-open .nav-toggle {
 	margin: 0 0 40px;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-	color: #fff;
 }
 .menu-categories {
 	display: flex;
@@ -570,7 +573,6 @@ body:not(.solid-header).nav-open .nav-toggle {
 .menu-btn {
 	background: transparent;
 	border: 1px solid rgba(255, 255, 255, 0.6);
-	color: #fff;
 	padding: 12px 28px;
 	font-size: 0.95rem;
 	letter-spacing: 0.08em;
@@ -762,6 +764,203 @@ body:not(.solid-header).nav-open .nav-toggle {
 	color: #eef4f7;
 	margin: 0;
 }
+/* ===========================================
+   HOME CONTACT FORM — luxe / editorial finish
+   Scoped so nothing else breaks
+   =========================================== */
+#contact-form-section .lux-form {
+	width: 80%;
+	max-width: 420px;
+	display: grid;
+	gap: 12px;
+	font: 600 0.82rem/1 "Montserrat", sans-serif;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* Hide honeypot so it doesn't inherit input styling */
+#contact-form-section .lux-form [name="_honey"] {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 0 !important;
+	height: 0 !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Fields: hairline, transparent, editorial calm */
+#contact-form-section .lux-form input[type="text"],
+#contact-form-section .lux-form input[type="email"],
+#contact-form-section .lux-form textarea {
+	width: 100%;
+	padding: 14px 16px;
+	border: 1px solid rgba(0, 43, 73, 0.7); /* matches your #002b49 with finesse */
+	background: rgba(
+		255,
+		255,
+		255,
+		0.12
+	); /* subtle translucency over beige panel */
+	color: #1c242b;
+	outline: none;
+	border-radius: 2px; /* square, editorial */
+	box-shadow: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease,
+		background 0.2s ease, transform 0.12s ease;
+}
+
+#contact-form-section .lux-form textarea {
+	min-height: 120px;
+	resize: vertical;
+}
+
+/* Placeholders: quiet + romantic */
+#contact-form-section .lux-form ::placeholder {
+	color: rgba(0, 43, 73, 0.55);
+	letter-spacing: 0.14em;
+}
+
+/* Focus: antique-gold ring + slight lift */
+#contact-form-section .lux-form input:focus,
+#contact-form-section .lux-form textarea:focus {
+	border-color: var(--brand);
+	box-shadow: 0 0 0 2px rgba(139, 106, 60, 0.18); /* soft gold halo */
+	background: rgba(255, 255, 255, 0.22);
+	transform: translateY(-1px);
+}
+
+/* Button: quiet outline -> gold hover (keeps your palette) */
+#contact-form-section .lux-form button[type="submit"] {
+	width: 100%;
+	padding: 14px 18px;
+	background: #e0dcd5;
+	color: #002b49;
+	border: 1px solid #002b49;
+	border-radius: 2px;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font: 700 0.84rem/1 "Montserrat", sans-serif;
+	transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+		transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+#contact-form-section .lux-form button[type="submit"]:hover,
+#contact-form-section .lux-form button[type="submit"]:focus-visible {
+	background: var(--brand);
+	color: #fff;
+	border-color: var(--brand);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+	outline: none;
+}
+
+/* Tighten alignment with your split band on small screens */
+@media (max-width: 768px) {
+	#contact-form-section .lux-form {
+		width: 90%;
+		max-width: 520px;
+		gap: 10px;
+	}
+}
+
+/* =========================================================
+   HOME CONTACT: Luxe / editorial overrides (scoped & specific)
+   ========================================================= */
+.contact-form-area form.lux-form {
+	width: 80%;
+	max-width: 420px;
+	display: grid;
+	gap: 12px;
+	font: 600 0.82rem/1 "Montserrat", sans-serif;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* Hide honeypot, prevent layout shifts */
+.contact-form-area form.lux-form [name="_honey"] {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 0 !important;
+	height: 0 !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Fields — override previous .contact-form-area inputs */
+.contact-form-area form.lux-form input[type="text"],
+.contact-form-area form.lux-form input[type="email"],
+.contact-form-area form.lux-form textarea {
+	width: 100% !important;
+	padding: 14px 16px !important;
+	border: 1px solid rgba(0, 43, 73, 0.7) !important; /* editorial hairline */
+	background: rgba(255, 255, 255, 0.12) !important; /* soft translucency */
+	color: #1c242b !important;
+	border-radius: 2px !important; /* square, luxe */
+	outline: none !important;
+	box-shadow: none !important;
+	transition: border-color 0.2s, box-shadow 0.2s, background 0.2s,
+		transform 0.12s !important;
+}
+
+.contact-form-area form.lux-form textarea {
+	min-height: 120px !important;
+	resize: vertical !important;
+}
+
+/* Placeholders: quiet + refined */
+.contact-form-area form.lux-form ::placeholder {
+	color: rgba(0, 43, 73, 0.55) !important;
+	letter-spacing: 0.14em !important;
+}
+
+/* Focus state: antique-gold halo + micro-lift */
+.contact-form-area form.lux-form input:focus,
+.contact-form-area form.lux-form textarea:focus {
+	border-color: var(--brand) !important;
+	box-shadow: 0 0 0 2px rgba(139, 106, 60, 0.18) !important;
+	background: rgba(255, 255, 255, 0.22) !important;
+	transform: translateY(-1px) !important;
+}
+
+/* Button: outline → gold on hover, stays within palette */
+.contact-form-area form.lux-form button[type="submit"] {
+	width: 100% !important;
+	padding: 14px 18px !important;
+	background: #e0dcd5 !important;
+	color: #002b49 !important;
+	border: 1px solid #002b49 !important;
+	border-radius: 2px !important;
+	letter-spacing: 0.14em !important;
+	text-transform: uppercase !important;
+	font: 700 0.84rem/1 "Montserrat", sans-serif !important;
+	transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.12s,
+		box-shadow 0.2s !important;
+}
+
+.contact-form-area form.lux-form button[type="submit"]:hover,
+.contact-form-area form.lux-form button[type="submit"]:focus-visible {
+	background: var(--brand) !important;
+	color: #fff !important;
+	border-color: var(--brand) !important;
+	transform: translateY(-1px) !important;
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12) !important;
+	outline: none !important;
+}
+
+/* Small screens: breathe a bit more */
+@media (max-width: 768px) {
+	.contact-form-area form.lux-form {
+		width: 90%;
+		max-width: 520px;
+		gap: 10px;
+	}
+}
 
 /* =========================================================
    GALLERY / PORTFOLIO PAGES
@@ -773,7 +972,7 @@ body.me-page header {
 }
 
 body.me-page nav a {
-	color: #fff !important; /* white nav text over hero */
+	color: var(--brand) !important; /* gold nav text over hero */
 	border-bottom-width: 1px; /* subtle underline like the comp */
 }
 
@@ -1101,6 +1300,108 @@ body.me-page .nav-toggle {
 	}
 }
 
+/* ===========================================
+   HOME CONTACT FORM — luxe / editorial finish
+   Scoped so nothing else breaks
+   =========================================== */
+#contact-form-section .lux-form {
+	width: 80%;
+	max-width: 420px;
+	display: grid;
+	gap: 12px;
+	font: 600 0.82rem/1 "Montserrat", sans-serif;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* Hide honeypot so it doesn't inherit input styling */
+#contact-form-section .lux-form [name="_honey"] {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 0 !important;
+	height: 0 !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Fields: hairline, transparent, editorial calm */
+#contact-form-section .lux-form input[type="text"],
+#contact-form-section .lux-form input[type="email"],
+#contact-form-section .lux-form textarea {
+	width: 100%;
+	padding: 14px 16px;
+	border: 1px solid rgba(0, 43, 73, 0.7); /* matches your #002b49 with finesse */
+	background: rgba(
+		255,
+		255,
+		255,
+		0.12
+	); /* subtle translucency over beige panel */
+	color: #1c242b;
+	outline: none;
+	border-radius: 2px; /* square, editorial */
+	box-shadow: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease,
+		background 0.2s ease, transform 0.12s ease;
+}
+
+#contact-form-section .lux-form textarea {
+	min-height: 120px;
+	resize: vertical;
+}
+
+/* Placeholders: quiet + romantic */
+#contact-form-section .lux-form ::placeholder {
+	color: rgba(0, 43, 73, 0.55);
+	letter-spacing: 0.14em;
+}
+
+/* Focus: antique-gold ring + slight lift */
+#contact-form-section .lux-form input:focus,
+#contact-form-section .lux-form textarea:focus {
+	border-color: var(--brand);
+	box-shadow: 0 0 0 2px rgba(139, 106, 60, 0.18); /* soft gold halo */
+	background: rgba(255, 255, 255, 0.22);
+	transform: translateY(-1px);
+}
+
+/* Button: quiet outline -> gold hover (keeps your palette) */
+#contact-form-section .lux-form button[type="submit"] {
+	width: 100%;
+	padding: 14px 18px;
+	background: #e0dcd5;
+	color: #002b49;
+	border: 1px solid #002b49;
+	border-radius: 2px;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font: 700 0.84rem/1 "Montserrat", sans-serif;
+	transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+		transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+#contact-form-section .lux-form button[type="submit"]:hover,
+#contact-form-section .lux-form button[type="submit"]:focus-visible {
+	background: var(--brand);
+	color: #fff;
+	border-color: var(--brand);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+	outline: none;
+}
+
+/* Tighten alignment with your split band on small screens */
+@media (max-width: 768px) {
+	#contact-form-section .lux-form {
+		width: 90%;
+		max-width: 520px;
+		gap: 10px;
+	}
+}
+
 /* =========================================================
    FOOTER
    ========================================================= */
@@ -1309,6 +1610,19 @@ footer .social-links a:hover {
 	--night: #0b0f13; /* hero overlay base */
 }
 
+.dark-academia h1,
+.dark-academia h2,
+.dark-academia h3,
+.dark-academia h4,
+.dark-academia h5,
+.dark-academia h6 {
+	color: var(--brand);
+	letter-spacing: 0.02em;
+}
+.dark-academia p {
+	color: #cfd6db;
+}
+
 /* Global type: calmer, more romantic + editorial spacing */
 h1,
 h2,
@@ -1316,7 +1630,7 @@ h3,
 h4,
 h5,
 h6 {
-	color: var(--ivory);
+	color: #8b6a3c;
 	letter-spacing: 0.02em;
 }
 p {
@@ -1621,12 +1935,7 @@ nav a:hover {
 		padding: 10px 20px;
 	}
 }
-/* ===========================
-   Editorial / Vogue overlay for portfolio grid
-   Applies to every card image on portfolio.html
-   =========================== */
 
-/* 1) Subtle color grade on the photo itself */
 .me-page .me-media img {
 	filter: contrast(1.06) saturate(0.96) brightness(0.98) hue-rotate(-4deg);
 	transition: filter 0.35s ease, transform 0.45s ease;
@@ -1640,13 +1949,10 @@ nav a:hover {
 	inset: 0;
 	pointer-events: none;
 	z-index: 1;
-
-	/* Layer stack (top → bottom) */
-	background:
-    /* fine grain (SVG turbulence as a data-URI) */ url("data:image/svg+xml;utf8,\
+	background: url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'>\
   <filter id='n'><feTurbulence baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter>\
-  <rect width='100%%' height='100%%' filter='url(#n)' opacity='0.035'/>\
+  <rect width='100%' height='100%' filter='url(#n)' opacity='0.035'/>\
 </svg>")
 			repeat,
 		linear-gradient(0deg, rgba(139, 106, 60, 0.05), rgba(0, 0, 0, 0)),
@@ -1655,7 +1961,7 @@ nav a:hover {
 			rgba(0, 0, 0, 0) 55%,
 			rgba(0, 0, 0, 0.18) 100%
 		);
-	mix-blend-mode: multiply; /* keep it editorial, not “overlay-glow” */
+	mix-blend-mode: multiply;
 
 	/* Crisp grain without blurring on hi-dpi */
 	image-rendering: -webkit-optimize-contrast;
@@ -1671,11 +1977,11 @@ nav a:hover {
 	transform: scale(1.03);
 	filter: contrast(1.08) saturate(0.95) brightness(0.98) hue-rotate(-6deg);
 }
+
 .me-page .me-card:hover .me-media::after {
 	opacity: 1; /* already subtle—feel free to nudge to 1.05 if you like */
 }
 
-/* 4) Lightbox: show originals without grading (optional) */
 .me-page .me-lightbox img {
 	filter: none !important;
 }
@@ -1700,4 +2006,197 @@ nav a:hover {
 	background-repeat: no-repeat;
 	filter: grayscale(100%);
 	z-index: 0;
+}
+
+/* =========================================================
+   HOME CONTACT: Luxe / editorial overrides (scoped & specific)
+   ========================================================= */
+.contact-form-area form.lux-form {
+	width: 80%;
+	max-width: 420px;
+	display: grid;
+	gap: 12px;
+	font: 600 0.82rem/1 "Montserrat", sans-serif;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* Hide honeypot, prevent layout shifts */
+.contact-form-area form.lux-form [name="_honey"] {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 0 !important;
+	height: 0 !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* Fields — override previous .contact-form-area inputs */
+.contact-form-area form.lux-form input[type="text"],
+.contact-form-area form.lux-form input[type="email"],
+.contact-form-area form.lux-form textarea {
+	width: 100% !important;
+	padding: 14px 16px !important;
+	border: 1px solid rgba(0, 43, 73, 0.7) !important; /* editorial hairline */
+	background: rgba(255, 255, 255, 0.12) !important; /* soft translucency */
+	color: #1c242b !important;
+	border-radius: 2px !important; /* square, luxe */
+	outline: none !important;
+	box-shadow: none !important;
+	transition: border-color 0.2s, box-shadow 0.2s, background 0.2s,
+		transform 0.12s !important;
+}
+
+.contact-form-area form.lux-form textarea {
+	min-height: 120px !important;
+	resize: vertical !important;
+}
+
+/* Placeholders: quiet + refined */
+.contact-form-area form.lux-form ::placeholder {
+	color: rgba(0, 43, 73, 0.55) !important;
+	letter-spacing: 0.14em !important;
+}
+
+/* Focus state: antique-gold halo + micro-lift */
+.contact-form-area form.lux-form input:focus,
+.contact-form-area form.lux-form textarea:focus {
+	border-color: var(--brand) !important;
+	box-shadow: 0 0 0 2px rgba(139, 106, 60, 0.18) !important;
+	background: rgba(255, 255, 255, 0.22) !important;
+	transform: translateY(-1px) !important;
+}
+
+/* Button: outline → gold on hover, stays within palette */
+.contact-form-area form.lux-form button[type="submit"] {
+	width: 100% !important;
+	padding: 14px 18px !important;
+	background: #e0dcd5 !important;
+	color: #002b49 !important;
+	border: 1px solid #002b49 !important;
+	border-radius: 2px !important;
+	letter-spacing: 0.14em !important;
+	text-transform: uppercase !important;
+	font: 700 0.84rem/1 "Montserrat", sans-serif !important;
+	transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.12s,
+		box-shadow 0.2s !important;
+}
+
+.contact-form-area form.lux-form button[type="submit"]:hover,
+.contact-form-area form.lux-form button[type="submit"]:focus-visible {
+	background: var(--brand) !important;
+	color: #fff !important;
+	border-color: var(--brand) !important;
+	transform: translateY(-1px) !important;
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12) !important;
+	outline: none !important;
+}
+
+/* Small screens: breathe a bit more */
+@media (max-width: 768px) {
+	.contact-form-area form.lux-form {
+		width: 90%;
+		max-width: 520px;
+		gap: 10px;
+	}
+}
+/* === HOME CONTACT: Luxe / editorial (scoped, safe) === */
+#contact-form-section .contact-form-area form.lux-form {
+	width: 80%;
+	max-width: 420px;
+	display: grid;
+	gap: 12px;
+	font: 600 0.82rem/1 "Montserrat", sans-serif;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* hide honeypot */
+#contact-form-section .contact-form-area form.lux-form [name="_honey"] {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 0 !important;
+	height: 0 !important;
+	opacity: 0 !important;
+	pointer-events: none !important;
+	border: 0 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* fields */
+#contact-form-section .contact-form-area form.lux-form input[type="text"],
+#contact-form-section .contact-form-area form.lux-form input[type="email"],
+#contact-form-section .contact-form-area form.lux-form textarea {
+	width: 100%;
+	padding: 14px 16px;
+	border: 1px solid rgba(0, 43, 73, 0.7);
+	background: rgba(255, 255, 255, 0.12);
+	color: #1c242b;
+	border-radius: 2px;
+	outline: none;
+	box-shadow: none;
+	transition: border-color 0.2s, box-shadow 0.2s, background 0.2s,
+		transform 0.12s;
+}
+#contact-form-section .contact-form-area form.lux-form textarea {
+	min-height: 120px;
+	resize: vertical;
+}
+
+/* placeholders */
+#contact-form-section .contact-form-area form.lux-form ::placeholder {
+	color: rgba(0, 43, 73, 0.55);
+	letter-spacing: 0.14em;
+}
+
+/* focus */
+#contact-form-section .contact-form-area form.lux-form input:focus,
+#contact-form-section .contact-form-area form.lux-form textarea:focus {
+	border-color: var(--brand);
+	box-shadow: 0 0 0 2px rgba(139, 106, 60, 0.18);
+	background: rgba(255, 255, 255, 0.22);
+	transform: translateY(-1px);
+}
+
+/* button */
+#contact-form-section .contact-form-area form.lux-form button[type="submit"] {
+	width: 100%;
+	padding: 14px 18px;
+	background: #e0dcd5;
+	color: #002b49;
+	border: 1px solid #002b49;
+	border-radius: 2px;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	font: 700 0.84rem/1 "Montserrat", sans-serif;
+	transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.12s,
+		box-shadow 0.2s;
+}
+#contact-form-section
+	.contact-form-area
+	form.lux-form
+	button[type="submit"]:hover,
+#contact-form-section
+	.contact-form-area
+	form.lux-form
+	button[type="submit"]:focus-visible {
+	background: var(--brand);
+	color: #fff;
+	border-color: var(--brand);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+	outline: none;
+}
+
+/* small screens */
+@media (max-width: 768px) {
+	#contact-form-section .contact-form-area form.lux-form {
+		width: 90%;
+		max-width: 520px;
+		gap: 10px;
+	}
 }
