@@ -5,35 +5,44 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>About Us · Tide & True Occasions</title>
 
-		<!-- Fonts -->
+		<link
+			rel="preload"
+			as="image"
+			href="images/couples/chelsnadray/13.jpg"
+		/>
+		<link
+			rel="preload"
+			as="image"
+			href="images/couples/santanaanddaniel/21.jpg"
+		/>
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
 			rel="stylesheet"
 		/>
 
 		<style>
-			/* ===== Tokens ===== */
 			:root {
-				--ink: #141a1f;
-				--muted: #6f7a82;
 				--navy: #0d1f2c;
 				--gold: #a88a54;
+				--ink: #141a1f;
+				--muted: #6f7a82;
 				--ivory: #f7f3ee;
-				--ivory-2: #efe9df;
 				--hairline: #e8eef2;
 				--max: 1140px;
 				--header-h: 88px;
-				--step-0: clamp(14px, 0.9rem + 0.1vw, 15.5px);
-				--step-1: clamp(16px, 1rem + 0.35vw, 19px);
-				--step-2: clamp(22px, 1.25rem + 0.6vw, 26px);
-				--step-3: clamp(30px, 1.6rem + 1vw, 38px);
-				--step-4: clamp(40px, 2.2rem + 1.6vw, 60px);
+				--radius: 14px;
+				--fade-up: translateY(16px);
 			}
-
-			/* ===== Base ===== */
-			* {
+			*,
+			*::before,
+			*::after {
 				box-sizing: border-box;
 			}
 			html,
@@ -42,24 +51,30 @@
 			}
 			body {
 				margin: 0;
-				color: var(--ink);
-				font: 400 var(--step-0) / 1.75 "Montserrat", system-ui,
-					-apple-system, "Segoe UI", Roboto, sans-serif;
-				-webkit-font-smoothing: antialiased;
-				text-rendering: optimizeLegibility;
 				background: #fff;
+				color: var(--ink);
+				font-family: "Montserrat", system-ui, -apple-system, Segoe UI,
+					Roboto, sans-serif;
+				font-weight: 300;
+				font-size: 0.975rem; /* slightly smaller */
+				line-height: 1.8; /* airier */
+				letter-spacing: 0.01em; /* refined tracking */
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
 			}
 			h1,
 			h2,
 			h3 {
-				font-family: "Playfair Display", ui-serif, Georgia, serif;
-				letter-spacing: 0.006em;
-				margin: 0 0 0.45em;
+				font-family: "Playfair Display", serif;
+				margin: 0 0 0.5em;
+				letter-spacing: 0.01em;
+				font-weight: 400;
 			}
+
 			a {
-				color: inherit;
+				color: var(--gold);
 				text-decoration: none;
-				text-underline-offset: 2px;
+				text-underline-offset: 3px;
 			}
 			a:hover {
 				text-decoration: underline;
@@ -72,16 +87,13 @@
 				margin-inline: auto;
 			}
 
-			/* ===== Header (fixed, CLEAR, no borders ever) ===== */
+			/* ===== Header (transparent) + DARK hamburger ===== */
 			header {
 				position: fixed;
 				inset: 0 0 auto 0;
 				height: var(--header-h);
 				z-index: 1000;
-				background: transparent !important;
-				border: 0 !important;
-				box-shadow: none !important;
-				backdrop-filter: none !important;
+				background: transparent;
 			}
 			header .container {
 				width: min(var(--max), 92%);
@@ -92,165 +104,105 @@
 				justify-content: space-between;
 				gap: 16px;
 			}
+			/* Logo + nav accents */
+			#site-nav a {
+				color: #101622; /* dark navy */
+				letter-spacing: 0.08em;
+				font-weight: 600;
+				text-decoration: none;
+				transition: color 0.3s ease; /* smooth hover */
+				font-weight: 500;
+				letter-spacing: 0.13em;
+			}
 
-			/* desktop nav */
-			#site-nav ul {
-				display: flex;
-				gap: 28px;
-				list-style: none;
-				margin: 0;
+			#site-nav a:hover {
+				color: #a88a54; /* gold on hover */
+				opacity: 0.9;
+			}
+
+			.nav-toggle {
+				display: inline-grid;
+				place-items: center;
+				width: 44px;
+				height: 44px;
+				border: 0;
+				background: transparent;
 				padding: 0;
+				cursor: pointer;
+				color: #0d1f2c;
+			}
+			.nav-toggle .hamburger {
+				position: relative;
+				width: 22px;
+				height: 2px;
+				background: currentColor;
+				border-radius: 2px;
+			}
+			.nav-toggle .hamburger::before,
+			.nav-toggle .hamburger::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background: currentColor;
+				border-radius: 2px;
+			}
+			.nav-toggle .hamburger::before {
+				top: -7px;
+			}
+			.nav-toggle .hamburger::after {
+				bottom: -7px;
+			}
+
+			#site-nav {
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				width: min(78vw, 360px);
+				transform: translateX(100%);
+				transition: 0.32s ease;
+				background: #ffff;
+				backdrop-filter: blur(10px);
+				padding: 28px 22px;
+				z-index: 1001;
+			}
+			#site-nav ul {
+				list-style: none;
+				margin: 64px 0 0;
+				padding: 0;
+				display: grid;
+				gap: 18px;
 			}
 			#site-nav a {
-				font-weight: 600;
-				letter-spacing: 0.06em;
-				text-transform: uppercase;
-				font-size: 0.78rem;
-				padding: 8px 10px;
-				border-radius: 2px;
-				color: #e9dbdb;
-			}
-			#site-nav a:hover {
-				text-decoration: none;
-				box-shadow: 0 0 0 1px rgba(168, 138, 84, 0.45);
+				color: #000;
 			}
 
-			/* hamburger hidden on desktop */
-			.nav-toggle {
-				display: none;
+			body.nav-open::before {
+				content: "";
+				position: fixed;
+				inset: 0;
+				background: rgba(0, 0, 0, 0.35);
+				backdrop-filter: blur(2px);
+				z-index: 1000;
+			}
+			body.nav-open #site-nav {
+				transform: translateX(0);
+			}
+			body.nav-open .nav-toggle .hamburger {
+				background: transparent;
+			}
+			body.nav-open .nav-toggle .hamburger::before {
+				top: 0;
+				transform: rotate(45deg);
+			}
+			body.nav-open .nav-toggle .hamburger::after {
+				bottom: 0;
+				transform: rotate(-45deg);
 			}
 
-			/* Rentals & Accent Décor — layout + typography */
-			.rentals {
-				width: min(1140px, 92%);
-				margin: 4px auto 0;
-				padding: 0 20px clamp(38px, 5vw, 68px);
-			}
-			.rentals h4 {
-				font-size: 1.15rem;
-				margin: 0 0 10px;
-				color: #0d1f2c;
-				text-align: center;
-			}
-			.rentals-grid {
-				display: grid;
-				gap: 16px;
-			}
-			@media (min-width: 820px) {
-				.rentals-grid {
-					grid-template-columns: repeat(4, 1fr);
-				}
-			}
-			.rent {
-				background: #fff;
-				border: 1px solid var(--hairline);
-				border-radius: 5px;
-				padding: 14px;
-				text-align: center;
-				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
-			}
-			/* make name & price stack to separate lines */
-			.rent strong,
-			.rent span {
-				display: block;
-			}
-			.rent strong {
-				color: #0d1f2c;
-			}
-			.rent span {
-				color: var(--gold);
-				font-weight: 700;
-				margin-top: 2px;
-			}
-
-			/* ===== Mobile menu ===== */
-			@media (max-width: 860px) {
-				.nav-toggle {
-					display: inline-grid;
-					place-items: center;
-					width: 44px;
-					height: 44px;
-					border: 0;
-					background: transparent;
-					padding: 0;
-					cursor: pointer;
-				}
-				.nav-toggle .hamburger {
-					position: relative;
-					width: 22px;
-					height: 2px;
-					background: currentColor;
-					color: #1a1a1a;
-					transition: transform 0.25s ease;
-				}
-				.nav-toggle .hamburger::before,
-				.nav-toggle .hamburger::after {
-					content: "";
-					position: absolute;
-					left: 0;
-					right: 0;
-					height: 2px;
-					background: currentColor;
-					transition: transform 0.25s ease, top 0.25s ease,
-						bottom 0.25s ease, opacity 0.2s ease;
-				}
-				.nav-toggle .hamburger::before {
-					top: -7px;
-				}
-				.nav-toggle .hamburger::after {
-					bottom: -7px;
-				}
-
-				/* panel */
-				#site-nav {
-					position: fixed;
-					top: 0;
-					right: 0;
-					bottom: 0;
-					width: min(78vw, 360px);
-					transform: translateX(100%);
-					transition: transform 0.32s ease;
-					background: rgba(16, 18, 22, 0.92);
-					backdrop-filter: blur(10px);
-					padding: 28px 22px;
-					z-index: 1001;
-				}
-				#site-nav ul {
-					flex-direction: column;
-					align-items: flex-start;
-					gap: 18px;
-					margin-top: 64px;
-				}
-				#site-nav a {
-					color: #f2f4f6;
-				}
-
-				/* scrim */
-				body.nav-open::before {
-					content: "";
-					position: fixed;
-					inset: 0;
-					background: rgba(0, 0, 0, 0.35);
-					backdrop-filter: blur(2px);
-					z-index: 1000;
-				}
-				body.nav-open #site-nav {
-					transform: translateX(0);
-				}
-				body.nav-open .nav-toggle .hamburger {
-					background: transparent;
-				}
-				body.nav-open .nav-toggle .hamburger::before {
-					top: 0;
-					transform: rotate(45deg);
-				}
-				body.nav-open .nav-toggle .hamburger::after {
-					bottom: 0;
-					transform: rotate(-45deg);
-				}
-			}
-
-			/* ===== HERO (full-bleed; no outer gaps) ===== */
+			/* ===== HERO ===== */
 			.about-hero {
 				--hero-img: url("images/couples/maryamandmustafa/5.JPG");
 				position: relative;
@@ -259,8 +211,8 @@
 				min-height: 100vh;
 				text-align: center;
 				overflow: hidden;
-				margin: 0; /* flush to top */
-				padding-top: var(--header-h); /* so text isn't under the logo */
+				margin: 0;
+				padding-top: var(--header-h);
 			}
 			.about-hero::before {
 				content: "";
@@ -291,46 +243,62 @@
 				position: relative;
 				z-index: 1;
 				color: #fff;
-				max-width: 780px;
+				max-width: 820px;
 				padding: 20px;
 			}
 			.about-title {
-				font-size: var(--step-4);
-				line-height: 1.03;
-				margin-bottom: 0.25em;
+				font-size: clamp(40px, 2.6rem + 1.4vw, 70px);
+				line-height: 1.02;
+				letter-spacing: 0.01em;
+			}
+			/* Golden accent underline */
+			.about-title {
+				position: relative;
+			}
+			.about-title::after {
+				content: "";
+				display: block;
+				width: 86px;
+				height: 2px;
+				margin: 0.5rem auto 0;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					var(--gold),
+					transparent
+				);
+				opacity: 0.9;
 			}
 			.about-lead {
-				font-size: var(--step-1);
-				color: #eef4f7;
-				opacity: 0.98;
-				margin: 0 0 0.6em;
+				font-weight: 300;
+				opacity: 0.96;
+				margin: 0.4em 0 0.8em;
 			}
 			.btn {
 				display: inline-block;
 				padding: 12px 22px;
-				border-radius: 500px;
-				border: 1px solid rgba(255, 255, 255, 0.8);
-				color: #111;
+				border-radius: 999px;
+				border: 1px solid var(--gold);
 				background: #fff;
+				color: #111;
 				letter-spacing: 0.12em;
-				font-weight: 600;
+				font-weight: 800;
 				text-transform: uppercase;
-				font-size: 0.78rem;
-				transition: transform 0.2s, background 0.25s, border-color 0.25s,
-					color 0.25s, box-shadow 0.25s;
+				font-size: 0.76rem;
 			}
 			.btn:hover {
 				background: var(--gold);
 				border-color: var(--gold);
-				color: #0b0b0b;
-				transform: translateY(-2px);
-				box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+				color: #111;
+			}
+			/* apply a different font to everything that will fade in */
+			[data-animate] {
+				font-family: "Montserrat", serif;
+				font-size: 14px;
+				line-height: 1.5;
 			}
 
 			/* ===== Story ===== */
-			.about-story {
-				padding-top: clamp(18px, 5vw, 44px);
-			}
 			.about-grid {
 				display: grid;
 				gap: clamp(28px, 3.4vw, 44px);
@@ -343,10 +311,10 @@
 				}
 			}
 			.about-img {
-				border-radius: 5px;
+				border-radius: 14px;
 				overflow: hidden;
 				background: #f3f5f6;
-				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
 			}
 			.about-img img {
 				width: 100%;
@@ -356,26 +324,9 @@
 			}
 			.about-sub {
 				color: var(--muted);
+				letter-spacing: 0.18em;
 				text-transform: uppercase;
-				letter-spacing: 0.16em;
-				font: 700 0.78rem/1 "Montserrat", sans-serif;
-				margin-bottom: var(--space-1);
-			}
-			.about-text p {
-				margin: 0.4em 0 0;
-			}
-			.about-text p + p {
-				margin-top: 0.9em;
-			}
-
-			/* ===== Section variants ===== */
-			.section {
-				position: relative;
-				z-index: 1;
-				background: #fff;
-			}
-			.section--soft {
-				background: linear-gradient(#faf7f1, #f1ecdf);
+				font-weight: 600;
 			}
 
 			/* ===== Process ===== */
@@ -390,15 +341,31 @@
 			}
 			.proc__band {
 				text-align: center;
-				padding-bottom: 0;
 			}
 			.proc__title {
-				font-weight: 400;
-				letter-spacing: 0.08em;
+				font-weight: 600;
+				letter-spacing: 0.12em;
 				text-transform: uppercase;
-				font-size: clamp(30px, 5vw, 52px);
 				color: #3b322a;
-				margin: 0;
+				font-size: clamp(30px, 5vw, 52px);
+				position: relative;
+				display: inline-block;
+				padding-bottom: 0.3rem;
+			}
+			.proc__title::after {
+				content: "";
+				position: absolute;
+				left: 50%;
+				transform: translateX(-50%);
+				bottom: 0;
+				width: 120px;
+				height: 2px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					var(--gold),
+					transparent
+				);
 			}
 			.proc__rule {
 				height: 1px;
@@ -409,7 +376,6 @@
 					transparent
 				);
 				margin: 18px 0 0;
-				opacity: 0.9;
 			}
 			.proc__grid {
 				display: grid;
@@ -422,270 +388,129 @@
 				}
 			}
 			.step {
-				text-align: center;
 				background: linear-gradient(#fff, #fff) padding-box,
 					linear-gradient(180deg, #efe7dc, #e7dccd) border-box;
 				border: 1px solid transparent;
 				border-radius: 14px;
 				padding: clamp(20px, 2.4vw, 26px);
-				box-shadow: 0 16px 44px rgba(66, 48, 24, 0.08);
-				transition: transform 0.25s, box-shadow 0.25s;
-			}
-			.step:hover {
-				transform: translateY(-4px);
-				box-shadow: 0 24px 66px rgba(66, 48, 24, 0.12);
-			}
-			.step__num {
-				font-family: "Playfair Display", serif;
-				font-weight: 400;
-				font-size: clamp(32px, 5.6vw, 56px);
-				line-height: 1;
-				color: #5e5245;
-				margin: 2px 0 10px;
-			}
-			.step__eyebrow {
-				font: 700 0.72rem/1 "Montserrat", sans-serif;
-				text-transform: uppercase;
-				letter-spacing: 0.14em;
-				color: #6c645d;
-				margin-bottom: 8px;
-			}
-
-			/* ===== Wedding ===== */
-			.wed-hero {
-				--wed-img: url("images/heropics/IMG_8671.JPG");
-				position: relative;
-				isolation: isolate;
-				min-height: 68vh;
-				display: grid;
-				place-items: center;
-				text-align: center;
-				background: var(--wed-img) center/cover no-repeat;
-				margin: 0; /* no negative margins */
-			}
-			.wed-hero::after {
-				content: "";
-				position: absolute;
-				inset: 0;
-				background: linear-gradient(
-						180deg,
-						rgba(18, 16, 12, 0.15),
-						rgba(18, 16, 12, 0.45)
-					),
-					linear-gradient(
-						0deg,
-						rgba(247, 243, 238, 0.12),
-						rgba(247, 243, 238, 0.12)
-					);
-				mix-blend-mode: multiply;
-			}
-			.wed-hero__inner {
-				position: relative;
-				z-index: 1;
-				color: #fff;
-				max-width: 820px;
-				padding: 64px 20px;
-			}
-			.wed-pack {
-				background: linear-gradient(#fff, #fff) padding-box,
-					linear-gradient(180deg, #e8dfd3, #efe7dc) border-box;
-				border: 1px solid transparent;
-				border-radius: 5px;
-				width: min(1140px, 92%);
-				margin: 0 auto;
-				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.12);
-			}
-			.wed-wrap {
-				display: grid;
-				gap: 24px;
-				padding: clamp(24px, 4vw, 34px);
-			}
-			@media (min-width: 980px) {
-				.wed-wrap {
-					grid-template-columns: 1.15fr 0.85fr;
-					align-items: start;
-				}
-			}
-			.wed-figure {
-				position: relative;
-				border-radius: 5px;
-				overflow: hidden;
-				background: #f3f5f6;
-				border: 1px solid #eadfce;
-				max-height: 680px;
-				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
-			}
-			@media (min-width: 980px) {
-				.wed-figure {
-					position: sticky;
-					top: calc(var(--header-h) + 18px);
-				}
-			}
-			.wed-figure img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				display: block;
-			}
-			.wed-stack {
-				display: grid;
-				gap: 18px;
-			}
-			.pkg {
-				background: #fff;
-				border: 1px solid rgba(234, 223, 206, 0.9);
-				border-radius: 5px;
-				padding: 18px 16px;
 				box-shadow: 0 10px 28px rgba(66, 48, 24, 0.06);
 			}
-			.pkg h3 {
-				font-size: 1.15rem;
-				margin: 0 0 4px;
-				color: #0d1f2c;
-				letter-spacing: 0.02em;
+			.step__num {
+				font-weight: 900;
+				font-size: clamp(26px, 4.2vw, 48px);
+				color: #5e5245;
 			}
-			.pkg .sub {
-				display: block;
-				color: #6b635b;
+			.step__eyebrow {
 				text-transform: uppercase;
-				letter-spacing: 0.12em;
-				font: 700 0.72rem/1 "Montserrat", sans-serif;
-				margin-bottom: 6px;
-			}
-			.pkg .price {
-				font: 700 1rem/1 "Montserrat", sans-serif;
-				color: var(--gold);
-				margin: 6px 0 8px;
-			}
-			.pkg ul {
-				margin: 0 0 8px 18px;
-				padding: 0;
-			}
-			.pkg li {
+				letter-spacing: 0.17em;
+				color: #6c645d;
 				margin: 6px 0;
-				color: #444;
 			}
-			.pkg .btnline {
-				margin-top: 10px;
-			}
-			.pkg .btnline a {
-				display: inline-block;
-				border: 1px solid var(--gold);
-				padding: 10px 14px;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
-				font-weight: 600;
-				font-size: 0.76rem;
-				border-radius: 500px;
-				transition: 0.25s;
-				text-decoration: none;
-			}
-			.pkg .btnline a:hover {
-				background: var(--gold);
-				color: #111;
-				transform: translateY(-2px);
+			.step h3 {
+				font-weight: 800;
+				margin: 0.1em 0 0.4em;
 			}
 
-			.wed-collage {
-				width: min(1140px, 92%);
-				margin: 22px auto 0;
-				display: grid;
-				gap: 14px;
+			/* ===== Wedding carousel (scroll-only) ===== */
+			.wed-gallery {
+				padding: clamp(10px, 5vw, 50px) 0;
 			}
-			@media (min-width: 820px) {
-				.wed-collage {
-					grid-template-columns: 2fr 1fr 1fr;
-				}
+			.wed-head {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
 			}
+			.wed-title {
+				font-size: clamp(26px, 3.6vw, 36px);
+			}
+			.wed-title em {
+				color: var(--gold);
+				font-weight: 600;
+				letter-spacing: 0.05em;
+			}
+			.wed-ctrls {
+				display: flex;
+				gap: 8px;
+			}
+			.wed-btn {
+				border: none;
+				background: transparent;
+				color: var(--gold);
+				font-size: 28px;
+				line-height: 1;
+				width: auto;
+				height: auto;
+				padding: 4px 8px;
+				cursor: pointer;
+			}
+			.wed-btn:hover {
+				opacity: 0.85;
+			}
+
+			.wed-viewport {
+				position: relative;
+			}
+
+			/* --- Carousel spacing (tighter) --- */
+			.wed-rail {
+				--gap: 8px; /* tweak this: 6–10px looks great */
+				display: flex;
+				gap: var(--gap);
+				overflow: auto;
+				scroll-snap-type: x mandatory;
+				padding: 2px 0;
+				scrollbar-width: none;
+				scroll-behavior: smooth;
+
+				/* --- TWEAKS FOR MOBILE SMOOTHNESS --- */
+				-webkit-overflow-scrolling: touch; /* smoother on iOS */
+				touch-action: pan-x; /* prefer horizontal gestures */
+				will-change: transform; /* hint for composition */
+				background-color: transparent; /* prevents white flash on some devices */
+			}
+			.wed-rail::-webkit-scrollbar {
+				display: none;
+			}
+
+			/* Tiles */
 			.wed-tile {
-				border-radius: 5px;
-				overflow: hidden;
+				flex: 0 0 auto;
+				width: 90%;
+				max-width: 560px;
+				scroll-snap-align: center;
 				border: 1px solid #eadfce;
-				background: #f6f2eb;
-				box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+				border-radius: 6px;
+				background: #fff;
+				box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+				height: clamp(260px, 40vw, 420px);
 			}
+
 			.wed-tile img {
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				object-position: 50% 35%;
 				display: block;
+				background-color: #f3f5f6; /* neutral placeholder while lazy loads */
+				min-height: 1px;
 			}
 
-			/* ===== Services / Rentals ===== */
-			.svc {
-				background: linear-gradient(#faf7f1, #efe9df);
-				border-top: 1px solid rgba(0, 0, 0, 0.05);
-			}
-			.svc-head {
-				text-align: center;
-				padding-bottom: 0;
-			}
-			.svc-title {
-				font-weight: 400;
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
-				font-size: clamp(30px, 5vw, 52px);
-				color: #3b322a;
-				margin: 0;
-			}
-			.svc-lead {
-				max-width: 760px;
-				margin: 10px auto clamp(18px, 2.5vw, 28px);
-				font-size: var(--step-1);
-				color: #2c2a27;
-				opacity: 0.95;
-			}
-			.svc-grid {
-				width: min(1140px, 92%);
-				margin-inline: auto;
-				display: grid;
-				gap: 18px;
-				padding: 0 20px clamp(38px, 5vw, 68px);
-			}
-			@media (min-width: 980px) {
-				.svc-grid {
-					grid-template-columns: repeat(3, 1fr);
+			@media (min-width: 780px) {
+				.wed-tile {
+					width: calc(50% - (var(--gap) / 2));
+					scroll-snap-align: start;
 				}
 			}
-			.svc-card {
-				background: #fff;
-				border: 1px solid var(--hairline);
-				border-radius: 5px;
-				overflow: hidden;
-				transition: transform 0.25s, box-shadow 0.25s;
-				box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-			}
-			.svc-card:hover {
-				transform: translateY(-3px);
-				box-shadow: 0 20px 46px rgba(0, 0, 0, 0.1);
-			}
-			.svc-media {
-				aspect-ratio: 4/3;
-				background: #f3f5f6;
-				border-bottom: 1px solid var(--hairline);
-			}
-			.svc-media img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				display: block;
-			}
-			.svc-body {
-				padding: 16px;
-			}
-			.svc-tag {
-				display: inline-block;
-				font: 700 0.72rem/1 "Montserrat", sans-serif;
-				letter-spacing: 0.14em;
-				color: var(--gold);
-				text-transform: uppercase;
+			@media (min-width: 1100px) {
+				.wed-tile {
+					width: calc(33.333% - (2 * var(--gap) / 3));
+				}
 			}
 
-			/* ===== Feature & Quotes ===== */
+			/* ===== Feature ===== */
 			.about-feature {
 				position: relative;
 				isolation: isolate;
-				margin: clamp(28px, 4vw, 44px) 0;
 				border-radius: 2px;
 				overflow: hidden;
 				border: 1px solid var(--hairline);
@@ -695,8 +520,9 @@
 				content: "";
 				position: absolute;
 				inset: 0;
-				background: url("images/AmerNabulsi-513.jpg") center/cover
-					no-repeat;
+				background: url("images/couples/santanaanddaniel/12.jpg")
+					center/cover no-repeat;
+				filter: contrast(1.02) saturate(1.02);
 			}
 			.about-feature::after {
 				content: "";
@@ -704,8 +530,8 @@
 				inset: 0;
 				background: linear-gradient(
 					180deg,
-					rgba(0, 0, 0, 0.22),
-					rgba(0, 0, 0, 0.38)
+					rgba(0, 0, 0, 0.28),
+					rgba(0, 0, 0, 0.4)
 				);
 			}
 			.about-feature__inner {
@@ -715,40 +541,118 @@
 				text-align: center;
 				padding: clamp(54px, 10vw, 120px) 16px;
 			}
+			.feature-kicker {
+				display: block;
+				font-weight: 900;
+				letter-spacing: 0.13em;
+				text-transform: uppercase;
+				color: #fff9;
+			}
+			.feature-big {
+				display: block;
+				font-weight: 900;
+				font-size: clamp(32px, 6vw, 76px);
+				line-height: 0.98;
+				letter-spacing: 0.01em;
+			}
+			.feature-sub {
+				display: block;
+				font-weight: 700;
+				font-size: clamp(16px, 1.1rem, 20px);
+				opacity: 0.96;
+				margin-top: 0.6rem;
+			}
+			.feature-big:nth-of-type(2) {
+				color: #f6e7c9;
+			}
 
+			/* ===== Rotating reviews (CSS) ===== */
 			.about-quotes {
 				background: #0c1216;
 				color: #e5ebee;
 				text-align: center;
+				overflow: hidden;
 			}
-			.about-quote {
-				font-family: "Playfair Display", serif;
-				font-size: clamp(18px, 1.6rem, 28px);
-				line-height: 1.55;
-				max-width: 780px;
-				margin: 0 auto clamp(18px, 3vw, 28px);
+			.rotator {
 				position: relative;
+				min-height: 170px;
+				display: grid;
+				place-items: center;
 			}
-			.about-quote::before {
-				content: "“";
+			.quote {
 				position: absolute;
-				left: -0.25em;
-				top: -0.25em;
-				opacity: 0.25;
-				font-size: 1.6em;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 100%;
+				margin: 0;
+				opacity: 0;
+				display: grid;
+				place-items: center;
+				padding: 22px 16px;
 			}
-			.about-quote span {
+			.quote p {
+				font-weight: 400;
+				font-size: clamp(18px, 1.5rem, 28px);
+				max-width: 820px;
+				margin: 0 auto;
+			}
+			.quote span {
 				display: block;
 				margin-top: 8px;
-				font: 600 0.86rem/1 "Montserrat", sans-serif;
-				letter-spacing: 0.08em;
+				font-weight: 800;
+				letter-spacing: 0.12em;
 				text-transform: uppercase;
-				color: #b8c2ca;
+				color: var(--gold);
+			}
+			.quote.show {
+				animation: quoteFade 15s linear infinite both;
+			}
+			.quote.delay-0 {
+				animation-delay: 0s;
+			}
+			.quote.delay-1 {
+				animation-delay: 5s;
+			}
+			.quote.delay-2 {
+				animation-delay: 10s;
+			}
+			@keyframes quoteFade {
+				0% {
+					opacity: 0;
+					transform: translate(-50%, -40%);
+				}
+				6% {
+					opacity: 1;
+					transform: translate(-50%, -50%);
+				}
+				28% {
+					opacity: 1;
+					transform: translate(-50%, -50%);
+				}
+				34% {
+					opacity: 0;
+					transform: translate(-50%, -60%);
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+			/* hide default focus ring for pointer interactions */
+			.wed-rail:focus {
+				outline: none;
 			}
 
-			/* ===== CTA & Footer ===== */
+			/* keep an accessible focus style for keyboard users */
+			.wed-rail:focus-visible {
+				outline: 3px solid var(--gold);
+				outline-offset: 4px;
+				border-radius: 6px;
+			}
+
+			/* ===== CTA + Footer ===== */
 			.about-cta {
-				--cta: url("images/services/IMG_7401.PNG");
+				--cta: url("images/couples/chelsnadray/2.jpg");
 				position: relative;
 				isolation: isolate;
 				border-radius: 5px;
@@ -784,13 +688,13 @@
 				display: inline-block;
 				padding: 12px 22px;
 				border: 1px solid var(--gold);
-				border-radius: 500px;
-				color: #111;
+				border-radius: 999px;
 				background: #fff;
+				color: #111;
 				letter-spacing: 0.12em;
+				font-weight: 900;
 				text-transform: uppercase;
-				font-weight: 700;
-				font-size: 0.78rem;
+				font-size: 0.76rem;
 			}
 			.about-btn:hover {
 				background: var(--gold);
@@ -799,7 +703,8 @@
 
 			footer {
 				padding: 28px 0;
-				border-top: 1px solid var(--hairline);
+				background: var(--navy);
+				color: #eaf2f7;
 			}
 			footer .container {
 				width: min(var(--max), 92%);
@@ -810,22 +715,38 @@
 				gap: 16px;
 				flex-wrap: wrap;
 			}
+			footer a {
+				color: #dfe9f3;
+			}
 
-			/* ===== Reveal on scroll ===== */
+			/* Fade-in on scroll */
 			[data-animate] {
 				opacity: 0;
-				transform: translateY(20px);
+				transform: var(--fade-up);
 				transition: opacity 0.6s ease, transform 0.6s ease;
 			}
 			.inview {
 				opacity: 1 !important;
 				transform: none !important;
 			}
+
+			.about-quotes {
+				font-family: Georgia, "Times New Roman", Times, serif;
+			}
+
+			/* Reduced motion */
+			@media (prefers-reduced-motion: reduce) {
+				* {
+					transition: none !important;
+					animation: none !important;
+				}
+				.wed-rail {
+					scroll-behavior: auto !important;
+				}
+			}
 		</style>
 	</head>
-
 	<body>
-		<!-- Header -->
 		<header>
 			<div class="container">
 				<a class="logo" href="index.html" aria-label="Tide & True">
@@ -835,8 +756,6 @@
 						style="height: 48px"
 					/>
 				</a>
-
-				<!-- Hamburger (mobile) -->
 				<button
 					class="nav-toggle"
 					aria-label="Open menu"
@@ -845,31 +764,27 @@
 				>
 					<span class="hamburger"></span>
 				</button>
-
-				<!-- Primary Nav -->
 				<nav id="site-nav" aria-label="Primary">
 					<ul>
 						<li>
 							<a href="about-us.html" aria-current="page"
-								>About Us</a
+								>ABOUT US</a
 							>
 						</li>
-						<li><a href="services.html">Services</a></li>
-						<li><a href="portfolio.html">Gallery</a></li>
-						<li>
-							<a href="contact.html">Contact</a>
-						</li>
+						<li><a href="services.html">SERVICES</a></li>
+						<li><a href="portfolio.html">GALLERY</a></li>
+						<li><a href="contact.html">CONTACT</a></li>
+						<li><a href="index.html">HOME</a></li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
-		<!-- HERO -->
 		<section
 			class="about-hero"
 			style="--hero-img: url('images/couples/maryamandmustafa/5.JPG')"
 		>
-			<div class="about-hero__inner">
+			<div class="about-hero__inner" data-animate>
 				<h1 class="about-title">
 					Thoughtful Planning, Effortless Celebrations
 				</h1>
@@ -881,7 +796,6 @@
 			</div>
 		</section>
 
-		<!-- STORY -->
 		<section class="about-story">
 			<div class="wrap about-grid">
 				<figure class="about-img" data-animate>
@@ -890,448 +804,391 @@
 						alt="Founders Maryam and Danielle"
 					/>
 				</figure>
-
 				<div class="about-text" data-animate>
 					<div class="about-sub">Our Story</div>
 					<h2>Where artistry meets organization</h2>
 					<p>
-						We’re Maryam and Danielle—two creative minds who came
-						together through a shared love of hospitality, design,
-						and the quiet rhythm of seamless coordination. We
-						founded Tide &amp; True to bring a refined yet welcoming
-						approach to weddings and events.
+						We’re Maryam and Danielle—two Toronto-based wedding
+						planners and creative minds who came together through a
+						shared love of hospitality, event design, and the quiet
+						rhythm of seamless wedding and event coordination. We
+						founded Tide & True Weddings & Events to bring a refined
+						yet welcoming approach to Toronto weddings, corporate
+						events, and special celebrations. From luxury wedding
+						planning to full-service event management, we help
+						couples and clients create unforgettable moments with
+						elegance and ease.
 					</p>
 					<p>
-						From intimate garden gatherings to full-weekend
-						celebrations, our work balances aesthetic direction with
-						meticulous logistics—so you can feel present, grounded,
-						and truly celebrated.
+						From intimate garden weddings to full-weekend wedding
+						celebrations, our work balances bespoke wedding design
+						with meticulous event logistics—so you can be fully
+						present, grounded, and truly celebrated on your special
+						day.
 					</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- APPROACH BAND -->
-		<section class="section section--soft">
-			<div class="wrap">
-				<div class="proc__band">
-					<h2 class="proc__title">Our Approach</h2>
-					<div class="proc__rule"></div>
-					<p
-						style="
-							max-width: 780px;
-							margin: 16px auto 0;
-							opacity: 0.95;
-						"
-					>
-						For us, planning an event always starts with people. We
-						take the time to get to know you—what excites you, what
-						makes you feel at home, and what will make your
-						celebration feel like yours.
-					</p>
-					<p
-						style="
-							max-width: 780px;
-							margin: 10px auto 0;
-							opacity: 0.95;
-						"
-					>
-						From there, we bring together the creative and the
-						practical: moodboards and floorplans, timelines and
-						tastings. When the day arrives, you’ll be laughing,
-						dancing, and making memories while we quietly take care
-						of everything behind the scenes.
-					</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- PROCESS -->
 		<section class="section proc" id="process">
 			<div class="proc__frame">
 				<div class="proc__band" data-animate>
 					<h2 class="proc__title">Our Process</h2>
 					<div class="proc__rule"></div>
 				</div>
-
 				<div class="proc__grid">
 					<article class="step" data-animate>
 						<div class="step__num">1</div>
 						<div class="step__eyebrow">Discovery</div>
-						<h3 class="step__title">
-							Design begins with listening
-						</h3>
+						<h3>Design begins with listening</h3>
 						<p>
 							After you submit the
-							<a href="contact.html">Inquiry Form</a>, we learn
-							your vision and guest experience goals—then
-							translate them into a cohesive creative direction
-							and plan.
+							<a href="contact.html">Inquiry Form</a>, we explore
+							your vision, style, and guest experience goals. From
+							intimate weddings to full-scale celebrations, we
+							translate your ideas into a cohesive creative
+							direction and custom wedding plan tailored to your
+							unique day.
 						</p>
 					</article>
-
 					<article class="step" data-animate>
 						<div class="step__num">2</div>
 						<div class="step__eyebrow">Direction</div>
-						<h3 class="step__title">
-							Elevated, editorial, effortless
-						</h3>
+						<h3>Editorial, elevated, effortless</h3>
 						<p>
-							Moodboards, floorplans, tastings, timelines—guided
-							with clarity and an eye for understated luxury.
+							Editorial, elevated, effortless Through moodboards,
+							floorplans, tastings, and timelines, we craft a
+							bespoke wedding design guided by clarity and a
+							refined eye for timeless elegance and luxury wedding
+							styling. Every detail is considered to ensure a
+							seamless guest experience and event flow.
 						</p>
 					</article>
-
 					<article class="step" data-animate>
 						<div class="step__num">3</div>
 						<div class="step__eyebrow">Execution</div>
-						<h3 class="step__title">Calm orchestration</h3>
+						<h3>Elevated, unforgettable orchestration</h3>
 						<p>
-							We manage production, vendors, and day-of logistics
-							so you can be fully present. Expect graceful pacing
-							and beautiful flow.
+							We oversee full-service wedding production, vendor
+							management, and day-of coordination, so you can be
+							fully present. Expect seamless logistics, graceful
+							pacing, and a beautifully orchestrated
+							celebration—every element curated for a truly
+							unforgettable wedding experience.
 						</p>
 					</article>
 				</div>
 			</div>
 		</section>
 
-		<!-- WEDDING -->
-		<section id="wedding" class="wed">
-			<div class="wed-hero">
-				<div class="wed-hero__inner" data-animate>
-					<span
-						class="about-eyebrow"
-						style="
-							border: 1px solid rgba(255, 255, 255, 0.4);
-							padding: 6px 10px;
-							display: inline-block;
-							text-transform: uppercase;
-							letter-spacing: 0.18em;
-							font: 600 0.78rem/1 Montserrat, sans-serif;
-						"
-						>Wedding</span
-					>
-					<h2 class="wed-title">Full-scope wedding support</h2>
-					<p class="wed-lead">
-						From first ideas to last dance, we handle design,
-						logistics and vendor orchestration—so you stay present.
-					</p>
-				</div>
-			</div>
-
-			<div class="wed-pack" data-animate>
-				<div class="wed-wrap">
-					<div class="wed-stack">
-						<article class="pkg">
-							<span class="sub">Day-of Coordination</span>
-							<h3>Effortless execution on the day</h3>
-							<div class="price">$1,750+</div>
-							<ul>
-								<li>
-									Pre-wedding coordination &amp; timeline
-									assistance
-								</li>
-								<li>
-									Point of contact for vendors &amp; guests
-								</li>
-								<li>
-									Setup/takedown supervision, procession &amp;
-									reception cueing
-								</li>
-								<li>
-									Guest/seating management &amp; vendor
-									payments
-								</li>
-							</ul>
-							<small>HST extra.</small>
-							<div class="btnline">
-								<a href="contact.html">Inquire</a>
-							</div>
-						</article>
-
-						<article class="pkg">
-							<span class="sub">Partial Planning</span>
-							<h3>Collaborative support where you need it</h3>
-							<div class="price">$2,000+</div>
-							<ul>
-								<li>
-									Preferred vendor referrals &amp; budget
-									creation
-								</li>
-								<li>
-									Meeting attendance &amp; custom timeline
-								</li>
-								<li>Wedding rehearsal + 8–10 hours day-of</li>
-							</ul>
-							<small
-								>Includes everything in Day-of, plus added
-								planning support.</small
-							>
-							<div class="btnline">
-								<a href="contact.html">Check Dates</a>
-							</div>
-						</article>
-
-						<article class="pkg">
-							<span class="sub"
-								>Full Planning &amp; Execution</span
-							>
-							<h3>Concept-to-celebration, entirely handled</h3>
-							<div class="price">$5,000+</div>
-							<ul>
-								<li>
-									Design direction &amp; wedding website +
-									guest management
-								</li>
-								<li>Unlimited access to Lead Planner</li>
-								<li>
-									Up to 12 hours day-of with two coordinators
-								</li>
-							</ul>
-							<small
-								>Custom packages available on request. HST
-								extra.</small
-							>
-							<div class="btnline">
-								<a href="contact.html">Start Full Planning</a>
-							</div>
-						</article>
+		<section class="wed-gallery" aria-label="Editorial collage">
+			<div class="wrap">
+				<div class="wed-head" data-animate>
+					<h2 class="wed-title">Curating <em>Memories</em></h2>
+					<div class="wed-ctrls">
+						<button
+							class="wed-btn prev"
+							type="button"
+							aria-label="Previous"
+						>
+							‹
+						</button>
+						<button
+							class="wed-btn next"
+							type="button"
+							aria-label="Next"
+						>
+							›
+						</button>
 					</div>
+				</div>
 
-					<!-- Sticky editorial image -->
-					<figure
-						class="wed-figure"
-						aria-label="Editorial wedding imagery"
+				<div class="wed-viewport" data-animate>
+					<div
+						class="wed-rail"
+						id="wedRail"
+						role="list"
+						tabindex="0"
+						aria-label="Gallery rail"
 					>
-						<img
-							src="images/heropics/kiss.png"
-							alt="Bridal editorial detail"
-						/>
-					</figure>
-				</div>
-			</div>
-
-			<div class="wed-collage">
-				<div class="wed-tile" data-animate>
-					<img
-						src="images/proposal/2.png"
-						alt="Tablescape with florals"
-					/>
-				</div>
-				<div class="wed-tile" data-animate>
-					<img
-						src="images/assets/IMG_5038.JPG"
-						alt="Ceremony installation"
-					/>
-				</div>
-				<div class="wed-tile" data-animate>
-					<img
-						src="images/couples/santanaanddaniel/9.jpg"
-						alt="Bridal suite moment"
-					/>
+						<figure class="wed-tile" role="listitem">
+							<img
+								src="images/couples/chelsnadray/13.jpg"
+								alt="Tablescape with florals"
+							/>
+						</figure>
+						<figure class="wed-tile" role="listitem">
+							<img
+								src="images/couples/santanaanddaniel/21.jpg"
+								alt="Bride and groom portrait"
+							/>
+						</figure>
+						<figure class="wed-tile" role="listitem">
+							<img
+								src="images/assets/IMG_5038.JPG"
+								alt="Ceremony installation"
+								loading="lazy"
+							/>
+						</figure>
+						<figure class="wed-tile" role="listitem">
+							<img
+								src="images/couples/santanaanddaniel/15.jpg"
+								alt="Bridal suite moment"
+								loading="lazy"
+							/>
+						</figure>
+					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- OTHER SERVICES & OFFERINGS -->
-		<section class="svc" aria-label="Other Services & Offerings">
-			<div class="svc-head">
-				<h2 class="svc-title">Other Services &amp; Offerings</h2>
-				<p class="svc-lead">
-					From proposals to corporate gatherings and baby showers, we
-					craft polished experiences with warmth and precision.
-				</p>
-			</div>
-
-			<div class="svc-grid">
-				<article class="svc-card" data-animate>
-					<div class="svc-media">
-						<img
-							src="images/proposal/ring.png"
-							alt="Romantic proposal setup"
-						/>
-					</div>
-					<div class="svc-body">
-						<span class="svc-tag">Proposal</span>
-						<h3>Unforgettable “yes” moments</h3>
-						<p>
-							Concept, location, décor and timing—every detail
-							handled for a seamless, romantic proposal.
-						</p>
-					</div>
-				</article>
-
-				<article class="svc-card" data-animate>
-					<div class="svc-media">
-						<img
-							src="images/specialevents/Coach.svg"
-							alt="Corporate event ambience"
-						/>
-					</div>
-					<div class="svc-body">
-						<span class="svc-tag">Corporate</span>
-						<h3>Polished brand experiences</h3>
-						<p>
-							On-message events without the scheduling
-							stress—let’s hit your goals with style.
-						</p>
-					</div>
-				</article>
-
-				<article class="svc-card" data-animate>
-					<div class="svc-media">
-						<img
-							src="images/specialevents/IMG_4367.png"
-							alt="Baby shower details"
-						/>
-					</div>
-					<div class="svc-body">
-						<span class="svc-tag">Baby Shower</span>
-						<h3>Celebrate without the stress</h3>
-						<p>
-							Theme, setup, takedown—so the parents-to-be can
-							simply enjoy the day.
-						</p>
-					</div>
-				</article>
-			</div>
-
-			<div class="rentals" data-animate>
-				<h4>Rentals &amp; Accent Décor</h4>
-				<div class="rentals-grid">
-					<div class="rent">
-						<strong>Dessert / Coffee Cart</strong
-						><span>from $399.99</span>
-					</div>
-					<div class="rent">
-						<strong>Custom Flower Wall</strong
-						><span>from $349.00</span>
-					</div>
-					<div class="rent">
-						<strong>Balloon Garland (8–24ft)</strong
-						><span>from $299.00</span>
-					</div>
-					<div class="rent">
-						<strong>Marquee Letters/Numbers</strong
-						><span>from $99.99</span>
-					</div>
-				</div>
-				<p style="text-align: center; margin-top: 10px">
-					<small
-						>Ask about photo booths, arch backdrops, canopy
-						installs, luxe florals &amp; more. Add-ons like content
-						creation available.</small
-					>
-				</p>
-			</div>
-		</section>
-
-		<!-- FEATURE IMAGE -->
 		<section class="about-feature" aria-label="Signature aesthetic">
-			<div class="about-feature__inner">
-				<h3>Refined celebrations with soul</h3>
-				<p>
-					Considered palettes. Intentional textures. Meaningful
-					details that last beyond the day.
-				</p>
-			</div>
-		</section>
-
-		<!-- TESTIMONIALS -->
-		<section class="about-quotes" aria-label="Client words">
-			<p class="about-quote">
-				“We couldn’t be happier with how it all came together”
-				<span>— Sarah &amp; Chris</span>
-			</p>
-			<p class="about-quote">
-				They had great vendor recommendations and found solutions to any
-				problem I faced! I couldn’t have done it without their
-				support!<span>— Francesca &amp; John</span>
-			</p>
-			<p class="about-quote">
-				Thank you for making my big day a success! I didn’t have to
-				stress or even think — you made it flawless.<span
-					>— Marwa &amp; Michael</span
+			<div class="about-feature__inner" data-animate>
+				<strong class="feature-kicker"
+					>Refined celebrations with soul</strong
 				>
-			</p>
-		</section>
-
-		<!-- CTA -->
-		<section class="about-cta">
-			<div class="about-cta__inner">
-				<h3>Ready to plan something beautiful?</h3>
-				<a class="about-btn" href="contact.html">Plan Your Event</a>
+				<span class="feature-big">Considered palettes.</span>
+				<span class="feature-big">Intentional textures.</span>
+				<span class="feature-sub"
+					>Meaningful details that last beyond the day.</span
+				>
 			</div>
 		</section>
 
-		<!-- FOOTER -->
+		<section class="about-quotes" aria-label="Client words">
+			<div class="rotator">
+				<div class="quote show delay-0">
+					<p>
+						"We are so grateful for their expertise and would
+						recommend them to any couple looking for thoughtful,
+						detail-oriented planners."
+					</p>
+					<span>— Sophia & A.K.</span>
+				</div>
+				<div class="quote show delay-1">
+					<p>
+						"The team at Tide & True Occasions was a great wedding
+						planner and an even better friend throughout our wedding
+						planning process."
+					</p>
+					<span>— Charlene & Garrett</span>
+				</div>
+				<div class="quote show delay-2">
+					<p>
+						"Your attention to detail from weeks leading up to the
+						wedding to the timeline to the execution was above and
+						beyond."
+					</p>
+					<span>— Marwa & Michael</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="section about-cta">
+			<div class="about-cta__inner" data-animate>
+				<h2>Ready to plan a celebration with intention?</h2>
+				<a href="contact.html" class="about-btn">Get In Touch</a>
+			</div>
+		</section>
+
 		<footer>
 			<div class="container">
-				<p>&copy; 2025 Tide &amp; True</p>
+				<div>
+					<p>&copy; 2025 Tide and True</p>
+				</div>
 				<div class="social-links">
-					<a href="#" aria-label="Facebook">Facebook</a>
-					<a href="#" aria-label="Instagram">Instagram</a>
+					<a
+						href="https://www.facebook.com/profile.php?id=61559325204992"
+						>Facebook</a
+					>
+					<a href="https://www.instagram.com/tideandtrueoccasions/"
+						>Instagram</a
+					>
 				</div>
 			</div>
 		</footer>
 
-		<!-- Minimal JS: mobile menu + fade-ins -->
 		<script>
-			(function () {
-				// Mobile menu
-				const btn = document.querySelector(".nav-toggle");
-				const nav = document.getElementById("site-nav");
-				function setState(open) {
-					document.body.classList.toggle("nav-open", open);
-					if (btn) {
-						btn.setAttribute("aria-expanded", String(open));
-						btn.setAttribute(
-							"aria-label",
-							open ? "Close menu" : "Open menu"
-						);
+			// JS for header + menu toggle
+			const navToggle = document.querySelector(".nav-toggle");
+			const body = document.body;
+
+			if (navToggle) {
+				navToggle.addEventListener("click", () => {
+					body.classList.toggle("nav-open");
+					navToggle.setAttribute(
+						"aria-expanded",
+						body.classList.contains("nav-open")
+					);
+				});
+			}
+
+			// JS for scroll fade-in animation
+			const animateEls = document.querySelectorAll("[data-animate]");
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add("inview");
+						}
+					});
+				},
+				{
+					threshold: 0.2, // Adjust as needed
+				}
+			);
+
+			animateEls.forEach((el) => {
+				observer.observe(el);
+			});
+
+			/* -----------------------------
+     Robust index-based carousel (rail.scrollTo used to avoid vertical page jumps)
+     ----------------------------- */
+
+			// helper: wait for images inside an element (resolve on load or timeout)
+			function waitForImages(parent, timeout = 4000) {
+				const imgs = Array.from(parent.querySelectorAll("img"));
+				if (!imgs.length) return Promise.resolve();
+				return Promise.race([
+					Promise.all(
+						imgs.map((img) =>
+							img.complete
+								? Promise.resolve()
+								: new Promise((res) => {
+										img.addEventListener("load", res, {
+											once: true,
+										});
+										img.addEventListener("error", res, {
+											once: true,
+										});
+								  })
+						)
+					),
+					new Promise((res) => setTimeout(res, timeout)),
+				]);
+			}
+
+			(function initCarousel() {
+				const rail = document.getElementById("wedRail");
+				const prevBtn = document.querySelector(".wed-btn.prev");
+				const nextBtn = document.querySelector(".wed-btn.next");
+				if (!rail || !prevBtn || !nextBtn) return;
+
+				const tiles = Array.from(rail.querySelectorAll(".wed-tile"));
+				if (!tiles.length) return;
+
+				// Ensure rail is focusable (already has tabindex in markup),
+				// and give it an accessible name/label (aria-label present).
+				rail.setAttribute("role", "list");
+
+				// Wait for images so measurements are stable, then setup
+				waitForImages(rail, 4000).then(() =>
+					setupCarousel(rail, tiles, prevBtn, nextBtn)
+				);
+			})();
+
+			function setupCarousel(rail, tiles, prevBtn, nextBtn) {
+				let currentIndex = 0;
+				let ticking = false;
+
+				// Center the tile at index i by scrolling the rail horizontally.
+				function scrollToIndex(i) {
+					i = ((i % tiles.length) + tiles.length) % tiles.length; // wrap
+					currentIndex = i;
+					const tile = tiles[i];
+
+					// Calculate left offset to center the tile inside the rail viewport
+					// Use scrollLeft values so we only move the rail (no page vertical scroll).
+					const railClientWidth = rail.clientWidth;
+					const tileLeft = tile.offsetLeft;
+					const tileWidth = tile.offsetWidth;
+					const targetLeft = Math.round(
+						tileLeft - (railClientWidth - tileWidth) / 2
+					);
+
+					// Bound targetLeft within scrollable range:
+					const maxScroll = rail.scrollWidth - railClientWidth;
+					const boundedLeft = Math.max(
+						0,
+						Math.min(targetLeft, maxScroll)
+					);
+
+					// Smooth horizontal scroll (modern browsers support behavior)
+					rail.scrollTo({ left: boundedLeft, behavior: "smooth" });
+
+					// Keep keyboard focus on the rail but avoid browser auto-scroll
+					try {
+						rail.focus({ preventScroll: true });
+					} catch (e) {
+						// older browsers don't support preventScroll — still fine
+						rail.focus();
 					}
 				}
-				if (btn && nav) {
-					btn.addEventListener("click", () =>
-						setState(!document.body.classList.contains("nav-open"))
-					);
-					nav.addEventListener("click", (e) => {
-						if (e.target.closest("a")) setState(false);
-					});
-					document.addEventListener("keydown", (e) => {
-						if (e.key === "Escape") setState(false);
-					});
-					// close when tapping scrim
-					document.addEventListener(
-						"click",
-						(e) => {
-							if (!document.body.classList.contains("nav-open"))
-								return;
-							const inside =
-								e.target.closest("#site-nav") ||
-								e.target.closest(".nav-toggle");
-							if (!inside) setState(false);
-						},
-						true
-					);
-				}
 
-				// Fade-ins
-				const els = document.querySelectorAll("[data-animate]");
-				const io = new IntersectionObserver(
-					(entries) => {
-						entries.forEach((e) => {
-							if (e.isIntersecting) {
-								e.target.classList.add("inview");
-								io.unobserve(e.target);
+				// Arrow handlers (wrap)
+				prevBtn.addEventListener("click", () => {
+					scrollToIndex(currentIndex - 1);
+				});
+				nextBtn.addEventListener("click", () => {
+					scrollToIndex(currentIndex + 1);
+				});
+
+				// Keep index in sync with manual scroll (find tile closest to rail center)
+				function updateIndexByScroll() {
+					if (ticking) return;
+					ticking = true;
+					window.requestAnimationFrame(() => {
+						const railRect = rail.getBoundingClientRect();
+						const centerX = railRect.left + railRect.width / 2;
+						let best = 0;
+						let bestDist = Infinity;
+						tiles.forEach((tile, idx) => {
+							const r = tile.getBoundingClientRect();
+							const tileCenter = r.left + r.width / 2;
+							const dist = Math.abs(tileCenter - centerX);
+							if (dist < bestDist) {
+								bestDist = dist;
+								best = idx;
 							}
 						});
+						currentIndex = best;
+						ticking = false;
+					});
+				}
+
+				// Debounced scroll listener
+				let scrollDebounce;
+				rail.addEventListener(
+					"scroll",
+					() => {
+						if (scrollDebounce) clearTimeout(scrollDebounce);
+						scrollDebounce = setTimeout(updateIndexByScroll, 80);
 					},
-					{ rootMargin: "-10% 0px -10% 0px", threshold: 0.01 }
+					{ passive: true }
 				);
-				els.forEach((el) => io.observe(el));
-			})();
+
+				// Keep centered on resize
+				window.addEventListener("resize", () => {
+					// small timeout to let layout settle
+					setTimeout(() => scrollToIndex(currentIndex), 120);
+				});
+
+				// Keyboard arrows when rail focused
+				rail.addEventListener("keydown", (e) => {
+					if (e.key === "ArrowLeft") {
+						e.preventDefault();
+						prevBtn.click();
+					} else if (e.key === "ArrowRight") {
+						e.preventDefault();
+						nextBtn.click();
+					}
+				});
+
+				// Initialize: center first tile
+				scrollToIndex(0);
+			}
 		</script>
 	</body>
 </html>

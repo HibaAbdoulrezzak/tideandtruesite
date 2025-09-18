@@ -16,7 +16,6 @@
 			/* =========================
          EDITORIAL LUXE (spacing fix)
          ========================= */
-
 			:root {
 				--ink: #141416;
 				--muted: #6f7a82;
@@ -35,7 +34,6 @@
 					0 0 0 1px rgba(168, 138, 84, 0.55);
 				--soft: 0 26px 80px rgba(0, 0, 0, 0.1);
 			}
-
 			* {
 				box-sizing: border-box;
 			}
@@ -51,7 +49,6 @@
 				-webkit-font-smoothing: antialiased;
 				background: #fff;
 			}
-
 			h1,
 			h2,
 			h3 {
@@ -72,7 +69,6 @@
 			section {
 				padding: clamp(32px, 5vw, 72px) 0;
 			}
-			/* utility: make a grid item span both columns inside .row--2 */
 			.span-2 {
 				grid-column: 1 / -1;
 			}
@@ -82,7 +78,7 @@
 				position: fixed;
 				inset: 0 0 auto 0;
 				height: var(--header-h);
-				z-index: 10;
+				z-index: 1000;
 				background: transparent;
 			}
 			header .container {
@@ -94,6 +90,8 @@
 				justify-content: space-between;
 				gap: 16px;
 			}
+
+			/* NAV LINKS */
 			#site-nav ul {
 				display: flex;
 				gap: 28px;
@@ -113,39 +111,104 @@
 			#site-nav a:hover {
 				box-shadow: 0 0 0 1px rgba(168, 138, 84, 0.5);
 			}
+
+			/* HAMBURGER (dark) */
 			.nav-toggle {
-				display: none;
+				display: none; /* shown on mobile below */
+				place-items: center;
+				width: 44px;
+				height: 44px;
+				border: 0;
+				background: transparent;
+				padding: 0;
+				cursor: pointer;
+				color: #0d1f2c; /* DARK ICON */
 			}
+			.nav-toggle:focus-visible {
+				outline: 2px solid #0d1f2c;
+				outline-offset: 3px;
+			}
+			.nav-toggle .hamburger {
+				position: relative;
+				width: 22px;
+				height: 2px;
+				background: currentColor;
+				border-radius: 2px;
+				transition: transform 0.25s ease, background 0.2s ease;
+			}
+			.nav-toggle .hamburger::before,
+			.nav-toggle .hamburger::after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background: currentColor;
+				border-radius: 2px;
+				transition: transform 0.25s ease, top 0.25s ease,
+					bottom 0.25s ease, opacity 0.2s ease;
+			}
+			.nav-toggle .hamburger::before {
+				top: -7px;
+			}
+			.nav-toggle .hamburger::after {
+				bottom: -7px;
+			}
+
+			/* Off-canvas panel + scrim */
+			#site-nav {
+				position: fixed;
+				inset: 0 0 0 auto;
+				width: min(78vw, 360px);
+				transform: translateX(100%);
+				transition: transform 0.32s ease;
+				background: #ffff;
+				backdrop-filter: blur(10px);
+				padding: 28px 22px;
+				z-index: 1001;
+			}
+			body.nav-open #site-nav {
+				transform: translateX(0);
+			}
+			body.nav-open::before {
+				content: "";
+				position: fixed;
+				inset: 0;
+				background: rgba(0, 0, 0, 0.35);
+				backdrop-filter: blur(2px);
+				z-index: 1000;
+			}
+			#site-nav ul {
+				flex-direction: column;
+				gap: 18px;
+				margin-top: 64px;
+			}
+			#site-nav a {
+				color: #0d1f2c;
+			}
+			#site-nav a:hover {
+				color: 0 0 0 1px rgba(168, 138, 84, 0.5);
+			}
+
+			/* Animate to X when open */
+			body.nav-open .nav-toggle .hamburger {
+				background: transparent;
+			}
+			body.nav-open .nav-toggle .hamburger::before {
+				top: 0;
+				transform: rotate(45deg);
+			}
+			body.nav-open .nav-toggle .hamburger::after {
+				bottom: 0;
+				transform: rotate(-45deg);
+			}
+
+			/* show hamburger on mobile */
 			@media (max-width: 860px) {
 				.nav-toggle {
 					display: inline-grid;
-					place-items: center;
-					width: 44px;
-					height: 44px;
-					border: 0;
-					background: transparent;
 				}
-				#site-nav {
-					position: fixed;
-					inset: 0 0 0 auto;
-					width: min(78vw, 360px);
-					transform: translateX(100%);
-					transition: 0.32s;
-					background: rgba(16, 18, 22, 0.92);
-					backdrop-filter: blur(10px);
-					padding: 28px 22px;
-				}
-				#site-nav ul {
-					flex-direction: column;
-					gap: 18px;
-					margin-top: 64px;
-				}
-				#site-nav a {
-					color: #f2f4f6;
-				}
-				body.nav-open #site-nav {
-					transform: translateX(0);
-				}
+				/* optionally hide desktop links; keep if you want both */
 			}
 
 			/* Hero */
@@ -222,12 +285,11 @@
 			}
 			@media (min-width: 980px) {
 				.contact-grid {
-					/* wider form column, slimmer aside */
 					grid-template-columns: 1.35fr 0.65fr;
 				}
 			}
 
-			/* --------- FORM: Floating labels + pills ---------- */
+			/* Form */
 			.row {
 				display: grid;
 				gap: 26px;
@@ -236,18 +298,15 @@
 			.row--2 {
 				grid-template-columns: repeat(2, 1fr);
 			}
-			/* adds top margin when a .row--2 (Date/Guests) follows any .row (Service) */
 			.row + .row--2 {
 				margin-top: 14px;
 			}
-
 			@media (max-width: 780px) {
 				.row--2 {
 					grid-template-columns: 1fr;
 				}
 			}
 
-			/* Fields */
 			.field {
 				position: relative;
 			}
@@ -262,7 +321,6 @@
 				transition: border-color 0.25s, box-shadow 0.25s,
 					transform 0.15s, background 0.25s;
 			}
-
 			.textarea {
 				min-height: 160px;
 				resize: vertical;
@@ -304,7 +362,6 @@
 				color: var(--gold);
 			}
 
-			/* Segmented radio pills (with better spacing) */
 			.group-label {
 				display: block;
 				font: 700 0.72rem/1 "Montserrat", sans-serif;
@@ -353,9 +410,7 @@
 				}
 			}
 
-			/* ================================
-         CONSENT CHECKBOX (custom, with ✓)
-         ================================ */
+			/* Consent checkbox */
 			#contact-form input[type="checkbox"] {
 				appearance: none;
 				width: 18px;
@@ -369,7 +424,6 @@
 				box-sizing: border-box;
 				transition: background 0.2s ease, border-color 0.2s ease;
 			}
-			/* the tick itself */
 			#contact-form input[type="checkbox"]::after {
 				content: "✓";
 				color: #fff;
@@ -387,32 +441,22 @@
 				transform: scale(1);
 			}
 
-			/* ================================
-         CALENDAR SPACING FIXES
-         - extra space between label “EVENT DATE” and the box
-         - extra space between date text and the calendar icon
-         ================================ */
-			/* make the date input’s top inner padding larger so the label sits farther from the field */
+			/* Date spacers */
 			#contact-form #date.input {
-				padding-top: 38px !important; /* more space above the date text */
-				padding-right: 60px !important; /* room for the icon on the right */
+				padding-top: 38px !important;
+				padding-right: 60px !important;
 			}
-			/* lift the floating label a bit more when active, only for the date field */
 			#contact-form #date.input:focus + .label,
 			#contact-form #date.input:not(:placeholder-shown) + .label {
 				top: -16px !important;
 			}
-			/* bump the built-in picker icon away from the date text (WebKit) */
 			#contact-form #date::-webkit-calendar-picker-indicator {
-				margin-left: 10px !important; /* gap between text and icon */
+				margin-left: 10px !important;
 				padding: 0 6px !important;
 			}
-			/* extra breathing room inside the editable date area (WebKit) */
 			#contact-form #date::-webkit-datetime-edit {
 				padding-right: 6px !important;
 			}
-
-			/* widen the gap between Date and Guests, if desired */
 			#contact-form .row.row--2 {
 				gap: 32px !important;
 			}
@@ -499,6 +543,7 @@
 								>Contact</a
 							>
 						</li>
+						<li><a href="index.html">Home</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -527,8 +572,10 @@
 						id="contact-form"
 						action="https://formsubmit.co/tideandtrueoccasions@gmail.com"
 						method="POST"
+						accept-charset="UTF-8"
 						novalidate
 					>
+						<!-- FormSubmit config -->
 						<input
 							type="hidden"
 							name="_subject"
@@ -537,10 +584,11 @@
 						<input
 							type="hidden"
 							name="_next"
-							value="https://hibaabdoulrezzak.github.io/tideandtruesite/thank-you.html"
+							value="https://tideandtrueoccasions.com/thank-you.html"
 						/>
 						<input type="hidden" name="_captcha" value="false" />
 						<input type="hidden" name="_template" value="table" />
+						<!-- Honeypot -->
 						<input
 							type="text"
 							name="_honey"
@@ -579,7 +627,7 @@
 							</div>
 						</div>
 
-						<!-- Phone (full-width, own line) -->
+						<!-- Phone -->
 						<div class="row">
 							<div class="field">
 								<input
@@ -594,7 +642,7 @@
 							</div>
 						</div>
 
-						<!-- SERVICE — segmented pills (full-width) -->
+						<!-- Service -->
 						<div class="row">
 							<div>
 								<span class="group-label" id="service-label"
@@ -629,13 +677,15 @@
 										name="service"
 										id="svc-proposal"
 										value="Proposal"
-									/><label for="svc-proposal">Proposal</label>
+									/><label for="svc-proposal"
+										>Engagement</label
+									>
 									<input
 										type="radio"
 										name="service"
 										id="svc-corp"
 										value="Corporate"
-									/><label for="svc-corp">Corporate</label>
+									/><label for="svc-corp">Proposal</label>
 									<input
 										type="radio"
 										name="service"
@@ -646,7 +696,7 @@
 							</div>
 						</div>
 
-						<!-- DATE & GUESTS -->
+						<!-- Date & Guests -->
 						<div class="row row--2">
 							<div class="field">
 								<input
@@ -675,6 +725,7 @@
 							</div>
 						</div>
 
+						<!-- Venue -->
 						<div class="row">
 							<div class="field">
 								<input
@@ -690,6 +741,7 @@
 							</div>
 						</div>
 
+						<!-- Message -->
 						<div class="row">
 							<div class="field">
 								<textarea
@@ -705,6 +757,7 @@
 							</div>
 						</div>
 
+						<!-- Consent -->
 						<div class="row" style="margin: 6px 0 12px">
 							<label
 								style="
@@ -840,9 +893,19 @@
 			</div>
 		</section>
 
-		<footer>
+		<!-- Footer -->
+		<footer class="fade-slide" data-animate>
 			<div class="container">
-				<p>&copy; 2025 Tide &amp; True</p>
+				<p>&copy; 2025 Tide and True</p>
+				<div class="social-links">
+					<a
+						href="https://www.facebook.com/profile.php?id=61559325204992"
+						>Facebook</a
+					>
+					<a href="https://www.instagram.com/tideandtrueoccasions/"
+						>Instagram</a
+					>
+				</div>
 			</div>
 		</footer>
 

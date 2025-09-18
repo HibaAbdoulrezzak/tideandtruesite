@@ -63,12 +63,12 @@ body {
 }
 
 .vendor-logos img {
-	max-height: 50px; /* cap the height */
-	width: auto; /* keep proportions */
-	object-fit: contain;
+	height: 50px;
+	width: 150px; /* or any width you choose */
+	object-fit: contain; /* keeps logos from stretching */
 	display: block;
-	filter: grayscale(100%) contrast(120%); /* optional: make them subtle */
-	opacity: 0.9; /* optional: softer look */
+	filter: grayscale(100%) contrast(120%);
+	opacity: 0.9;
 	transition: opacity 0.2s ease;
 }
 
@@ -89,8 +89,9 @@ h6 {
 	font-family: "Playfair Display", Georgia, serif;
 	font-weight: 400;
 	line-height: 1.1;
-	color: #002b49;
+	color: #8b6a3c;
 	margin: 0 0 0.35em;
+	letter-spacing: 0.03;
 }
 p {
 	margin: 0 0 1em;
@@ -105,7 +106,6 @@ p {
 	color: #fff !important;
 	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
-/* === Portfolio Grid Overlay === */
 /* === Portfolio Grid Overlay (Luxe text only) === */
 .me-card {
 	position: relative;
@@ -289,7 +289,7 @@ body.solid-header nav a:hover {
 	padding: 10px;
 	margin-left: auto;
 	line-height: 0;
-	color: #1b2933;
+	color: #0000;
 }
 .nav-toggle .hamburger {
 	position: relative;
@@ -583,52 +583,190 @@ body:not(.solid-header).nav-open .nav-toggle {
 	border-color: var(--brand);
 }
 
-/* REVIEWS */
+[data-animate] {
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+/* =======================
+   Reviews Section
+======================= */
 #reviews-section {
-	background: #f0ede6;
-	text-align: center;
-	padding: 60px 0;
-}
-.reviews-title {
-	font-size: clamp(28px, 5vw, 56px);
-	margin: 0 0 40px;
-	text-transform: uppercase;
-	color: #002b49;
-}
-.reviews-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 30px;
-	max-width: 1000px;
-	margin: 0 auto 40px;
-}
-.review-card {
-	background: #fff;
-	padding: 30px;
-	border-radius: 8px;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+	position: relative;
+	background-image: url("images/couples/sarahandchris/2.PNG");
+	background-attachment: fixed;
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 6rem 1rem;
+	min-height: 500px; /* ensure section has height for absolute title */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+#reviews-section::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(171, 155, 137, 0.35);
+	z-index: 1;
+	pointer-events: none;
+}
+.carousel-container-reviews {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	max-width: 1200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+}
+.reviews-title {
+	font-family: "Playfair Display", serif;
+	font-size: 3rem; /* fixed font size */
+	text-transform: uppercase;
+	color: #805b32;
 	text-align: center;
-	transition: transform 0.3s, box-shadow 0.3s;
+	position: absolute;
+	top: 2rem; /* near top of section */
+	left: 50%;
+	transform: translateX(-50%); /* center horizontally only */
+	z-index: 2;
+	letter-spacing: -0.08rem;
+	font-weight: 400;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+	width: 90%; /* ensure it fits on mobile */
+	box-sizing: border-box;
 }
+
+.reviews-grid-carousel {
+	overflow-x: auto !important;
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	scroll-padding-inline: 1rem; /* allow space on both ends for scroll */
+}
+
+.reviews-grid {
+	flex: 0 0 auto;
+	scroll-snap-align: start;
+	box-sizing: border-box;
+	max-width: 350px;
+}
+
+.review-card {
+	background: rgba(255, 248, 240, 0.95);
+	border-radius: 16px;
+	padding: 1.5rem;
+	flex: 0 0 auto; /* do not shrink */
+	text-align: center;
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	max-width: 350px; /* prevents stretching on large screens */
+}
+
+.reviews-grid::after {
+	content: "";
+	flex: 0 0 1rem;
+}
+
 .review-card:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+	transform: translateY(-6px);
+	box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
 }
-.review-card .stars {
-	color: var(--brand);
-	font-size: 1.3em;
-	margin-bottom: 15px;
-}
+
 .review-card .review-text {
 	font-family: "Playfair Display", serif;
-	font-size: 1.05em;
+	font-size: 14px;
 	color: #555;
-	margin: 0 0 20px;
-	line-height: 1.4;
+	margin: 2rem 0 1rem;
+	line-height: 1.3;
 	font-style: italic;
+}
+
+.review-card .stars i {
+	color: #c9a76d;
+	font-size: 1.2rem;
+	margin-right: 0.2rem;
+	transition: transform 0.2s ease;
+}
+
+.review-card:hover .stars i {
+	transform: scale(1.2);
+}
+
+.reviewer-name {
+	font-style: italic;
+	font-weight: 500;
+	color: #4a3b2f;
+	margin-top: 0.8rem;
+	font-size: 13px;
+}
+
+/* Optional: adjust on very small screens */
+@media (max-width: 480px) {
+	.reviews-title {
+		font-size: 2.2rem; /* slightly smaller on tiny screens */
+		top: 1.5rem;
+	}
+}
+
+/* Carousel scrollbar styling */
+.reviews-grid-carousel::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+.reviews-grid-carousel::-webkit-scrollbar-track {
+	background: rgba(255, 248, 240, 0.4);
+	border-radius: 10px;
+}
+
+.reviews-grid-carousel::-webkit-scrollbar-thumb {
+	background: #c9a76d;
+	border-radius: 10px;
+	border: 3px solid rgba(255, 248, 240, 0.4);
+}
+
+.reviews-grid-carousel::-webkit-scrollbar-thumb:hover {
+	background: #b8935e;
+}
+
+.reviews-grid-carousel {
+	scrollbar-width: thin;
+	scrollbar-color: #c9a76d rgba(255, 248, 240, 0.4);
+}
+
+/* Responsive card widths */
+@media (min-width: 1025px) {
+	.review-card {
+		width: calc((100% / 3) - 0.66rem);
+	} /* 3 per row */
+}
+
+@media (max-width: 1024px) {
+	.review-card {
+		width: calc((100% / 2) - 0.5rem);
+	} /* 2 per row */
+}
+
+@media (max-width: 768px) {
+	.review-card {
+		width: 80%;
+	} /* 1 per row scrollable */
+}
+
+@media (max-width: 480px) {
+	.review-card {
+		width: 90%;
+	} /* small screens */
 }
 
 /* CONTACT SPLIT BAND */
@@ -733,14 +871,19 @@ body:not(.solid-header).nav-open .nav-toggle {
 .me-hero {
 	position: relative;
 	isolation: isolate;
-	min-height: 100svh;
+	min-height: 60vh;
 	display: grid;
 	place-items: center;
 	text-align: center;
 	overflow: hidden;
-	background: var(--hero-img) center/cover no-repeat;
-	filter: grayscale(100%); /* <--- force B/W */
+	width: 100%;
+	background-image: var(--hero-img);
+	background-position: center;
+	background-size: cover; /* fills hero fully, may crop */
+	background-repeat: no-repeat;
+	filter: grayscale(100%);
 }
+
 .me-hero::before {
 	content: "";
 	position: absolute;
@@ -748,22 +891,26 @@ body:not(.solid-header).nav-open .nav-toggle {
 	background: rgba(0, 0, 0, 0.35); /* moody dark veil */
 	z-index: 0;
 }
+
 .me-hero__inner {
 	position: relative;
 	z-index: 1;
 	padding: 20px;
 }
+
 .me-hero__title {
 	font-family: "Playfair Display", serif;
 	font-size: clamp(32px, 6vw, 64px);
 	color: #fff;
 	margin: 0.1em 0;
 }
+
 .me-hero__lead {
 	font-size: clamp(16px, 2.2vw, 22px);
 	color: #eef4f7;
 	margin: 0;
 }
+
 /* ===========================================
    HOME CONTACT FORM — luxe / editorial finish
    Scoped so nothing else breaks
@@ -1475,6 +1622,9 @@ footer .social-links a:hover {
 .me-page .logo img {
 	height: 56px;
 }
+.vendor-section {
+	background-color: white;
+}
 
 /* IMPORTANT: don’t tuck inner-page heroes under the header */
 .page-hero {
@@ -1812,100 +1962,200 @@ nav a:hover {
 	color: rgba(234, 230, 223, 0.92) !important;
 }
 
-/* --- Reviews: compact size & tighter type --- */
-/* =============================
-   REVIEWS: compact scrollable row
-   ============================= */
-#reviews-section {
-	background: #f0ede6;
-	text-align: center;
-	padding: 40px 0;
-}
-
-.reviews-title {
-	font-size: clamp(24px, 5vw, 44px);
-	margin: 0 0 22px;
-	text-transform: uppercase;
-	color: #002b49;
-}
-
-/* horizontal scroller */
-.reviews-grid {
+/* ===========================
+   VOGUE / GEN Z EDITORIAL FORM
+   =========================== */
+/* Replace your current .vogue-contact padding with this */
+.vogue-contact {
 	display: flex;
-	gap: 16px;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-	-webkit-overflow-scrolling: touch; /* smooth iOS */
-	padding: 6px 12px 18px;
-	max-width: var(--container);
-	margin: 0 auto 30px;
+	min-height: min(78vh, 720px);
+	background: #f6f4ef;
+	isolation: isolate;
 
-	/* hide scrollbars */
-	-ms-overflow-style: none; /* IE/Edge */
-	scrollbar-width: none; /* Firefox */
-}
-.reviews-grid::-webkit-scrollbar {
-	display: none;
+	/* responsive outer gap (push neighbors away) */
+	margin-block: clamp(32px, 6vw, 96px);
+
+	/* responsive inner breathing room */
+	padding-block: clamp(28px, 5vw, 64px);
 }
 
-.review-card {
-	flex: 0 0 auto;
-	width: 260px;
-	padding: 18px;
-	border-radius: 6px;
-	background: #fff;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-	text-align: left;
-	scroll-snap-align: start;
-	transition: transform 0.3s, box-shadow 0.3s;
+/* Optional: give a little extra air above/below when used between sections */
+section + .vogue-contact {
+	margin-top: clamp(32px, 5vw, 72px);
 }
-.review-card:hover {
-	transform: translateY(-4px);
-	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+.vogue-contact + section {
+	margin-top: clamp(32px, 5vw, 72px);
 }
 
-.review-card .stars {
-	color: var(--brand);
-	font-size: 1rem;
-	margin-bottom: 8px;
+/* Mobile stack */
+@media (max-width: 860px) {
+	.vogue-contact {
+		flex-direction: column;
+		/* slightly tighter on phones */
+		margin-block: clamp(24px, 6vw, 48px);
+		padding-block: clamp(20px, 5vw, 44px);
+	}
+	.vogue-contact .vogue-image {
+		height: 38vh;
+	}
+	.vf-cta {
+		width: 100%;
+		justify-content: center;
+	}
 }
 
-.review-card .review-text {
+.vogue-contact .vogue-image {
+	flex: 1;
+	background: linear-gradient(
+			180deg,
+			rgba(0, 0, 0, 0.25),
+			rgba(0, 0, 0, 0.25)
+		),
+		url("images/sarah-chris/IMG_3130.PNG") center/cover no-repeat;
+	filter: grayscale(100%) contrast(1.05);
+}
+.vogue-contact .vogue-panel {
+	flex: 1;
+	display: grid;
+	align-content: center;
+	gap: 18px;
+	padding: clamp(36px, 6vw, 72px) clamp(24px, 5vw, 72px);
+	background: #f6f4ef;
+}
+
+/* Eyebrow + title */
+.vf-eyebrow {
+	margin: 0;
+	font: 600 0.78rem/1 "Montserrat", sans-serif;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: #6b7c89;
+}
+.vf-title {
+	margin: 0;
 	font-family: "Playfair Display", serif;
-	font-size: 0.7rem;
-	line-height: 1.2;
+	font-weight: 400;
+	font-size: clamp(28px, 4.6vw, 48px);
+	line-height: 1.1;
+	color: #0e2a41;
+}
+.vf-title em {
 	font-style: italic;
-	margin: 0 0 12px;
-	color: #444;
+	color: var(--brand);
 }
-
-.reviewer-name {
-	font-size: 0.7rem;
-	font-weight: 600;
+.vf-sub {
+	margin: 0.25rem 0 0;
 	color: #7b858c;
+	font-size: 0.95rem;
 }
 
-/* phones: slightly smaller cards */
-@media (max-width: 520px) {
-	.review-card {
-		width: 220px;
-		padding: 16px;
-	}
-	.review-card .review-text {
-		font-size: 0.88rem;
-		line-height: 1.22;
-	}
+.vogue-form {
+	margin-top: 8px;
+	display: grid;
+	gap: 16px;
+	width: min(520px, 100%);
+}
+.vf-hide {
+	position: absolute !important;
+	left: -9999px !important;
 }
 
-/* phones: even smaller cards */
-@media (max-width: 520px) {
-	.review-card {
-		width: 240px;
-		padding: 16px;
+/* Fields: hairline underline, oversized inputs */
+.vf-field {
+	display: grid;
+	gap: 8px;
+}
+.vf-label {
+	font: 600 0.72rem/1 "Montserrat", sans-serif;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: #6b7c89;
+}
+.vogue-form input,
+.vogue-form textarea {
+	-webkit-appearance: none;
+	appearance: none;
+	border: 0;
+	border-bottom: 1px solid rgba(14, 42, 65, 0.18);
+	background: transparent;
+	padding: 14px 2px 12px;
+	color: #0e2a41;
+	font: 500 1rem/1.4 "Montserrat", sans-serif;
+	outline: none;
+	transition: border-color 0.16s ease, transform 0.12s ease;
+}
+.vogue-form input::placeholder,
+.vogue-form textarea::placeholder {
+	color: transparent;
+} /* floating trick */
+.vogue-form input:focus,
+.vogue-form textarea:focus {
+	border-bottom-color: var(--brand);
+	transform: translateY(-1px);
+}
+.vogue-form textarea {
+	resize: vertical;
+	min-height: 130px;
+}
+
+/* CTA: quiet outline → gold fill */
+.vf-cta {
+	justify-self: start;
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 22px;
+	border: 1px solid #0e2a41;
+	background: transparent;
+	color: #0e2a41;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	font: 700 0.86rem/1 "Montserrat", sans-serif;
+	border-radius: 2px;
+	transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.12s;
+}
+.vf-cta:hover,
+.vf-cta:focus-visible {
+	background: var(--brand);
+	color: #fff;
+	border-color: var(--brand);
+	transform: translateY(-1px);
+	outline: none;
+}
+.vf-arrow {
+	transition: transform 0.18s ease;
+}
+.vf-cta:hover .vf-arrow {
+	transform: translateX(4px);
+}
+
+/* Fine print link */
+.vf-fine {
+	margin: 0.5rem 0 0;
+	color: #6b7c89;
+	font-size: 0.9rem;
+}
+.vf-link {
+	color: #0e2a41;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(14, 42, 65, 0.25);
+}
+.vf-link:hover {
+	color: var(--brand);
+	border-bottom-color: var(--brand);
+}
+
+/* Mobile stack */
+@media (max-width: 860px) {
+	.vogue-contact {
+		flex-direction: column;
 	}
-	.review-card .review-text {
-		font-size: 0.9rem;
-		line-height: 1.22;
+	.vogue-contact .vogue-image {
+		height: 38vh;
+	}
+	.vf-cta {
+		width: 100%;
+		justify-content: center;
 	}
 }
 

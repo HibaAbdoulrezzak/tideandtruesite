@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Thank You · Tide & True</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--navy: #0d1f2c;
+				--gold: #a88a54;
+			}
+			body {
+				margin: 0;
+				min-height: 100svh;
+				display: grid;
+				place-items: center;
+				font: 400 16px/1.8 "Montserrat", system-ui, -apple-system,
+					"Segoe UI", Roboto, sans-serif;
+				color: #141416;
+				background: linear-gradient(#fbf8f3, #f3ede4);
+			}
+			.card {
+				background: #fff;
+				border: 1px solid #eadfce;
+				border-radius: 10px;
+				padding: 32px 22px;
+				text-align: center;
+				box-shadow: 0 26px 80px rgba(0, 0, 0, 0.08);
+				width: min(620px, 92%);
+			}
+			h1 {
+				font-family: "Playfair Display", serif;
+				font-weight: 400;
+				margin: 0 0 0.35em;
+			}
+			p {
+				margin: 0.4em 0;
+			}
+			a.btn {
+				display: inline-block;
+				margin-top: 14px;
+				padding: 12px 20px;
+				border-radius: 999px;
+				border: 1px solid var(--gold);
+				text-decoration: none;
+				color: #111;
+				background: #fff;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				font-size: 0.8rem;
+			}
+			a.btn:hover {
+				background: var(--gold);
+			}
+			small {
+				display: block;
+				opacity: 0.7;
+				margin-top: 10px;
+			}
+		</style>
+		<meta http-equiv="refresh" content="6; url=/" />
+	</head>
+	<body>
+		<main class="card" role="main" aria-labelledby="ty-title">
+			<h1 id="ty-title">Thanks for reaching out!</h1>
+			<p>
+				We’ve received your inquiry and will reply within 1–2 business
+				days.
+			</p>
+			<a class="btn" href="/">Back to Home</a>
+			<small>(You’ll be redirected automatically.)</small>
+		</main>
+	</body>
+</html>

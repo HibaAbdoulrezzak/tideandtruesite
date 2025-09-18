@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Gallery · Tide & True Occasions</title>
+
+		<!-- Fonts -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Global styles -->
+		<link rel="stylesheet" href="../style.css" />
+		<!-- Gallery styles (scoped) -->
+		<link rel="stylesheet" href="../gallery.css" />
+	</head>
+
+	<body class="me-page">
+		<!-- ===== HERO (moody, B/W) ===== -->
+		<!-- Background set by JS -->
+		<section class="page-hero hero--portfolio">
+			<div class="page-hero__inner">
+				<h1 class="page-hero__title" id="meTitle">
+					Chelsea &amp; Louay
+				</h1>
+				<p class="page-hero__lead" id="meLead">
+					Candles Banquet Hall · Wedding · Gallery
+				</p>
+			</div>
+		</section>
+
+		<!-- ===== Slim intro line ===== -->
+		<section class="me-intro">
+			<div class="me-container">
+				<p class="me-lead" id="meIntro">
+					A romantic countryside celebration where the rain made the
+					moments even more magical.
+				</p>
+			</div>
+		</section>
+
+		<!-- ===== GRID ===== -->
+		<main class="me-container">
+			<section id="meGrid" class="me-grid" aria-label="Gallery"></section>
+		</main>
+
+		<!-- ===== LIGHTBOXES ===== -->
+		<div id="meLightboxes"></div>
+
+		<!-- ===== CTA ===== -->
+		<!-- Background set by JS -->
+		<section class="me-cta">
+			<div class="me-cta__inner">
+				<h2 class="me-cta__title">
+					Ready to plan something beautiful?
+				</h2>
+				<a class="me-btn" href="../index.html#contact-form-section"
+					>Plan Your Event</a
+				>
+			</div>
+		</section>
+
+		<!-- QUOTES -->
+		<section class="me-quotes">
+			<p class="me-q" style="--d: 0s">
+				“We couldn’t be happier with how it all came together”
+				<span>— Sarah &amp; Chris</span>
+			</p>
+			<p class="me-q" style="--d: 5s">
+				“They had great vendor recommendations and found solutions to
+				any problem I faced! I couldn’t have done it without their
+				support!”
+				<span>— Francesca &amp; John</span>
+			</p>
+			<p class="me-q" style="--d: 10s">
+				"Thank you for making my big day a success! I didn’t have to
+				stress or even think — you made it flawless."
+				<span>— Marwa &amp; Michael</span>
+			</p>
+		</section>
+
+		<!-- ===== CONFIG + BUILDER ===== -->
+		<script>
+			// Per-page gallery config (filenames must match case on server)
+			window.GALLERY = {
+				title: "Chelsea & Louay",
+				lead: "Candles Banquet Hall · Wedding · Gallery",
+				intro: "Romance in every frame, elegance in every detail — memories to treasure forever.",
+				basePath: "../images/couples/chelseaandlouay", // keep trailing slash
+				images: [
+					"1.JPG",
+					"2.JPG",
+					"3.JPG",
+					"4.jpg",
+					"5.jpg",
+					"6.JPG",
+					"7.jpg",
+					"8.jpg",
+					"9.jpg",
+					"10.jpg",
+					"11.jpg",
+				],
+				hero: "5.jpg", // match actual file case
+				cta: "1.jpg", // optional override for CTA
+			};
+
+			(function () {
+				function join(base, file) {
+					if (!base) return file || "";
+					return (
+						(base.endsWith("/") ? base : base + "/") + (file || "")
+					);
+				}
+
+				function build() {
+					const cfg = window.GALLERY || {};
+					const {
+						title = "",
+						lead = "",
+						intro = "",
+						basePath = "",
+						images = [],
+						hero,
+						cta,
+					} = cfg;
+
+					// Text
+					const t = document.getElementById("meTitle");
+					const l = document.getElementById("meLead");
+					const i = document.getElementById("meIntro");
+					if (t && title) t.textContent = title;
+					if (l && lead) l.textContent = lead;
+					if (i && intro) i.textContent = intro;
+
+					// HERO (your CSS .page-hero.hero--portfolio::before uses var --hero)
+					const heroEl = document.querySelector(
+						".page-hero.hero--portfolio"
+					);
+					const heroFile = hero || images[0];
+					if (heroEl && heroFile) {
+						const heroUrl = join(basePath, heroFile);
+						heroEl.style.setProperty("--hero", `url("${heroUrl}")`);
+						// direct fallback (in case CSS var path isn't applied)
+						heroEl.style.backgroundImage = `url("${heroUrl}")`;
+						heroEl.style.backgroundSize = "cover";
+						heroEl.style.backgroundPosition = "center";
+						heroEl.style.backgroundRepeat = "no-repeat";
+					}
+
+					// CTA background
+					const ctaEl = document.querySelector(".me-cta");
+					const ctaFile =
+						cta || images[images.length - 1] || heroFile;
+					if (ctaEl && ctaFile) {
+						const ctaUrl = join(basePath, ctaFile);
+						// custom property (if your CSS uses --cta)
+						ctaEl.style.setProperty("--cta", `url("${ctaUrl}")`);
+						// direct fallback
+						ctaEl.style.backgroundImage = `url("${ctaUrl}")`;
+						ctaEl.style.backgroundSize = "cover";
+						ctaEl.style.backgroundPosition = "center";
+						ctaEl.style.backgroundRepeat = "no-repeat";
+						// ensure visible height if CSS doesn't set it
+						if (
+							!ctaEl.style.minHeight &&
+							!getComputedStyle(ctaEl).minHeight
+						) {
+							ctaEl.style.minHeight = "56vh";
+						}
+					}
+
+					// GRID + LIGHTBOXES
+					const grid = document.getElementById("meGrid");
+					const lbs = document.getElementById("meLightboxes");
+					if (!grid || !lbs || !images.length) return;
+
+					images.forEach((file, idx) => {
+						const id = `img-${idx + 1}`;
+						const src = join(basePath, file);
+
+						// Card
+						const a = document.createElement("a");
+						a.className = "me-card";
+						a.href = `#${id}`;
+						a.innerHTML = `
+              <figure class="me-media">
+                <img src="${src}" alt="${
+							(title || "Gallery") + " " + (idx + 1)
+						}" loading="lazy">
+              </figure>
+              <div class="me-caption">
+                <h3>${title}</h3>
+                <p>${lead}</p>
+              </div>`;
+						grid.appendChild(a);
+
+						// Lightbox
+						const lb = document.createElement("div");
+						lb.id = id;
+						lb.className = "me-lightbox";
+						lb.innerHTML = `<a class="me-close" href="#"></a><img src="${src}" alt="${title}">`;
+						lbs.appendChild(lb);
+					});
+				}
+
+				if (document.readyState === "loading") {
+					document.addEventListener("DOMContentLoaded", build);
+				} else {
+					build();
+				}
+			})();
+		</script>
+	</body>
+</html>

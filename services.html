@@ -43,23 +43,34 @@
 			body {
 				margin: 0;
 				color: var(--ink);
-				font: 400 var(--step-0) / 1.75 "Montserrat", system-ui,
+				font: 400 var(--step-0) / 1.75 "Trebuchet MS", system-ui,
 					-apple-system, "Segoe UI", Roboto, sans-serif;
+
 				-webkit-font-smoothing: antialiased;
 				text-rendering: optimizeLegibility;
 				background: #fff;
 			}
 			h1,
-			h2,
+			h2 {
+				font-family: "Playfair Display", ui-serif, Georgia, serif;
+				letter-spacing: 0.006em;
+				margin: 0 0 0.45em;
+				line-height: 40px;
+			}
+
 			h3 {
 				font-family: "Playfair Display", ui-serif, Georgia, serif;
 				letter-spacing: 0.006em;
 				margin: 0 0 0.45em;
+				line-height: 33px;
 			}
+
 			a {
 				color: inherit;
 				text-decoration: none;
 				text-underline-offset: 2px;
+				font-family: "Trebuchet MS", "Lucida Sans Unicode",
+					"Lucida Grande", "Lucida Sans", Arial, sans-serif;
 			}
 			a:hover {
 				text-decoration: underline;
@@ -70,6 +81,10 @@
 			.wrap {
 				width: min(var(--max), 92%);
 				margin-inline: auto;
+			}
+			/* apply a different font to everything that will fade in */
+			[data-animate] {
+				font-family: "Trebuchet MS", serif;
 			}
 
 			/* ===== Header: fixed, transparent, no borders ===== */
@@ -168,7 +183,7 @@
 					width: min(78vw, 360px);
 					transform: translateX(100%);
 					transition: transform 0.32s ease;
-					background: rgba(16, 18, 22, 0.92);
+					background: #ffff;
 					backdrop-filter: blur(10px);
 					padding: 28px 22px;
 					z-index: 1001;
@@ -180,7 +195,11 @@
 					margin-top: 64px;
 				}
 				#site-nav a {
-					color: #f2f4f6;
+					color: rgba(16, 18, 22, 0.92);
+				}
+
+				#site-nav a:hover {
+					color: 0 0 0 1px rgba(168, 138, 84, 0.6);
 				}
 				body.nav-open::before {
 					content: "";
@@ -219,7 +238,11 @@
 				padding-top: var(--header-h);
 				background: var(--hero) center/cover no-repeat;
 			}
-
+			em {
+				color: var(--gold);
+				font-weight: 600;
+				letter-spacing: 0.05em;
+			}
 			/* Make the Services hero fill the viewport */
 			.svc-hero {
 				min-height: 100vh; /* full screen height */
@@ -297,6 +320,16 @@
 				transform: translateY(-2px);
 				box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
 			}
+			/* Global paragraph styling for body text */
+			body p {
+				font-family: "Montserrat", sans-serif; /* clean, modern font */
+				font-size: 0.9rem; /* readable default size */
+				line-height: 1.2; /* good spacing for readability */
+				color: #141a1f; /* dark text for contrast */
+				margin: 0 0 1.25em 0; /* bottom spacing between paragraphs */
+				max-width: 760px; /* prevents overly long lines */
+				opacity: 0.95; /* subtle softening */
+			}
 
 			/* ===== Package cards ===== */
 			.pack-wrap {
@@ -340,6 +373,14 @@
 				font: 700 1rem/1 "Montserrat", sans-serif;
 				color: var(--gold);
 				margin: 6px 0 8px;
+			}
+			.pkg .num {
+				display: inline-block;
+				color: #d4aa62;
+				text-align: center;
+				font-weight: 500;
+				font-size: 40px;
+				margin-bottom: 8px;
 			}
 			.pkg ul {
 				margin: 0 0 8px 18px;
@@ -392,6 +433,10 @@
 				}
 			}
 
+			#wedding-packages,
+			h2 {
+				color: rgb(142, 130, 104);
+			}
 			/* ===== Other services grid ===== */
 			.svc-grid {
 				width: min(1140px, 92%);
@@ -472,33 +517,125 @@
 			}
 
 			/* ===== FAQs ===== */
-			.faqs details {
-				border: 1px solid var(--hairline);
-				border-radius: 8px;
-				padding: 14px 16px;
+			/* Editorial / luxe FAQ styles */
+			.faqs {
+				background: linear-gradient(
+					180deg,
+					rgba(240, 236, 231, 0.6),
+					rgba(247, 243, 238, 0.95)
+				);
+				padding: clamp(36px, 6vw, 84px) 0;
+				color: var(--navy);
+			}
+
+			.faqs .wrap {
+				max-width: 1080px;
+			}
+
+			.faqs-header {
+				text-align: center;
+				margin-bottom: 28px;
+			}
+			.faqs-header .eyebrow {
+				display: block;
+				font-weight: 700;
+				letter-spacing: 0.18em;
+				color: #6b635b;
+				font-size: 0.75rem;
+				margin-bottom: 8px;
+			}
+			.faqs-header h2 {
+				font-family: "Playfair Display", serif;
+				font-size: clamp(28px, 4.5vw, 44px);
+				font-weight: 400;
+				letter-spacing: 0.02em;
+				margin: 0;
+				color: #3b332d;
+				font-style: italic;
+			}
+			.faqs-flourish {
+				width: 72px;
+				height: 14px;
+				margin: 14px auto 0;
+				background: url("images/assets/flourish.svg") center/contain
+					no-repeat;
+				opacity: 0.9;
+			}
+
+			/* grid of sections */
+			.faqs-grid {
+				display: grid;
+				gap: 22px;
+				margin-top: 28px;
+			}
+			@media (min-width: 980px) {
+				.faqs-grid {
+					grid-template-columns: 1fr 1fr;
+				}
+			}
+
+			/* section card */
+			.faqs-section {
 				background: #fff;
-				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04);
+				border-radius: 12px;
+				padding: 20px 22px;
+				box-shadow: 0 14px 40px rgba(31, 24, 16, 0.06);
+				border: 1px solid rgba(230, 220, 210, 0.7);
 			}
-			.faqs details + details {
-				margin-top: 12px;
+			.faqs-section h3 {
+				font-family: "Playfair Display", serif;
+				margin: 0 0 8px;
+				font-size: 1.05rem;
+				color: #3b332d;
+				font-weight: 500;
 			}
-			.faqs summary {
+			.faqs-section p.lead {
+				margin: 0 0 12px;
+				color: #6b635b;
+				font-size: 0.95rem;
+			}
+
+			/* Q/A list look */
+			.faqs-list {
+				margin: 6px 0 0 0;
+				padding: 0;
+				list-style: none;
+			}
+			.faqs-item {
+				padding: 12px 0;
+				border-top: 1px dashed rgba(220, 210, 200, 0.5);
+			}
+			.faqs-item:first-child {
+				border-top: none;
+				padding-top: 0;
+			}
+			.faqs-item .q {
+				display: block;
+				font-weight: 700;
+				color: #2e2924;
+				margin-bottom: 6px;
+				font-size: 0.98rem;
+			}
+			.faqs-item .a {
+				margin: 0;
+				color: #645b52;
+				font-size: 0.92rem;
+				line-height: 1.6;
+			}
+
+			/* details/summary fallback (keeps accessibility if you keep details) */
+			.faqs-section details summary {
 				cursor: pointer;
-				font-weight: 600;
+				font-weight: 700;
 			}
-			.faqs summary::-webkit-details-marker {
-				display: none;
+			.faqs-section details p {
+				margin: 8px 0 0;
 			}
-			.faqs summary::after {
-				content: "+";
-				float: right;
-				transition: 0.2s;
-			}
-			.faqs details[open] summary::after {
-				content: "–";
-			}
-			.faqs p {
-				margin: 0.6em 0 0;
+
+			/* small tweak for the page flow */
+			.faqs .wrap {
+				padding-top: 4px;
+				padding-bottom: 4px;
 			}
 
 			/* ===== CTA & Footer ===== */
@@ -506,7 +643,7 @@
 				--cta: url("images/services/IMG_7401.PNG");
 				position: relative;
 				isolation: isolate;
-				border-radius: 16px;
+				border-radius: 5px;
 				overflow: hidden;
 				border: 1px solid var(--hairline);
 				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
@@ -608,6 +745,7 @@
 						<li>
 							<a href="contact.html">Contact</a>
 						</li>
+						<li><a href="index.html">Home</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -629,6 +767,7 @@
 				</p>
 			</div>
 		</section>
+
 		<!-- WEDDING PACKAGES -->
 		<section id="wedding-packages">
 			<div class="wrap" style="text-align: center" data-animate>
@@ -643,71 +782,175 @@
 			<div class="pack-wrap" style="margin-top: 18px">
 				<!-- left column -->
 				<div class="pack-stack" data-animate>
+					<!-- PACKAGE 1: CLASSIC / DAY OF -->
 					<article class="pkg">
-						<span class="sub">Day-of Coordination</span>
-						<h3>Effortless execution on the day</h3>
-						<div class="price">$1,750+</div>
+						<div class="num">1</div>
+						<span class="sub">Classic | Day Of Coordination</span>
+						<div class="price">$1,750</div>
+						<h3>
+							For the couple who’s planned it all and wants
+							<em>flawless execution</em> on their big day.
+						</h3>
+
+						<p>What's Included:</p>
 						<ul>
+							<li>Initial consultation (complimentary)</li>
 							<li>
-								Pre-wedding coordination &amp; run-of-show
-								timeline
+								Planning check-ins at 6 weeks and 1 week out
 							</li>
-							<li>Vendor &amp; guest point-of-contact</li>
+							<li>Site visit (only if necessary)</li>
+							<li>Up to 8 hours of on-site coordination</li>
 							<li>
-								Setup/takedown supervision, procession &amp;
-								reception cueing
+								Vendor oversight to ensure timelines and vision
+								are met
 							</li>
 							<li>
-								Seating oversight &amp; vendor payment
-								coordination
+								Light assistance with personal touches (e.g.
+								party favours, signage)
+							</li>
+							<li>
+								Timeline management: entrances, speeches,
+								dinner, entertainment &amp; more
+							</li>
+							<li>Guest greeting and ushering</li>
+							<li>Complimentary basic stationery design</li>
+							<li>Access to Wedding Day Emergency Kit</li>
+							<li>
+								Add-ons:
+								<ul>
+									<li>Additional hours: $135/hour</li>
+									<li>
+										Second planner: $300 (recommended for
+										guest counts over 150)
+									</li>
+								</ul>
 							</li>
 						</ul>
+
+						<small
+							><i
+								>*Travel fees may apply outside the GTA</i
+							></small
+						>
+						<br />
 						<small>HST extra.</small>
 						<div class="btnline">
 							<a href="contact.html">Plan your dream event</a>
 						</div>
 					</article>
 
+					<!-- PACKAGE 2: SIGNATURE / PARTIAL -->
 					<article class="pkg">
-						<span class="sub">Partial Planning</span>
-						<h3>Collaborative support where you need it</h3>
-						<div class="price">$2,000+</div>
+						<div class="num">2</div>
+						<span class="sub">Signature | Partial Planning</span>
+						<h3></h3>
+						<div class="price">$2,500+</div>
+						<h3>
+							Perfect for couples who have planned most of their
+							wedding and require collaborative support with final
+							details and <em>seamless</em> execution.
+						</h3>
+						<p>
+							Everything in Package 1, plus added support to wrap
+							up the details.
+						</p>
+
+						<p>Includes:</p>
 						<ul>
+							<li>Weekly meetings starting 1 month out</li>
 							<li>
-								Preferred vendor referrals &amp; budget creation
+								Full creation of planning documents (timelines,
+								vendor lists, scripts, floor plans, seating
+								charts, etc.)
 							</li>
+							<li>Up to 10 hours of on-site coordination</li>
+							<li>Vendor management starting 6 weeks out</li>
 							<li>
-								Meeting attendance &amp; custom planning roadmap
+								Styling, set-up, coordination &amp; room flips
 							</li>
-							<li>Rehearsal + 8–10 hours day-of management</li>
+							<li>Unlimited communication (email/messaging)</li>
+							<li>
+								Add-ons:
+								<ul>
+									<li>Extra hours: $135/hour</li>
+									<li>Second planner: $300</li>
+								</ul>
+							</li>
 						</ul>
+
 						<small
 							>Includes everything in Day-of plus added planning
 							support.</small
 						>
+						<br />
+						<small><i>*Travel fees may apply outside GTA</i></small>
+						<br />
+						<small>HST extra.</small>
 						<div class="btnline">
 							<a href="contact.html">Check Dates</a>
 						</div>
 					</article>
 
+					<!-- PACKAGE 3: LUXE / FULL -->
 					<article class="pkg">
-						<span class="sub">Full Planning &amp; Execution</span>
-						<h3>Concept-to-celebration, entirely handled</h3>
+						<div class="num">3</div>
+						<span class="sub">Luxe | Full Planning</span>
 						<div class="price">$5,000+</div>
+						<h3>
+							A luxury, full-service experience for couples
+							looking for <em>expert guidance </em>every step of
+							the way.
+						</h3>
+
+						<p>
+							Everything in Package 2, plus full-service planning
+							and design from day one.
+						</p>
+
+						<p>Includes:</p>
 						<ul>
 							<li>
-								Design direction; wedding website &amp; guest
-								management
+								Full design &amp; theme development: concept to
+								execution
 							</li>
-							<li>Unlimited access to Lead Planner</li>
-							<li>Up to 12 hours day-of with two coordinators</li>
+							<li>Budget planning &amp; management</li>
+							<li>
+								Vendor &amp; venue sourcing, quoting, contract
+								negotiation
+							</li>
+							<li>
+								Venue walkthroughs &amp; ceremony rehearsal
+								coordination
+							</li>
+							<li>Assistance with wedding website</li>
+							<li>
+								Unlimited on-site coordination with Lead Planner
+								+ Assistant
+							</li>
+							<li>
+								Unlimited communication (phone, email,
+								messaging)
+							</li>
+							<li>
+								Add-ons:
+								<ul>
+									<li>
+										Second planner included for
+										large/complex weddings
+									</li>
+								</ul>
+							</li>
 						</ul>
+
+						<small><i>*Travel fees may apply outside GTA</i></small>
+						<br />
 						<small>HST extra.</small>
 						<div class="btnline">
 							<a href="contact.html">Start Planning</a>
 						</div>
 					</article>
 
+					<!-- CUSTOM -->
 					<article class="pkg">
 						<span class="sub">Custom Packages</span>
 						<h3>Tailored to your unique celebration</h3>
@@ -719,7 +962,9 @@
 								Perfect for destination or cultural weddings
 							</li>
 						</ul>
-						<small>Built around your vision. HST extra.</small>
+						<small>Built around your vision. </small>
+						<br />
+						<small>HST extra.</small>
 						<div class="btnline">
 							<a href="contact.html">Inquire Now</a>
 						</div>
@@ -752,7 +997,7 @@
 
 			<div class="svc-grid" style="padding-top: 18px">
 				<article class="svc-card" data-animate>
-					<div class="svc-media">
+					<div class="svc-media" id="proposals">
 						<img
 							src="images/proposal/ring.png"
 							alt="Romantic proposal setup"
@@ -760,16 +1005,69 @@
 					</div>
 					<div class="svc-body">
 						<span class="svc-tag">Proposal</span>
-						<h3>Unforgettable “yes” moments</h3>
+						<h3>Unforgettable "yes" moments</h3>
 						<p>
 							Concept, location, décor and timing — every detail
 							handled for a seamless, romantic proposal.
 						</p>
 					</div>
 				</article>
+				<article class="svc-card" data-animate>
+					<div class="svc-media" id="engagements">
+						<img
+							src="images/specialevents/engagement.jpg"
+							alt="Romantic proposal setup"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Engagement</span>
+						<h3>A Love Story Begins</h3>
+						<p>
+							From the perfect venue to elegant décor and
+							meaningful details, we design every moment of your
+							engagement celebration to be seamless, joyful, and
+							unforgettable.
+						</p>
+					</div>
+				</article>
 
 				<article class="svc-card" data-animate>
-					<div class="svc-media">
+					<div class="svc-media" id="culturalevents">
+						<img
+							src="images/specialevents/Cultural.jpg"
+							alt="Cultural celebrations"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Cultural Celebrations</span>
+						<h3>Traditions brought to life</h3>
+						<p>
+							From Tea Ceremonies and Sofreh Aghd to Henna,
+							Nikkah, Hindu, Orthodox, and more. Planned with
+							respect and inclusivity.
+						</p>
+					</div>
+				</article>
+
+				<article class="svc-card" data-animate>
+					<div id="birthday" class="svc-media">
+						<img
+							src="images/specialevents/birthday.jpg"
+							alt="Corporate ambience"
+						/>
+					</div>
+					<div class="svc-body">
+						<span class="svc-tag">Birthday</span>
+						<h3>A Celebration to Remember</h3>
+						<p>
+							From themed décor to custom experiences, we craft
+							every detail so your birthday is fun, stylish, and
+							unforgettable.
+						</p>
+					</div>
+				</article>
+				<article class="svc-card" data-animate>
+					<div id="corporate" class="svc-media">
 						<img
 							src="images/specialevents/Coach.svg"
 							alt="Corporate ambience"
@@ -781,23 +1079,6 @@
 						<p>
 							On-message events without the scheduling stress —
 							let’s hit your goals with style.
-						</p>
-					</div>
-				</article>
-
-				<article class="svc-card" data-animate>
-					<div class="svc-media">
-						<img
-							src="images/specialevents/IMG_4367.png"
-							alt="Baby shower details"
-						/>
-					</div>
-					<div class="svc-body">
-						<span class="svc-tag">Baby Shower</span>
-						<h3>Celebrate without the stress</h3>
-						<p>
-							Theme, setup, takedown — so the parents-to-be can
-							simply enjoy the day.
 						</p>
 					</div>
 				</article>
@@ -840,131 +1121,186 @@
 		</section>
 
 		<!-- FAQs -->
-		<section class="faqs">
+		<section class="faqs" aria-label="Frequently asked questions">
 			<div class="wrap">
-				<h2 style="text-align: center">FAQs</h2>
-				<div style="max-width: 860px; margin: 12px auto 0">
-					<details>
-						<summary>
-							What’s the difference between a wedding planner,
-							coordinator, and designer?
-						</summary>
-						<ul>
-							<li>
-								<strong>Planner:</strong> Manages the entire
-								process from budgeting, vendor sourcing, and
-								contracts to logistics and timelines.
+				<div class="faqs-header" data-animate>
+					<span class="eyebrow">FREQUENTLY</span>
+					<h2>Asked Questions</h2>
+					<div class="faqs-flourish" aria-hidden="true"></div>
+					<p
+						style="
+							max-width: 720px;
+							margin: 14px auto 0;
+							color: #6b635b;
+						"
+					>
+						Answers to the questions we hear most often. If you
+						don’t find what you need, reach out — we love a good
+						chat.
+					</p>
+				</div>
+
+				<div class="faqs-grid" data-animate>
+					<!-- Logistics & booking -->
+					<div class="faqs-section">
+						<h3>Booking & Availability</h3>
+						<p class="lead">
+							How to secure your date and what to expect in the
+							booking process.
+						</p>
+
+						<ul class="faqs-list">
+							<li class="faqs-item">
+								<span class="q"
+									>Is my wedding date available?</span
+								>
+								<p class="a">
+									We’d love to check our calendar for you.
+									Availability varies throughout the season,
+									so the sooner you reach out, the better
+									chance we’ll have your date reserved.
+									<a class="btn-link" href="contact.html">
+										Click here to check your date →
+									</a>
+								</p>
 							</li>
-							<li>
-								<strong>Coordinator:</strong> Steps in closer to
-								the wedding (usually 6–8 weeks out) to run the
-								day smoothly.
+
+							<li class="faqs-item">
+								<span class="q">How do I secure my date?</span>
+								<p class="a">
+									A signed proposal and 50% non-refundable
+									retainer reserves the date. Final payment is
+									due 30 days before the wedding unless
+									otherwise agreed.
+								</p>
 							</li>
-							<li>
-								<strong>Designer:</strong> Focuses purely on
-								aesthetic and décor vision.
+
+							<li class="faqs-item">
+								<span class="q">When should I book?</span>
+								<p class="a">
+									For full planning, 12–18 months is ideal.
+									For month-of coordination, 6–8 weeks usually
+									works well.
+								</p>
 							</li>
 						</ul>
-					</details>
+					</div>
 
-					<details>
-						<summary>
-							When should we book a wedding planner?
-						</summary>
-						<p>
-							Ideally 12–18 months before the wedding. For
-							coordination services, 6–8 weeks before the big day.
-							The earlier you book, the more seamless and
-							cost-effective the planning can be.
+					<!-- Day-of & logistics -->
+					<div class="faqs-section">
+						<h3>Day-of & Operations</h3>
+						<p class="lead">
+							What we handle on the day and how coordination
+							works.
 						</p>
-					</details>
 
-					<details>
-						<summary>
-							How much do wedding planning services cost?
-						</summary>
-						<p>
-							Pricing depends on the level of service—full
-							planning, partial planning, or month-of
-							coordination. Each package is customized based on
-							your guest count, complexity, and vision.
-						</p>
-					</details>
+						<ul class="faqs-list">
+							<li class="faqs-item">
+								<span class="q"
+									>Will you be on-site on the wedding
+									day?</span
+								>
+								<p class="a">
+									Absolutely — we’re the first in and the last
+									out. Our team oversees vendor arrivals,
+									timeline flow, and last-minute
+									troubleshooting so you can stay present.
+								</p>
+							</li>
 
-					<details>
-						<summary>Will hiring a planner save us money?</summary>
-						<p>
-							Yes. A planner helps you allocate your budget
-							strategically, negotiates with vendors, and prevents
-							costly mistakes. Couples often find planners pay for
-							themselves in stress saved and money managed.
-						</p>
-					</details>
+							<li class="faqs-item">
+								<span class="q"
+									>How many assistants will you bring?</span
+								>
+								<p class="a">
+									We allocate staff by package and guest count
+									— day-of includes one lead coordinator;
+									larger weddings include an assistant or
+									second planner as required.
+								</p>
+							</li>
 
-					<details>
-						<summary>
-							Do you only work with certain vendors?
-						</summary>
-						<p>
-							No—we can recommend trusted professionals we know
-							deliver excellent results, but you’re free to choose
-							your own vendors. Our role is to ensure everyone
-							works together seamlessly.
-						</p>
-					</details>
+							<li class="faqs-item">
+								<span class="q"
+									>What happens if a vendor is late /
+									something goes wrong?</span
+								>
+								<p class="a">
+									We handle it discreetly. Our team has
+									contingency plans for weather, vendor
+									delays, and any on-the-spot adjustments.
+								</p>
+							</li>
+						</ul>
+					</div>
 
-					<details>
-						<summary>Will you be there on the wedding day?</summary>
-						<p>
-							Absolutely. We’re the first ones in and the last
-							ones out—handling logistics, vendor coordination,
-							timeline management, and troubleshooting so you can
-							stay present.
+					<!-- Design & extras -->
+					<div class="faqs-section">
+						<h3>Design & Add-ons</h3>
+						<p class="lead">
+							Details about styling, rentals and bespoke services.
 						</p>
-					</details>
 
-					<details>
-						<summary>
-							Can you help with cultural or religious weddings?
-						</summary>
-						<p>
-							Yes, we specialize in tailoring weddings to each
-							couple’s traditions, whether that’s cultural
-							ceremonies, faith-based elements, or blended
-							celebrations.
-						</p>
-					</details>
+						<ul class="faqs-list">
+							<li class="faqs-item">
+								<span class="q"
+									>Do you offer design services?</span
+								>
+								<p class="a">
+									Yes — full planning includes concept
+									development through execution. We work with
+									you on color palettes, mood boards and
+									vendor styling to create a cohesive look.
+								</p>
+							</li>
 
-					<details>
-						<summary>
-							What happens if something goes wrong on the wedding
-							day?
-						</summary>
-						<p>
-							That’s exactly why we’re there. We troubleshoot
-							behind the scenes—handling late vendors, décor
-							adjustments, weather issues, or last-minute
-							changes—so you never feel the stress.
-						</p>
-					</details>
+							<li class="faqs-item">
+								<span class="q"
+									>Can we rent décor or furniture through
+									you?</span
+								>
+								<p class="a">
+									We have preferred rental partners and can
+									coordinate delivery, install and removal for
+									a seamless experience.
+								</p>
+							</li>
+						</ul>
+					</div>
 
-					<details>
-						<summary>Do you handle destination weddings?</summary>
-						<p>
-							Yes. We can manage logistics abroad, from sourcing
-							venues to coordinating travel and guest
-							accommodations.
+					<!-- Fees & payment -->
+					<div class="faqs-section">
+						<h3>Pricing & Payments</h3>
+						<p class="lead">
+							How payments, travel fees and HST are handled.
 						</p>
-					</details>
 
-					<details>
-						<summary>How do we get started?</summary>
-						<p>
-							The first step is a complimentary consultation call.
-							From there, we’ll recommend a planning package that
-							fits your needs and vision.
-						</p>
-					</details>
+						<ul class="faqs-list">
+							<li class="faqs-item">
+								<span class="q"
+									>How much do wedding planning services
+									cost?</span
+								>
+								<p class="a">
+									Pricing depends on the level of service—full
+									planning, partial planning, or day-of
+									coordination. Each package is tailored by
+									guest count and complexity.
+								</p>
+							</li>
+
+							<li class="faqs-item">
+								<span class="q"
+									>Are travel fees or taxes included?</span
+								>
+								<p class="a">
+									Travel fees may apply outside the GTA. HST
+									is extra; this will be noted in your
+									proposal.
+								</p>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -977,10 +1313,19 @@
 			</div>
 		</section>
 
-		<!-- FOOTER -->
-		<footer>
+		<!-- Footer -->
+		<footer class="fade-slide" data-animate>
 			<div class="container">
-				<p>&copy; 2025 Tide &amp; True</p>
+				<p>&copy; 2025 Tide and True</p>
+				<div class="social-links">
+					<a
+						href="https://www.facebook.com/profile.php?id=61559325204992"
+						>Facebook</a
+					>
+					<a href="https://www.instagram.com/tideandtrueoccasions/"
+						>Instagram</a
+					>
+				</div>
 			</div>
 		</footer>
 

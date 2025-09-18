@@ -10,22 +10,20 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="../style.css" />
-		<!-- your global -->
 		<link rel="stylesheet" href="../gallery.css" />
-		<!-- new scoped -->
 	</head>
 	<body class="me-page">
-		<!-- HERO (moody, B/W) -->
+		<!-- HERO (moody, B/W via CSS) -->
 		<section class="me-hero">
 			<div class="me-hero__inner">
 				<h1 class="me-hero__title">Francesca &amp; John</h1>
 				<p class="me-hero__lead">
-					Estate Grounds · Reception · Portraits
+					Crystal Fountain Event Venue · Wedding · Gallery
 				</p>
 			</div>
 		</section>
 
-		<!-- (Optional) slim intro line -->
+		<!-- Intro -->
 		<section class="me-intro">
 			<div class="me-container">
 				<p class="me-lead" id="meIntro">
@@ -43,15 +41,13 @@
 		<!-- LIGHTBOX (auto-filled) -->
 		<div id="meLightboxes"></div>
 
-		<!-- CTA -->
+		<!-- CTA (image set by JS) -->
 		<section class="me-cta">
 			<div class="me-cta__inner">
 				<h2 class="me-cta__title">
 					Ready to plan something beautiful?
 				</h2>
-				<p class="me-cta__lead">
-					Thoughtfully planned, effortlessly executed.
-				</p>
+
 				<a class="me-btn" href="../index.html#contact-form-section"
 					>Plan Your Event</a
 				>
@@ -76,16 +72,16 @@
 				<span>— Marwa &amp; Michael</span>
 			</p>
 		</section>
-		<!-- put this BEFORE the builder script -->
+
+		<!-- GALLERY CONFIG (single source of truth) -->
 		<script>
 			window.GALLERY = {
 				title: "Francesca & John",
-				lead: "Estate Grounds · Reception · Portraits",
-				intro: "A modern garden celebration filled with sunlight, greenery, and warmth.",
+				lead: "Crystal Fountain · Wedding · Gallery",
+				intro: "A grand celebration filled with beautiful florals and loved ones.",
 				// from /galleries/fandj.html up to the images folder:
-				basePath: "../images/couples/fandj/", // folder + trailing slash
+				basePath: "../images/couples/fandj/", // keep the trailing slash
 				images: [
-					"1.jpg",
 					"2.jpg",
 					"3.jpg",
 					"4.jpg",
@@ -97,11 +93,12 @@
 					"photo10.jpg",
 					"photo11.jpg",
 				],
-				hero: "photo9.jpg", // must match the actual filename + case
+				hero: "photo9.jpg", // exact filename + case
+				cta: "photo9.jpg", // (optional) override for CTA background
 			};
 		</script>
 
-		<!-- REUSABLE BUILDER (config first, then script) -->
+		<!-- BUILDER (sets hero + grid + lightboxes + CTA background) -->
 		<script>
 			(function () {
 				function join(base, file) {
@@ -120,51 +117,72 @@
 						basePath = "",
 						images = [],
 						hero,
+						cta,
 					} = cfg;
 
-					// Write texts
-					const i = document.getElementById("meIntro");
-					if (i && intro) i.textContent = intro;
+					// Intro text
+					const introEl = document.getElementById("meIntro");
+					if (introEl && intro) introEl.textContent = intro;
 
-					// Hero background (moody B/W via CSS)
+					// HERO background
 					const heroEl = document.querySelector(".me-hero");
-					const heroSrc =
-						hero || images[0]
-							? join(basePath, hero || images[0])
-							: "";
-					if (heroEl && heroSrc)
-						heroEl.style.backgroundImage = `url("${heroSrc}")`;
+					const heroFile = hero || images[0];
+					if (heroEl && heroFile) {
+						heroEl.style.backgroundImage = `url("${join(
+							basePath,
+							heroFile
+						)}")`;
+					}
 
-					// Grid + lightboxes
+					// GRID + LIGHTBOXES
 					const grid = document.getElementById("meGrid");
 					const lbs = document.getElementById("meLightboxes");
-					if (!grid || !lbs) return;
+					if (grid && lbs && images.length) {
+						images.forEach((file, idx) => {
+							const id = `img-${idx + 1}`;
+							const src = join(basePath, file);
 
-					images.forEach((file, idx) => {
-						const id = `img-${idx + 1}`;
-						const src = join(basePath, file);
+							// Card
+							const a = document.createElement("a");
+							a.className = "me-card";
+							a.href = `#${id}`;
+							a.innerHTML = `
+                <figure class="me-media">
+                  <img src="${src}" alt="${
+								(title || "Gallery") + " " + (idx + 1)
+							}" loading="lazy">
+                </figure>
+                <div class="me-caption">
+                  <h3>${title || ""}</h3>
+                  <p>${lead || ""}</p>
+                </div>`;
+							grid.appendChild(a);
 
-						const a = document.createElement("a");
-						a.className = "me-card";
-						a.href = `#${id}`;
-						a.innerHTML = `
-        <figure class="me-media">
-          <img src="${src}" alt="${title || "Gallery"} ${
-							idx + 1
-						}" loading="lazy">
-        </figure>
-        <div class="me-caption">
-          <h3>${title || ""}</h3>
-          <p>${lead || ""}</p>
-        </div>`;
-						grid.appendChild(a);
+							// Lightbox
+							const lb = document.createElement("div");
+							lb.id = id;
+							lb.className = "me-lightbox";
+							lb.innerHTML = `<a class="me-close" href="#"></a><img src="${src}" alt="${
+								title || ""
+							}">`;
+							lbs.appendChild(lb);
+						});
+					}
 
-						const lb = document.createElement("div");
-						lb.id = id;
-						lb.className = "me-lightbox";
-						lb.innerHTML = `<a class="me-close" href="#"></a><img src="${src}" alt="">`;
-						lbs.appendChild(lb);
-					});
+					// CTA background (this was the missing piece before)
+					const ctaEl = document.querySelector(".me-cta");
+					const ctaFile =
+						cta || images[images.length - 1] || heroFile;
+					if (ctaEl && ctaFile) {
+						ctaEl.style.backgroundImage = `url("${join(
+							basePath,
+							ctaFile
+						)}")`;
+						// ensure sizing behaviors are present even if CSS overrides elsewhere
+						ctaEl.style.backgroundSize = "cover";
+						ctaEl.style.backgroundPosition = "center";
+						ctaEl.style.backgroundRepeat = "no-repeat";
+					}
 				}
 
 				if (document.readyState === "loading") {
@@ -173,28 +191,6 @@
 					build();
 				}
 			})();
-			// HERO background (reads --hero in CSS). Only set it if none exists.
-			const heroEl = document.querySelector(".page-hero.hero--portfolio");
-			const alreadyHasHero =
-				heroEl && heroEl.style.getPropertyValue("--hero");
-			const heroSrc =
-				hero || images[0] ? basePath + (hero || images[0]) : "";
-
-			if (heroEl && heroSrc && !alreadyHasHero) {
-				heroEl.style.setProperty("--hero", `url("${heroSrc}")`);
-			}
-			// after you compute heroSrc and set --hero-img
-			const ctaEl = document.querySelector(".me-cta");
-			const ctaFile =
-				window.GALLERY.cta ||
-				images[images.length - 1] ||
-				hero ||
-				images[0];
-			if (ctaEl && ctaFile)
-				ctaEl.style.setProperty(
-					"--cta",
-					`url("${join(basePath, ctaFile)}")`
-				);
 		</script>
 	</body>
 </html>
